@@ -1,0 +1,12 @@
+{
+	"autoload": {
+		"psr-4": {
+			"SGGM\\Controller\\Classes\\": "classes/controllers/",
+			"SGGM\\General\\Classes\\": "classes/general/",
+			"SGGM\\Setup\\Classes\\": "classes/setup/"
+		}
+	},
+	"require-dev" : {
+		"phpunit/phpunit" : "^7"
+	}
+}

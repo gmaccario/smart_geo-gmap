@@ -1,0 +1,14 @@
+.smart_geo_gmap table {
+  	border-collapse: collapse;
+  	width: 100%;
+}
+
+.smart_geo_gmap td, th {
+  	border: 1px solid #dddddd;
+  	text-align: left;
+	padding: 8px;
+}
+
+.smart_geo_gmap tr:nth-child(even) {
+	background-color: #dddddd;
+}
