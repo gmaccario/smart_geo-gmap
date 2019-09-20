@@ -6,16 +6,16 @@ Description: Smart GEO GMap provides an easy way to integrate a Google Map over 
 Version: 1.0
 Author: Giuseppe Maccario
 Author URI: https://www.giuseppemaccario.com
-License: GPL2
+License: GPLv2 or later
 */
 
-define( 'SMART_GEO_GMAP_ENV', 'dev' );
+define( 'SMART_GEO_GMAP_ENV', 'prod' );
 
-if( SMART_GEO_GMAP_ENV == 'dev' )
+if( defined( 'SMART_GEO_GMAP_ENV' ) && 'env' === SMART_GEO_GMAP_ENV )
 {
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+    ini_set( 'display_errors', 1 );
+    ini_set( 'display_startup_errors', 1 );
+    error_reporting( E_ALL );
 }
 
 /* GENERAL CONSTANTS */
@@ -29,7 +29,7 @@ define( 'SMART_GEO_GMAP_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SMART_GEO_GMAP_PATH_DATA', SMART_GEO_GMAP_DIR_PATH . 'data' . DIRECTORY_SEPARATOR );
 define( 'SMART_GEO_GMAP_PATH_SNAZZY_STYLE', SMART_GEO_GMAP_DIR_PATH . 'snazzy' . DIRECTORY_SEPARATOR );
 
-function smart_geo_gmap_init()
+function smartGeoGmapInit()
 {
 	/* DEFINE CONSTANTS	*/
 	require_once SMART_GEO_GMAP_DIR_PATH . 'include' . DIRECTORY_SEPARATOR . 'constants.php';
@@ -47,5 +47,5 @@ if( defined( 'ABSPATH' ))
     /*
      * GO!
      */
-    smart_geo_gmap_init();
+    smartGeoGmapInit();
 }

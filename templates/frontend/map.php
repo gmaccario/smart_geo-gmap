@@ -2,7 +2,7 @@
 
     <div class="smart-geo-gmap-wrapper">
     	<div id="smart-geo-gmap-error">
-	    	<p><?php echo __( 'Google Key missing,', SMART_GEO_GMAP_L10N ); ?>.</p>
+	    	<p><?php echo __( 'Google Key missing', SMART_GEO_GMAP_L10N ); ?>.</p>
     	</div>
     </div>
     

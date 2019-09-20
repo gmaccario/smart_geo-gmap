@@ -87,6 +87,12 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
 		 */
 		public function configuration()
 		{
+		    /*
+		     * GET VALUES FROM POST
+		     * *********************************************
+		     */
+		    $common = $this->getCommon();
+		    
 			/*
 			 * GET VALUES FROM POST
 			 * *********************************************
@@ -97,6 +103,9 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
 			
 			$this->params['pages'] = $this->common->getConfig()[ 'features' ][ 'backend' ][ 'pages' ];
 			$this->params['tabs'] = $this->getHTMLTabs();
+			
+			$delete_geo_json = filter_input( INPUT_POST, 'delete_geo_json', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+			$delete_snazzy_json = filter_input( INPUT_POST, 'delete_snazzy_json', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 			
 			/*
 			 * UPDATE OPTIONS
@@ -135,13 +144,13 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
     			        /* UPLOAD MULTIPLE GEO JSON */
     			        if( isset( $_FILES[ 'geojson_file' ] ))
     			        {
-    			            $this->params['upload_result_multiple_geojson'] = $this->getCommon()->uploadFiles( SMART_GEO_GMAP_PATH_DATA, $_FILES[ 'geojson_file' ] );
+    			            $this->params['upload_result_multiple_geojson'] = $common->uploadFiles( SMART_GEO_GMAP_PATH_DATA, $_FILES[ 'geojson_file' ] );
     			        }
     			        
     			        /* UPLOAD SINGLE SNAZZY STYLE JSON */
     			        if( isset( $_FILES[ 'snazzymap' ] ))
     			        {
-    			            $this->params['upload_result_single_snazzy'] = $this->getCommon()->uploadFile( SMART_GEO_GMAP_PATH_SNAZZY_STYLE, $_FILES[ 'snazzymap' ] );
+    			            $this->params['upload_result_single_snazzy'] = $common->uploadFile( SMART_GEO_GMAP_PATH_SNAZZY_STYLE, $_FILES[ 'snazzymap' ] );
     			        }
     			    }
     			    
@@ -149,19 +158,19 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
     			     * DELETE FILES
     			     * *********************************************
     			     */
-    			    if( isset( $_POST[ 'delete_geo_json' ] ))
+    			    if( isset( $delete_geo_json ))
     			    {
-    			        foreach( $_POST[ 'delete_geo_json' ] as $file_to_delete )
+    			        foreach( $delete_geo_json as $file_to_delete )
     			        {
-    			            unlink( SMART_GEO_GMAP_PATH_DATA . $file_to_delete );
+    			            $common->deleteFile( SMART_GEO_GMAP_PATH_DATA, $file_to_delete );
     			        }
     			    }
     			    
-    			    if( isset( $_POST[ 'delete_snazzy_json' ] ))
+    			    if( isset( $delete_snazzy_json ))
     			    {
-    			        foreach( $_POST[ 'delete_snazzy_json' ] as $file_to_delete )
+    			        foreach( $delete_snazzy_json as $file_to_delete )
     			        {
-    			            unlink( SMART_GEO_GMAP_PATH_SNAZZY_STYLE . $file_to_delete );
+    			            $common->deleteFile( SMART_GEO_GMAP_PATH_SNAZZY_STYLE, $file_to_delete );
     			        }
     			    }
 			    }
@@ -354,21 +363,24 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
 		{
 		    ?>
 		    	<p><?php echo __( "Upload one Snazzy file in order to apply a new skin to your map. Uploads your GEO JSON files in order to draw your custom shapes on the map. ", SMART_GEO_GMAP_L10N ); ?></p>
+		    	<p><span><?php echo __( "Make sure your GEO JSON files are correct otherwise you'll get a Javascript error in your browser console", SMART_GEO_GMAP_L10N ); ?>.</span></p>
         		<p>
-        			<span><b><u><?php echo __( "To delete files", SMART_GEO_GMAP_L10N ); ?></u>:</b></span>
-					<span><b><?php echo __( "Select the files you want to delete and click Save Changes.", SMART_GEO_GMAP_L10N ); ?></b></span>
+        			<span><b><?php echo __( "To delete files", SMART_GEO_GMAP_L10N ); ?>:</b></span>
+					<span><b><?php echo __( "Select the files you want to delete, then click Save Changes", SMART_GEO_GMAP_L10N ); ?>.</b></span>
         		</p>
         		
         		<hr />
         		
     		    <div class="snazzy_file">
                 	<h3><?php echo __( 'Snazzy Maps', SMART_GEO_GMAP_L10N ); ?></h3>
-                	<div>
-                		<span><?php echo __( "Upload a Snazzy File", SMART_GEO_GMAP_L10N ); ?></span>
-                		<input type="file" id="snazzymap" name="snazzymap" />
-                	</div>
+                	<h4><?php echo __( 'Only json extensions allowed', SMART_GEO_GMAP_L10N ); ?>.</h4>
                 	
                 	<?php if( count( $this->params['data_snazzy'] ) == 0 ): ?>
+                		<div>
+                    		<span><?php echo __( "Upload a Snazzy File", SMART_GEO_GMAP_L10N ); ?></span>
+                    		<input type="file" id="snazzymap" name="snazzymap" />
+                    	</div>
+                	
                 		<p><?php echo __( "No files uploaded yet.", SMART_GEO_GMAP_L10N ); ?></p>
                 	<?php else: ?>
                     	<table>
@@ -413,6 +425,8 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
                 
                 <div class="geo_json_files">
                 	<h3><?php echo __( 'Geo Json', SMART_GEO_GMAP_L10N ); ?></h3>
+                	<h4><?php echo __( 'Only geojson and json extensions allowed', SMART_GEO_GMAP_L10N ); ?>.</h4>
+                	
                 	<div>
                 		<span><?php echo __("Upload GEOJson files", SMART_GEO_GMAP_L10N ); ?></span>
                 		<input type="file" id="geojson_file[]" name="geojson_file[]" multiple="multiple" />

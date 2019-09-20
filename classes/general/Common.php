@@ -16,6 +16,7 @@ if(!interface_exists('SGGM\General\Classes\iCommon'))
         public function getConstant(string $sz_supposed_constant = '') : string;
         public function uploadFile(string $dir = '', array $f = []) : bool;
         public function uploadFiles(string $dir = '', array $f = []) : bool;
+        public function deleteFile( string $path = '', string $fileName = '', array $restrictions = array( 'geojson', 'json' ) ) : bool;
         public function errorNoticeDependency();
     }
 }
@@ -232,26 +233,60 @@ if(!class_exists('\General\Classes\Common'))
 		 *
 		 * @param string $path
 		 * @param array $files
+		 * @param array $restrictions
 		 *
 		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return bool
 		 */
-		public function uploadFile(string $path = '', array $files = []) : bool
+		public function uploadFile( string $path = '', array $files = [], array $restrictions = array( 'json' ) ) : bool
 		{
-		    if( !empty( $files[ 'name' ]))
+		    if( !empty( $files[ 'name' ] ))
 			{
-			    $tmpFilePath = $files['tmp_name'];
-					
+			    $tmpFilePath = $files[ 'tmp_name' ];
+			    
 				if( $tmpFilePath != "" )
 				{
-				    $filePath = $path . $files['name'];
-			
-					if( !move_uploaded_file( $tmpFilePath, $filePath ))
+				    /**
+				     * Sanitize file name to avoid directory traversal
+				     */
+				    $cleanFileName = sanitize_file_name( $files[ 'name' ] );
+				    
+				    $filePath = $path . $cleanFileName;
+				    
+				    /**
+				     * Check file extension
+				     */
+				    $extension = pathinfo( $filePath, PATHINFO_EXTENSION );
+				    
+				    if( count( $restrictions ) > 0 )
+				    {
+				        if( empty( $extension ) || !in_array( $extension, $restrictions ))
+				        {
+				            return false;
+				        }
+				    }
+				    
+				    /*
+				     * Ok move the file
+				     */
+					if( move_uploaded_file( $tmpFilePath, $filePath ))
 					{
-						return false;
-					}
-					else {
-						return true;
+					    /**
+					     * Check Json file content
+					     */
+					    $jsonString = file_get_contents( $filePath );
+					    
+					    $jsonData = json_decode( $jsonString );
+					    
+					    $isValid = (  json_last_error() == JSON_ERROR_NONE ) ? true : false;
+					    
+					    if( $isValid )
+					    {
+					        return true;
+					    }
+					    else {
+					        $this->deleteFile( SMART_GEO_GMAP_PATH_DATA, $filePath );
+					    }
 					}
 				}
 			}
@@ -262,37 +297,123 @@ if(!class_exists('\General\Classes\Common'))
 		/**
 		 * uploadFiles
 		 * 
+		 * @todo Need to return an array of results
+		 * 
 		 * @param string $path
 		 * @param array $files
 		 *
 		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return bool
 		 */
-		public function uploadFiles(string $path = '', array $files = []) : bool
+		public function uploadFiles( string $path = '', array $files = [], array $restrictions = array( 'geojson', 'json' ) ) : bool
 		{
-		    if(count($files['name']) > 0)
+		    if( count( $files[ 'name' ] ) > 0 )
 			{
-				$result = true;
-				
-				for($i=0; $i<count($files['name']); $i++)
+				for( $i=0; $i < count( $files[ 'name' ] ); $i++ )
 				{
-				    $tmpFilePath = $files['tmp_name'][$i];
-			
-					if( $tmpFilePath != "" )
-					{
-					    $filePath = $path . $files['name'][$i];
-				
-						if( !move_uploaded_file( $tmpFilePath, $filePath ))
-						{
-						    $result = false;
-						}
-						else {
-						    $result = true;
-						}
-					}
-				}
+				    $result = true;
+				    
+				    if( !isset( $files[ 'tmp_name' ][ $i ] ))
+				    {
+				        $result = false;
+				    }
+				    else {
+    				    $tmpFilePath = $files[ 'tmp_name' ][ $i ];
+    			
+    					if( !empty( $tmpFilePath ))
+    					{
+    					    /**
+    					     * Sanitize file name to avoid directory traversal
+    					     */
+    					    $filePath = $path . sanitize_file_name( $files[ 'name' ][ $i ] );
+    				
+    					    /**
+    					     * Check file extension
+    					     */
+    					    $extension = pathinfo( $filePath, PATHINFO_EXTENSION );
+    					    
+    					    if( count( $restrictions ) > 0 )
+    					    {
+    					        if( empty( $extension ) || !in_array( $extension, $restrictions ))
+    					        {
+    					            $result = false;
+    					        }
+    					    }
+    					    
+    					    if( $result )
+    					    {
+    					        /*
+    					         * If upload goes wrong
+    					         */
+    					        if( !move_uploaded_file( $tmpFilePath, $filePath ))
+    					        {
+    					            $result = false;
+    					        }
+    					        else {
+    					            
+    					            /**
+    					             * Otherwise check Json file content
+    					             */
+    					            $jsonString = file_get_contents( $filePath );
+    					            
+    					            $jsonData = json_decode( $jsonString );
+    					            
+    					            $isValid = (  json_last_error() == JSON_ERROR_NONE ) ? true : false;
+    					            
+    					            if( $isValid )
+    					            {
+    					                $result = true;
+    					            }
+    					            else {
+    					                $this->deleteFile( SMART_GEO_GMAP_PATH_DATA, $filePath );
+    					                
+    					                $result = false;
+    					            }
+    					        } // end check json content
+    					    } // end try to move file
+    					} // not empty tmp file name
+				    } // valid tmp file name
+				} // end for
 				
 				return $result;
+				
+		    } // end count files[name]
+		    
+		    return false;
+		}
+		
+		/**
+		 * deleteFile
+		 *
+		 * @param string $path
+		 * @param string $fileName
+		 * @param array $restrictions
+		 *
+		 * @author G.Maccario <g_maccario@hotmail.com>
+		 * @return bool
+		 */
+		public function deleteFile( string $path = '', string $fileName = '', array $restrictions = array( 'geojson', 'json' ) ) : bool
+		{
+		    $extension = pathinfo( $fileName, PATHINFO_EXTENSION );
+		    
+		    if( count( $restrictions ) > 0 )
+		    {
+		        if( empty( $extension ) || !in_array( $extension, $restrictions ))
+		        {
+		            return false;
+		        }
+		    }
+		    
+		    /**
+		     * Sanitize file name to avoid directory traversal
+		     */
+		    $filePath = $path . sanitize_file_name( $fileName );
+		    
+		    if( file_exists( $filePath ))
+		    {
+		        unlink( $filePath );
+		        
+		        return true;
 		    }
 		    
 		    return false;
