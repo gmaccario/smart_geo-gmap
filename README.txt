@@ -1,5 +1,5 @@
 === Smart GEO GMap ===
-Contributors: Giuseppe Maccario
+Contributors: gmaccario
 Requires at least: 4.8
 Tested up to: 5.2
 Requires PHP: 7.0
