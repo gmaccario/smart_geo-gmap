@@ -1,8 +1,8 @@
 === Smart GEO GMap ===
 Contributors: gmaccario
 Requires at least: 4.8
-Tested up to: 5.2
-Requires PHP: 7.0
+Tested up to: 5.4.1
+Requires PHP: 7.2
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -19,8 +19,11 @@ GEOJSON is a format for encoding a variety of geographic data structures. Take a
 This step is mandatory:
 [https://developers.google.com/maps/documentation/javascript/get-api-key](https://developers.google.com/maps/documentation/javascript/get-api-key "Google API Key")
 
+== Snazzy Maps Skins ==
+Snazzy Maps is a community built around creating and sharing great looking styles for Google Maps. [https://snazzymaps.com](https://snazzymaps.com "Snazzy website")
+
 == Features ==
-* Multiple markers 
+* Multiple markers
 * Marker info window (marker tooltips)
 * Coordinates: 3 center area controls
 * Zoom: world, landmass/continent, city, streets, buildings
@@ -41,6 +44,8 @@ This step is mandatory:
 * Go to Files tabs and upload your GEO JSON and Snazzy files
 
 == Change log ==
+== 1.1 ==
+* Minor changes
 == 1.0 ==
 * Compatible with PHP 7.0 (Linting)
 * General improvement
