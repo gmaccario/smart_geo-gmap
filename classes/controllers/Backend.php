@@ -251,6 +251,7 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
             	</li>
             	<li>
 	            	<span><?php echo __( "Use the Files tab to upload the skin and the GEO files to show on the map.", SMART_GEO_GMAP_L10N ); ?></span>
+                <span><?php echo __( "Files will be stored in uploads folder.", SMART_GEO_GMAP_L10N ); ?></span>
             	</li>
         	</ul>
 
@@ -265,7 +266,7 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
                             </tr>
                             <tr>
                                 <th><?php echo __( "Shortcode", SMART_GEO_GMAP_L10N ); ?></th>
-                                <th><?php echo __( "Frontend Method", SMART_GEO_GMAP_L10N ); ?></th>
+                                <!-- <th><?php // echo __( "Frontend Method", SMART_GEO_GMAP_L10N ); ?></th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -273,7 +274,7 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
                         		<tr>
                         			<?php foreach($available_shortcode as $shortcode => $method): ?>
                                     	<td>[<?php echo $shortcode; ?>]</td>
-                                    	<td><?php echo $method; ?></td>
+                                    	<!-- <td><?php //echo $method; ?></td> -->
                                     <?php endforeach; ?>
                                 </tr>
             				<?php endforeach; ?>
