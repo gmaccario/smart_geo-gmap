@@ -15,25 +15,25 @@ return [
 		    'additional_css' => [],
 			'pages'=> [
 				[
-				    'name'=> 'Smart GEO GMap Backend name', 
-    				'slug'=> 'smart_geo_gmap_menu_page', 
+				    'name'=> 'Smart GEO GMap Backend name',
+    				'slug'=> 'smart_geo_gmap_menu_page',
     				'attributes'=> [
-    					'callback'=> 'configuration', 
-    					'tabs'=> [ 
-    						[ 
-    							'name' => 'Welcome', 
-    							'slug' => 'welcome', 
-    							'callback' => 'displayTabWelcome' 
+    					'callback'=> 'configuration',
+    					'tabs'=> [
+    						[
+    							'name' => 'Welcome',
+    							'slug' => 'welcome',
+    							'callback' => 'displayTabWelcome'
     						],
     					    [
     					        'name' => 'Settings',
     					        'slug' => 'settings',
     					        'callback' => 'displayTabSettings'
     					    ],
-    						[ 
-    							'name' => 'Files', 
-    							'slug' => 'files', 
-    							'callback' => 'displayTabFiles' 
+    						[
+    							'name' => 'Files',
+    							'slug' => 'files',
+    							'callback' => 'displayTabFiles'
     						]
     					]
     				]
@@ -48,7 +48,7 @@ return [
 			],
 			'ajax'=> [ 'echo_foo' ],
 			'routes'=> [],
-		    'additional_js' => [ 'https://maps.googleapis.com/maps/api/js?key=%googleapiskey%&callback=initMap' ],
+		    'additional_js' => [ 'https://maps.googleapis.com/maps/api/js?key=%s&amp;callback=initMap' ],
 		    'additional_css' => []
 		]
 	],

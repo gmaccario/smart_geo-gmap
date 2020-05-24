@@ -25,7 +25,7 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
      * @return
      */
     class Backend extends Controller implements iBackend
-	{		
+	{
 	    /**
 		 * @name __construct
 		 *
@@ -38,7 +38,7 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
 	    {
 	        parent::__construct($common);
 	    }
-		
+
 	    /**
 	     * @name getHTMLTabs
 	     *
@@ -48,7 +48,7 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
 	    protected function getHTMLTabs() : string
 	    {
 	        $links = '';
-	        
+
 	        if( $this->params['pages'] )
 	        {
 	            foreach( $this->params['pages'] as $page )
@@ -58,13 +58,13 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
 	                    $tabs = $page[ 'attributes' ][ 'tabs' ];
 	                    foreach( $tabs as $tab )
 	                    {
-	                        if(empty($links)) 
+	                        if(empty($links))
 	                        {
 	                            $active = ( $this->params['active_tab'] == $tab[ 'slug' ] || !$this->params['active_tab'] ) ? 'nav-tab-active' : '';
 	                        } else {
 	                            $active = ( $this->params['active_tab'] == $tab[ 'slug' ] ) ? 'nav-tab-active' : '';
 	                        }
-	                        
+
 	                        /**
 	                         * @todo might be better!
 	                         */
@@ -75,10 +75,10 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
 		            }
 		        }
 		    }
-		    
+
 		    return $links;
 	    }
-	    
+
 		/**
 		 * @name configuration
 		 *
@@ -92,7 +92,7 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
 		     * *********************************************
 		     */
 		    $common = $this->getCommon();
-		    
+
 			/*
 			 * GET VALUES FROM POST
 			 * *********************************************
@@ -100,13 +100,13 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
 			$this->params['action'] = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING );
 			$this->params['active_page'] = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING );
 			$this->params['active_tab'] = filter_input( INPUT_GET, 'tab', FILTER_SANITIZE_STRING );
-			
+
 			$this->params['pages'] = $this->common->getConfig()[ 'features' ][ 'backend' ][ 'pages' ];
 			$this->params['tabs'] = $this->getHTMLTabs();
-			
+
 			$delete_geo_json = filter_input( INPUT_POST, 'delete_geo_json', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 			$delete_snazzy_json = filter_input( INPUT_POST, 'delete_snazzy_json', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
-			
+
 			/*
 			 * UPDATE OPTIONS
 			 * *********************************************
@@ -130,9 +130,9 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
     			    $this->params['coord_center_3_name'] = get_option( SMART_GEO_GMAP_OPT_COORD_CENTER_3_NAME );
     			    $this->params['javascript_event_info_windows'] = get_option( SMART_GEO_GMAP_OPT_JAVASCRIPT_EVENT_INFO_WINDOWS );
 			    }
-			    
+
 			} else {
-			    
+
 			    if( $this->params['active_tab'] == 'files' )
 			    {
     			    /*
@@ -146,14 +146,14 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
     			        {
     			            $this->params['upload_result_multiple_geojson'] = $common->uploadFiles( SMART_GEO_GMAP_PATH_DATA, $_FILES[ 'geojson_file' ] );
     			        }
-    			        
+
     			        /* UPLOAD SINGLE SNAZZY STYLE JSON */
     			        if( isset( $_FILES[ 'snazzymap' ] ))
     			        {
     			            $this->params['upload_result_single_snazzy'] = $common->uploadFile( SMART_GEO_GMAP_PATH_SNAZZY_STYLE, $_FILES[ 'snazzymap' ] );
     			        }
     			    }
-    			    
+
     			    /*
     			     * DELETE FILES
     			     * *********************************************
@@ -165,7 +165,7 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
     			            $common->deleteFile( SMART_GEO_GMAP_PATH_DATA, $file_to_delete );
     			        }
     			    }
-    			    
+
     			    if( isset( $delete_snazzy_json ))
     			    {
     			        foreach( $delete_snazzy_json as $file_to_delete )
@@ -189,7 +189,7 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
     			    $this->params['coord_center_2_name'] = filter_input( INPUT_POST, SMART_GEO_GMAP_OPT_COORD_CENTER_2_NAME, FILTER_SANITIZE_STRING );
     			    $this->params['coord_center_3_name'] = filter_input( INPUT_POST, SMART_GEO_GMAP_OPT_COORD_CENTER_3_NAME, FILTER_SANITIZE_STRING );
     			    $this->params['javascript_event_info_windows'] = filter_input( INPUT_POST, SMART_GEO_GMAP_OPT_JAVASCRIPT_EVENT_INFO_WINDOWS, FILTER_SANITIZE_STRING );
-    			    
+
     				/*
     				 * UPDATE NEW VALUES
     				 * *********************************************
@@ -206,22 +206,22 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
     				update_option( SMART_GEO_GMAP_OPT_JAVASCRIPT_EVENT_INFO_WINDOWS, $this->params['javascript_event_info_windows'] );
 			    }
 			}
-			
+
 			/*
 			 * GET REFRESHED FILES LIST
 			 * *********************************************
 			 */
 			$this->params['data_urls'] = array_diff( scandir( SMART_GEO_GMAP_PATH_DATA, 1 ), array( '..', '.', '.gitignore' ));
 			$this->params['data_snazzy'] = array_diff( scandir( SMART_GEO_GMAP_PATH_SNAZZY_STYLE, 1 ), array( '..', '.', '.gitignore' ));
-			
+
 			$this->params['available_shortcodes'] = $this->common->getConfig()['features']['frontend']['shortcodes'];
-			
+
 			/*
 			 * Include Template
 			 */
 			$this->renderTemplate('configuration');
 		}
-		
+
 		/**
 		 * @name displayTabWelcome
 		 *
@@ -253,7 +253,7 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
 	            	<span><?php echo __( "Use the Files tab to upload the skin and the GEO files to show on the map.", SMART_GEO_GMAP_L10N ); ?></span>
             	</li>
         	</ul>
-        	
+
         	<?php if( count( $this->params['available_shortcodes'] ) > 0 ): ?>
             	<div class="shortcodes">
             		<table>
@@ -280,10 +280,10 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
                         </tbody>
                      </table>
             	</div>
-        	<?php 
+        	<?php
         	endif;
 		}
-		
+
 		/**
 		 * @name displayTabSettings
 		 *
@@ -294,7 +294,7 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
 		{
 		    ?>
 		    <p><?php echo __( "Prepare your Smart GEO GMap: save your Google API Key, setup your coordinates controls, the starting zoom and the Javascript event to open the infoWindows (tooltips).", SMART_GEO_GMAP_L10N ); ?></p>
-        	
+
         	<div class="api_key">
             	<h3><?php echo __( 'Google API Key', SMART_GEO_GMAP_L10N ); ?></h3>
             	<div>
@@ -305,23 +305,23 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
 
             <div class="coordinates">
             	<h3><?php echo __( 'Coordinates', SMART_GEO_GMAP_L10N ); ?></h3>
-            	
+
             	<span><?php echo __( 'Coordinates center #1', SMART_GEO_GMAP_L10N ); ?></span>
             	<input type="text" name="<?php echo SMART_GEO_GMAP_OPT_COORD_CENTER_1_NAME; ?>" value="<?php echo $this->params['coord_center_1_name']; ?>" size="75" placeholder="Rome" />
             	<input type="text" name="<?php echo SMART_GEO_GMAP_OPT_COORD_CENTER_1; ?>" value="<?php echo $this->params['coord_center_1']; ?>" size="75" placeholder="41.890251, 12.492373" />
-            	
+
             	<div class="clearfix"></div>
-            		
+
             	<span><?php echo __( 'Coordinates center #2', SMART_GEO_GMAP_L10N ); ?></span>
             	<input type="text" name="<?php echo SMART_GEO_GMAP_OPT_COORD_CENTER_2_NAME; ?>" value="<?php echo $this->params['coord_center_2_name']; ?>" size="75" placeholder="Amsterdam" />
             	<input type="text" name="<?php echo SMART_GEO_GMAP_OPT_COORD_CENTER_2; ?>" value="<?php echo $this->params['coord_center_2']; ?>" size="75" placeholder="52.370216, 4.895168" />
-            	
+
             	<div class="clearfix"></div>
-            	
+
             	<span><?php echo __( 'Coordinates center #3', SMART_GEO_GMAP_L10N ); ?></span>
             	<input type="text" name="<?php echo SMART_GEO_GMAP_OPT_COORD_CENTER_3_NAME; ?>" value="<?php echo $this->params['coord_center_3_name']; ?>" size="75" placeholder="New York" />
             	<input type="text" name="<?php echo SMART_GEO_GMAP_OPT_COORD_CENTER_3; ?>" value="<?php echo $this->params['coord_center_3']; ?>" size="75" placeholder="40.730610, -73.935242" />
-            	
+
             	<div class="clearfix"></div>
             </div>
 
@@ -330,12 +330,12 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
             	<div>
             		<span><?php echo __( 'Default zoom', SMART_GEO_GMAP_L10N ); ?></span>
             		<select id="default_zoom" name="<?php echo SMART_GEO_GMAP_OPT_DEFAULT_ZOOM; ?>">
-            			<option value="1" <?php echo ((string)$this->params['default_zoom'] == "1" ) ? 'selected' : ''; ?>><?php echo __('World', SMART_GEO_GMAP_L10N); ?></option> 
+            			<option value="1" <?php echo ((string)$this->params['default_zoom'] == "1" ) ? 'selected' : ''; ?>><?php echo __('World', SMART_GEO_GMAP_L10N); ?></option>
             			<option value="5" <?php echo ((string)$this->params['default_zoom'] == "5" ) ? 'selected' : ''; ?>><?php echo __('Landmass/continent', SMART_GEO_GMAP_L10N); ?></option>
             			<option value="10" <?php echo ((string)$this->params['default_zoom'] == "10" ) ? 'selected' : ''; ?>><?php echo __('City', SMART_GEO_GMAP_L10N); ?></option>
             			<option value="15" <?php echo ((string)$this->params['default_zoom'] == "15" ) ? 'selected' : ''; ?>><?php echo __('Streets', SMART_GEO_GMAP_L10N); ?></option>
             			<option value="20" <?php echo ((string)$this->params['default_zoom'] == "20" ) ? 'selected' : ''; ?>><?php echo __('Buildings', SMART_GEO_GMAP_L10N); ?></option>
-            		</select>	
+            		</select>
             	</div>
             </div>
 
@@ -350,9 +350,9 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
             		<label for="javascript_event_click" class="radio"><?php echo __( 'Click', SMART_GEO_GMAP_L10N ); ?></label>
             	</div>
             </div>
-		    <?php 
+		    <?php
 		}
-		
+
 		/**
 		 * @name displayTabFiles
 		 *
@@ -368,19 +368,19 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
         			<span><b><?php echo __( "To delete files", SMART_GEO_GMAP_L10N ); ?>:</b></span>
 					<span><b><?php echo __( "Select the files you want to delete, then click Save Changes", SMART_GEO_GMAP_L10N ); ?>.</b></span>
         		</p>
-        		
+
         		<hr />
-        		
+
     		    <div class="snazzy_file">
                 	<h3><?php echo __( 'Snazzy Maps', SMART_GEO_GMAP_L10N ); ?></h3>
                 	<h4><?php echo __( 'Only json extensions allowed', SMART_GEO_GMAP_L10N ); ?>.</h4>
-                	
+
                 	<?php if( count( $this->params['data_snazzy'] ) == 0 ): ?>
                 		<div>
                     		<span><?php echo __( "Upload a Snazzy File", SMART_GEO_GMAP_L10N ); ?></span>
                     		<input type="file" id="snazzymap" name="snazzymap" />
                     	</div>
-                	
+
                 		<p><?php echo __( "No files uploaded yet.", SMART_GEO_GMAP_L10N ); ?></p>
                 	<?php else: ?>
                     	<table>
@@ -420,18 +420,18 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
                          </table>
 					<?php endif; ?>
                 </div>
-                
+
                 <hr />
-                
+
                 <div class="geo_json_files">
                 	<h3><?php echo __( 'Geo Json', SMART_GEO_GMAP_L10N ); ?></h3>
                 	<h4><?php echo __( 'Only geojson and json extensions allowed', SMART_GEO_GMAP_L10N ); ?>.</h4>
-                	
+
                 	<div>
                 		<span><?php echo __("Upload GEOJson files", SMART_GEO_GMAP_L10N ); ?></span>
                 		<input type="file" id="geojson_file[]" name="geojson_file[]" multiple="multiple" />
                 	</div>
-                	
+
                 	<?php if( count( $this->params['data_urls'] ) == 0 ): ?>
                 		<p><?php echo __( "No files uploaded yet.", SMART_GEO_GMAP_L10N ); ?></p>
                 	<?php else: ?>
@@ -472,7 +472,7 @@ if(!class_exists('\SGGM\Controllers\Classes\Backend'))
                          </table>
 					<?php endif; ?>
                 </div>
-		    <?php 
+		    <?php
 		}
 	}
 }

@@ -21,10 +21,14 @@ define( 'SMART_GEO_GMAP_OPT_COORD_CENTER_3_NAME', 'smart_geo_gmap_opt_coord_cent
 define( 'SMART_GEO_GMAP_OPT_JAVASCRIPT_EVENT_INFO_WINDOWS', 'smart_geo_gmap_opt_javascript_event_info_windows' );
 
 /* PLUGIN FILES FOLDERS */
-$uploadDir = isset(wp_upload_dir()['basedir']) ? wp_upload_dir()['basedir'] : '/uploads';
+$uploadBaseDir = isset(wp_upload_dir()['basedir']) ? wp_upload_dir()['basedir'] : DIRECTORY_SEPARATOR . 'uploads';
+$uploadBaseurl = isset(wp_upload_dir()['baseurl']) ? wp_upload_dir()['baseurl'] : '/uploads';
 
-define( 'SMART_GEO_GMAP_PATH_DATA', $uploadDir . DIRECTORY_SEPARATOR . 'smart-geo-gmap-data' . DIRECTORY_SEPARATOR );
-define( 'SMART_GEO_GMAP_PATH_SNAZZY_STYLE', $uploadDir . DIRECTORY_SEPARATOR . 'smart-geo-gmap-snazzy' . DIRECTORY_SEPARATOR );
+define( 'SMART_GEO_GMAP_PATH_DATA', $uploadBaseDir . DIRECTORY_SEPARATOR . 'smart-geo-gmap-data' . DIRECTORY_SEPARATOR );
+define( 'SMART_GEO_GMAP_PATH_SNAZZY_STYLE', $uploadBaseDir . DIRECTORY_SEPARATOR . 'smart-geo-gmap-snazzy' . DIRECTORY_SEPARATOR );
+
+define( 'SMART_GEO_GMAP_PATH_URL', $uploadBaseurl . DIRECTORY_SEPARATOR . 'smart-geo-gmap-data' . DIRECTORY_SEPARATOR );
+define( 'SMART_GEO_GMAP_URL_SNAZZY_STYLE', $uploadBaseurl . DIRECTORY_SEPARATOR . 'smart-geo-gmap-snazzy' . DIRECTORY_SEPARATOR );
 
 /* PLUGIN STRINGS */
 define( 'SMART_GEO_GMAP_L10N', 'smart_geo_gmap_l10n' );
