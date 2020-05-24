@@ -18,6 +18,7 @@ $common = new Common();
 
 if($common->checkDependencies())
 {
+    $common->prepareFolders();
     $common->prepare();
 
     /* In case of ajax call I need to load both Frontend and Backend to match the right method inside the right class */

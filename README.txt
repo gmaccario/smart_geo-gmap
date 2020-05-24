@@ -3,7 +3,7 @@ Contributors: gmaccario
 Requires at least: 4.8
 Tested up to: 5.4.1
 Requires PHP: 7.2
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,8 @@ Snazzy Maps is a community built around creating and sharing great looking style
 * Go to Files tabs and upload your GEO JSON and Snazzy files
 
 == Change log ==
+== 1.2 ==
+* Fixed error on file storing
 == 1.1 ==
 * Minor changes
 == 1.0 ==
