@@ -46,7 +46,7 @@ return [
 			'shortcodes'=> [
 			    ['smart_geo_gmap'=> 'showSmartGEOGoogleMap']
 			],
-			'ajax'=> [ 'echo_foo' ],
+			'ajax'=> [],
 			'routes'=> [],
 		    'additional_js' => [ 'https://maps.googleapis.com/maps/api/js?key=%s&amp;callback=initMap' ],
 		    'additional_css' => []
