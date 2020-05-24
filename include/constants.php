@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 /**
  * @note This file is intended as a repository of constants of name of options,
- * useful with filter_input and get_option methods to avoid human errors writing 
+ * useful with filter_input and get_option methods to avoid human errors writing
  * the name of the variables.
- * 
+ *
  */
 
 /* PLUGIN OPTIONS */
@@ -19,6 +19,12 @@ define( 'SMART_GEO_GMAP_OPT_COORD_CENTER_1_NAME', 'smart_geo_gmap_opt_coord_cent
 define( 'SMART_GEO_GMAP_OPT_COORD_CENTER_2_NAME', 'smart_geo_gmap_opt_coord_center_2_name' );
 define( 'SMART_GEO_GMAP_OPT_COORD_CENTER_3_NAME', 'smart_geo_gmap_opt_coord_center_3_name' );
 define( 'SMART_GEO_GMAP_OPT_JAVASCRIPT_EVENT_INFO_WINDOWS', 'smart_geo_gmap_opt_javascript_event_info_windows' );
+
+/* PLUGIN FILES FOLDERS */
+$uploadDir = isset(wp_upload_dir()['basedir']) ? wp_upload_dir()['basedir'] : '/uploads';
+
+define( 'SMART_GEO_GMAP_PATH_DATA', $uploadDir . DIRECTORY_SEPARATOR . 'smart-geo-gmap-data' . DIRECTORY_SEPARATOR );
+define( 'SMART_GEO_GMAP_PATH_SNAZZY_STYLE', $uploadDir . DIRECTORY_SEPARATOR . 'smart-geo-gmap-snazzy' . DIRECTORY_SEPARATOR );
 
 /* PLUGIN STRINGS */
 define( 'SMART_GEO_GMAP_L10N', 'smart_geo_gmap_l10n' );

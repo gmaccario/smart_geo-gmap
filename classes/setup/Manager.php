@@ -26,7 +26,7 @@ if(!class_exists('\SGGM\Setup\Classes\Controller'))
     {
         protected $config;
         protected $controller;
-        
+
         /**
          * @name __construct
          *
@@ -36,10 +36,10 @@ if(!class_exists('\SGGM\Setup\Classes\Controller'))
         public function __construct(iController $controller)
         {
             parent::__construct();
-            
+
             $this->controller = $controller;
         }
-        
+
         /**
          * @name setConfig
          *
@@ -50,10 +50,10 @@ if(!class_exists('\SGGM\Setup\Classes\Controller'))
         {
             $this->config = $this->controller->getCommon()->getConfig();
         }
-        
+
         /**
          * @name enqueueAdditionalStaticFiles
-         * 
+         *
          * @param array $additionals
          * @param string $enqueueType
          *
@@ -62,28 +62,31 @@ if(!class_exists('\SGGM\Setup\Classes\Controller'))
          */
         protected function enqueueAdditionalStaticFiles(array $additionals, string $enqueueType)
         {
-            array_map(function($additional) use($enqueueType){
-                $basename = explode('/', $additional);
-                
-                if($enqueueType == 'js')
-                {
-                    if(strpos($additional, 'maps.googleapis.com') !== false){
-                        if( !empty( get_option( SMART_GEO_GMAP_OPT_GOOGLE_API_KEY )))
-                        {
-                            $additional = str_replace('%googleapiskey%', get_option(SMART_GEO_GMAP_OPT_GOOGLE_API_KEY), $additional);
-                            
-                            wp_enqueue_script( 'smart_geo_gmap-frontend-js-' . $basename[count($basename) - 1], $additional, array( 'jquery', 'smart_geo_gmap-frontend-js' ), null, true );
-                        }
-                    }
-                    else {
-                        wp_enqueue_script( 'smart_geo_gmap-frontend-js-' . $basename[count($basename) - 1], $additional, array( 'jquery', 'smart_geo_gmap-frontend-js' ), null, true );
-                    }
-                }
-                else {
-                    wp_enqueue_style( 'smart_geo_gmap-admin-frontend-css-' . $basename[count($basename) - 1], $additional);
-                }
-                
-            }, $additionals);
+            foreach($additionals as $additional)
+            {
+              $basename = explode('/', $additional);
+
+              if($enqueueType != 'js')
+              {
+                wp_enqueue_style( 'smart_geo_gmap-admin-frontend-css-' . $basename[count($basename) - 1], $additional);
+              }
+              else {
+                  if(strpos($additional, 'maps.googleapis.com') === false)
+                  {
+                    wp_enqueue_script( 'smart_geo_gmap-frontend-js-' . $basename[count($basename) - 1], $additional, array( 'jquery', 'smart_geo_gmap-frontend-js' ), null, true );
+                  }
+                  else {
+                      $googleApiKey = get_option( SMART_GEO_GMAP_OPT_GOOGLE_API_KEY );
+
+                      if( !empty( $googleApiKey ))
+                      {
+                          $additional = sprintf( $additional, $googleApiKey );
+
+                          wp_enqueue_script( 'smart_geo_gmap-frontend-js-' . $basename[count($basename) - 1], $additional, array( 'jquery', 'smart_geo_gmap-frontend-js' ), null, true );
+                      }
+                  }
+              }
+            }
         }
     }
 }
