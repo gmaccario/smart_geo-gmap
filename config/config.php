@@ -15,7 +15,7 @@ return [
 		    'additional_css' => [],
 			'pages'=> [
 				[
-				    'name'=> 'Smart GEO GMap Backend name',
+				    'name'=> 'Smart GEO GMap Backend',
     				'slug'=> 'smart_geo_gmap_menu_page',
     				'attributes'=> [
     					'callback'=> 'configuration',
