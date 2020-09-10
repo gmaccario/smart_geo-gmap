@@ -44,7 +44,7 @@ return [
 			'hooks'=> [],
 			'filters'=> [],
 			'shortcodes'=> [
-			    ['smart_geo_gmap'=> 'showSmartGEOGoogleMap']
+			    ['smart_geo_gmap' => 'showSmartGEOGoogleMap']
 			],
 			'ajax'=> [],
 			'routes'=> [],
