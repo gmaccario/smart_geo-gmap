@@ -3,7 +3,7 @@
 Plugin Name: Smart GEO GMap
 Plugin URI: https://github.com/gmaccario/smart-geo-gmap
 Description: Smart GEO GMap provides an easy way to integrate a Google Map over WordPress Page/Post using an easy Shortcode.
-Version: 1.3
+Version: 1.3.1
 Author: Giuseppe Maccario
 Author URI: https://www.giuseppemaccario.com
 License: GPLv2 or later

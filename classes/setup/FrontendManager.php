@@ -58,11 +58,14 @@ if(!class_exists('\SGGM\Setup\Classes\FrontendManager'))
 
 				foreach($keys as $key)
 				{
-					if(has_shortcode($post->post_content, $key))
+					if(isset($post->post_content))
 					{
-						$include = true;
-						
-						break 2;
+						if(has_shortcode($post->post_content, $key))
+						{
+							$include = true;
+							
+							break 2;
+						}
 					}
 				}
 			}
