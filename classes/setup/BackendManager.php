@@ -64,20 +64,31 @@ if( !class_exists('\SGGM\Setup\Classes\BackendManager'))
 		 */
 		public function backendEnqueue()
 		{
-			/*
-			 * Add additional frontend css/js 
-			 */
-			$additional_js = $this->config['features']['backend']['additional_js'];
-			$additional_css = $this->config['features']['backend']['additional_css'];
+			global $wp;
+			$domain = home_url( add_query_arg( array(), $wp->request ));
+			$current_rel_uri = add_query_arg( NULL, NULL );
+			$current_url = parse_url ( $domain . $current_rel_uri );
 			
-			$this->enqueueAdditionalStaticFiles($additional_js, 'js');
-			$this->enqueueAdditionalStaticFiles($additional_css, 'css');
-			
-			/*
-			 * Add basic static files
-			 */
-			wp_enqueue_style('smart_geo_gmap-admin-css', sprintf( '%s%s', SMART_GEO_GMAP_URL, '/assets/css/backend.css' ), array(),  '1.0');
-			wp_enqueue_script('smart_geo_gmap-admin-js', sprintf( '%s%s', SMART_GEO_GMAP_URL, '/assets/js/backend.js' ), array( 'jquery' ),  '1.0', true);
+			if( isset( $current_url["query"] ))
+			{
+				if( strpos( $current_url["query"], 'page=smart_geo_gmap_menu_page' ) !== false )
+				{
+					/*
+					* Add additional frontend css/js 
+					*/
+					$additional_js = $this->config['features']['backend']['additional_js'];
+					$additional_css = $this->config['features']['backend']['additional_css'];
+					
+					$this->enqueueAdditionalStaticFiles($additional_js, 'js');
+					$this->enqueueAdditionalStaticFiles($additional_css, 'css');
+					
+					/*
+					* Add basic static files
+					*/
+					wp_enqueue_style('smart_geo_gmap-admin-css', sprintf( '%s%s', SMART_GEO_GMAP_URL, '/assets/css/backend.css' ), array(),  '1.0');
+					wp_enqueue_script('smart_geo_gmap-admin-js', sprintf( '%s%s', SMART_GEO_GMAP_URL, '/assets/js/backend.js' ), array( 'jquery' ),  '1.0', true);
+				}
+			}
 		}
 		
 		/**
