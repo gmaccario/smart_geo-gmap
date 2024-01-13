@@ -59,7 +59,7 @@
     	var geojson_files = [];
     	<?php foreach( $data_urls as $url ): ?>
     		<?php if( is_file( SMART_GEO_GMAP_PATH_DATA . $url )): ?>
-    			geojson_files.push( <?php echo json_encode( SMART_GEO_GMAP_PATH_URL. '/' . $url ); ?> );
+    			geojson_files.push( <?php echo json_encode( SMART_GEO_GMAP_PATH_URL . $url ); ?> );
     		<?php endif; ?>
     	<?php endforeach; ?>
     </script>

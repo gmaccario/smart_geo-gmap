@@ -20,7 +20,6 @@ if( !class_exists('\SGGM\Setup\Classes\AjaxLoader'))
      * @name AjaxLoader
      * @description Generic loader for ajax call
      *
-     * @author G.Maccario <g_maccario@hotmail.com>
      * @return
      */
     class AjaxLoader extends Basic implements iAjaxLoader
@@ -30,7 +29,6 @@ if( !class_exists('\SGGM\Setup\Classes\AjaxLoader'))
 		/**
 		 * @name __construct
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return
 		 */
 	    public function __construct()
@@ -43,7 +41,6 @@ if( !class_exists('\SGGM\Setup\Classes\AjaxLoader'))
 		 *
 		 * @param Controller $controller
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return
 		 */
 		public function setController(Controller $controller)
@@ -54,7 +51,6 @@ if( !class_exists('\SGGM\Setup\Classes\AjaxLoader'))
 		/**
 		 * @name registerAjaxCalls
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return
 		 */
 		public function registerAjaxCalls()
@@ -77,7 +73,6 @@ if( !class_exists('\SGGM\Setup\Classes\AjaxLoader'))
 		 *
 		 * @param array $methods
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return
 		 */
 		protected function registerAjaxSideCall(array $methods) : bool

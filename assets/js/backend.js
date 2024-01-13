@@ -1,3 +1,1 @@
-jQuery( document ).ready(function() {
-    //console.log( "Smart GEO GMap backend ready!" );
-});
+jQuery( document ).ready(function() {    //console.log( "Smart GEO GMap backend ready!" );});

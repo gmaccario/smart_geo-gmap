@@ -3,6 +3,7 @@
 namespace SGGM\Controller\Classes;
 
 use SGGM\General\Classes\Common;
+use SGGM\General\Classes\View;
 
 if(!interface_exists('SGGM\Controllers\Classes\iFrontend'))
 {
@@ -18,28 +19,22 @@ if(!class_exists('\SGGM\Controllers\Classes\Frontend'))
      * @name Frontend
      * @description Generic class for the Frontend controller
      *
-     * @author G.Maccario <g_maccario@hotmail.com>
      * @return
      */
     class Frontend extends Controller implements iFrontend
 	{
-		/**
-		 * @name __construct
-		 *
-		 * @param Common $common
-		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
-		 * @return
-		 */
-		public function __construct(Common $common)
+        /**
+         * @param Common $common
+         * @param View $view
+         */
+		public function __construct(Common $common, View $view)
 		{
-		    parent::__construct($common);
+		    parent::__construct($common, $view);
 		}
 
 		/**
 		 * showSmartGEOGoogleMap
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 *
 		 * Show Smart GEO GMap
 		 *
@@ -96,7 +91,7 @@ if(!class_exists('\SGGM\Controllers\Classes\Frontend'))
 		    }
 
 		    /* @note Use "return" if this is the result of a shortcode */
-		    return $this->common->renderView($this, 'map', $this->params);
+		    return $this->view->renderView($this, 'map', $this->params);
 		}
 	}
 }

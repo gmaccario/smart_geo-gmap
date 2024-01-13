@@ -1,9 +1,7 @@
 <?php
 /**
  * @name BackendManager
- * @description The BackendManager is a wrapper for all backend wordpress related activites for example add the pages in the backend menu, add the backend js/css.
- *
- * @author G.Maccario <g_maccario@hotmail.com>
+ * @description The BackendManager is a wrapper for all backend WordPress related activities for example add the pages in the backend menu, add the backend js/css.
  */
 
 namespace SGGM\Setup\Classes;
@@ -16,7 +14,7 @@ if(!interface_exists('SGGM\Setup\Classes\iBackendManager'))
     {
         public function getPages() : array;
         public function backendEnqueue();
-        public function customActionLinks(array $links) : array;
+        public function customActionLinks(array $links) : ?array;
         public function backendMenu();
         public function whenSmartGEOGoogleMapStart();
     }
@@ -24,14 +22,12 @@ if(!interface_exists('SGGM\Setup\Classes\iBackendManager'))
 
 if( !class_exists('\SGGM\Setup\Classes\BackendManager'))
 {
-    class BackendManager extends Manager
-	{		
-		/**
-		 * @name __construct
-		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
-		 * @return
-		 */
+    class BackendManager extends Manager implements iBackendManager
+	{
+        /**
+         * @param Controller $backend
+         *
+         */
 		public function __construct(Controller $backend)
 		{
 		    parent::__construct($backend);
@@ -42,7 +38,6 @@ if( !class_exists('\SGGM\Setup\Classes\BackendManager'))
 		/**
 		 * @name getPages
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return array
 		 */
 		public function getPages() : array
@@ -59,13 +54,12 @@ if( !class_exists('\SGGM\Setup\Classes\BackendManager'))
 		/**
 		 * @name backendEnqueue
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return void
 		 */
 		public function backendEnqueue()
 		{
 			global $wp;
-			$domain = home_url( add_query_arg( array(), $wp->request ));
+			$domain = home_url( add_query_arg( [], $wp->request ));
 			$current_rel_uri = add_query_arg( NULL, NULL );
 			$current_url = parse_url ( $domain . $current_rel_uri );
 			
@@ -85,8 +79,8 @@ if( !class_exists('\SGGM\Setup\Classes\BackendManager'))
 					/*
 					* Add basic static files
 					*/
-					wp_enqueue_style('smart_geo_gmap-admin-css', sprintf( '%s%s', SMART_GEO_GMAP_URL, '/assets/css/backend.css' ), array(),  '1.0');
-					wp_enqueue_script('smart_geo_gmap-admin-js', sprintf( '%s%s', SMART_GEO_GMAP_URL, '/assets/js/backend.js' ), array( 'jquery' ),  '1.0', true);
+					wp_enqueue_style('smart_geo_gmap-admin-css', sprintf( '%s%s', SMART_GEO_GMAP_URL, '/assets/css/backend.css' ), [],  '1.0');
+					wp_enqueue_script('smart_geo_gmap-admin-js', sprintf( '%s%s', SMART_GEO_GMAP_URL, '/assets/js/backend.js' ), ['jquery'],  '1.1', true);
 				}
 			}
 		}
@@ -96,21 +90,20 @@ if( !class_exists('\SGGM\Setup\Classes\BackendManager'))
 		 *
 		 * @param array $links
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
-		 * @return array
+		 * @return ?array
 		 */
-		public function customActionLinks(array $links) : array
+		public function customActionLinks(array $links) : ?array
 		{
 		    $pages = $this->getPages();
 		    
 		    if( count( $pages ) > 0 )
 			{
-				return array_merge($links, array( 
+				return array_merge($links, [
 					sprintf( '<a href="%s">%s</a>', 
 					    admin_url( 'admin.php?page=' . $this->controller->getCommon()->getConstant( $pages[0][ 'slug' ] )), 
 						__( 'Settings', SMART_GEO_GMAP_L10N ) 
 					)
-				));
+                ]);
 			}
 			
 			return null;
@@ -119,7 +112,6 @@ if( !class_exists('\SGGM\Setup\Classes\BackendManager'))
 		/**
 		 * @name backendMenu
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return void
 		 */
 		public function backendMenu()
@@ -142,7 +134,7 @@ if( !class_exists('\SGGM\Setup\Classes\BackendManager'))
 								__( SMART_GEO_GMAP_NAME, SMART_GEO_GMAP_L10N ),
 								'manage_options',
 						    $this->controller->getCommon()->getConstant( $page[ 'slug' ] ),
-								array( $this->controller, $page[ 'attributes' ][ 'callback' ] ),
+								[$this->controller, $page[ 'attributes' ][ 'callback' ]],
 								'dashicons-admin-site'
 						);
 					}
@@ -153,7 +145,7 @@ if( !class_exists('\SGGM\Setup\Classes\BackendManager'))
 						__( $page[ 'name' ], SMART_GEO_GMAP_L10N ),
 						'manage_options',
 					    $this->controller->getCommon()->getConstant( $page[ 'slug' ] ),
-						array( $this->controller, $page[ 'attributes' ][ 'callback' ] )
+						[$this->controller, $page[ 'attributes' ][ 'callback' ]]
 					);
 				}
 			}
@@ -162,7 +154,6 @@ if( !class_exists('\SGGM\Setup\Classes\BackendManager'))
 		/**
 		 * @name whenSmartGEOGoogleMapStart
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return void
 		 */
 		public function whenSmartGEOGoogleMapStart()
@@ -180,8 +171,8 @@ if( !class_exists('\SGGM\Setup\Classes\BackendManager'))
 			add_settings_section
 			*/
 			
-			$active_tab = filter_input( INPUT_GET, 'tab', FILTER_SANITIZE_STRING );
-			$active_page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING );
+			$active_tab = filter_input( INPUT_GET, 'tab', FILTER_UNSAFE_RAW  );
+			$active_page = filter_input( INPUT_GET, 'page', FILTER_UNSAFE_RAW );
 			
 			$pages = $this->getPages();
 			
@@ -199,7 +190,7 @@ if( !class_exists('\SGGM\Setup\Classes\BackendManager'))
 							    add_settings_section(
                                     $tab[ 'slug' ],
 							        $tab[ 'name' ],
-							        array( $this->controller, $tab[ 'callback' ] ) , 
+							        [$this->controller, $tab[ 'callback' ]],
 							        $tab[ 'slug' ]
 							    );
 							}

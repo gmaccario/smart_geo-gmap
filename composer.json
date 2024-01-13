@@ -1,9 +1,9 @@
 {
 	"autoload": {
 		"psr-4": {
-			"SGGM\\Controller\\Classes\\": "classes/controllers/",
-			"SGGM\\General\\Classes\\": "classes/general/",
-			"SGGM\\Setup\\Classes\\": "classes/setup/"
+			"SGGM\\Controller\\Classes\\": "classes/Controllers/",
+			"SGGM\\General\\Classes\\": "classes/General/",
+			"SGGM\\Setup\\Classes\\": "classes/Setup/"
 		}
 	},
 	"require-dev" : {}

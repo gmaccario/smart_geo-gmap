@@ -1,13 +1,17 @@
 <?php
 /*
 Plugin Name: Smart GEO GMap
-Plugin URI: https://github.com/gmaccario/smart-geo-gmap
+Plugin URI: https://www.giuseppemaccario.com/wordpress-map-plugin-smart-geo-gmap/
 Description: Smart GEO GMap provides an easy way to integrate a Google Map over WordPress Page/Post using an easy Shortcode.
-Version: 1.3.2
+Version: 1.3.5
 Author: Giuseppe Maccario
 Author URI: https://www.giuseppemaccario.com
 License: GPLv2 or later
 */
+
+if( !defined( 'ABSPATH' )) {
+    return false;
+}
 
 if( defined( WP_DEBUG ) && WP_DEBUG )
 {
@@ -17,7 +21,7 @@ if( defined( WP_DEBUG ) && WP_DEBUG )
 }
 
 /* GENERAL CONSTANTS */
-define( 'SMART_GEO_GMAP_NAME', 'Smart GEO GMap' );
+const SMART_GEO_GMAP_NAME = 'Smart GEO GMap';
 
 /* BASIC CONSTANTS - MANDATORY HERE CAUSE __FILE__ */
 define( 'SMART_GEO_GMAP_BASENAME', plugin_basename( __FILE__ ));
@@ -29,14 +33,11 @@ function smartGeoGmapInit()
 	/* PSR-4: Autoloader - PHP-FIG */
 	require SMART_GEO_GMAP_DIR_PATH . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
-  /* DEFINE CONSTANTS	*/
+    /* DEFINE CONSTANTS	*/
 	require_once SMART_GEO_GMAP_DIR_PATH . 'include' . DIRECTORY_SEPARATOR . 'constants.php';
 
 	/* DISPATCHER */
 	require_once SMART_GEO_GMAP_DIR_PATH . 'include' . DIRECTORY_SEPARATOR . 'dispatcher.php';
 }
 
-if( defined( 'ABSPATH' ))
-{
-    smartGeoGmapInit();
-}
+smartGeoGmapInit();

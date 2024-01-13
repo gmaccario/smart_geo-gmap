@@ -1,9 +1,10 @@
 === Smart GEO GMap ===
 Contributors: gmaccario
-Requires at least: 4.8
-Tested up to: 5.5.1
+Donate link: https://www.giuseppemaccario.com/wordpress-map-plugin-smart-geo-gmap/
+Requires at least: 4.8.15
+Tested up to: 6.4.2
 Requires PHP: 7.2
-Stable tag: 1.3.2
+Stable tag: 1.3.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,8 +13,8 @@ Smart GEO GMap is a WordPress plugin that provides an easy way to integrate a Go
 == Description ==
 Smart GEO GMap is a WordPress plugin that provides an easy way to integrate a Google Map over WordPress Page/Post using an easy Shortcode. Upload unlimited GEO JSON files for encoding a variety of geographic data structures and showing and drawing boundaries, shapes, markers and infowindows (tooltips) on the map. Make your map funny: Upload a Snazzy file to stylize the map.
 
-== What is GEOJSON? ==
-GEOJSON is a format for encoding a variety of geographic data structures. Take a look at the documentation: https://geojson.org/
+== What is GeoJSON? ==
+GeoJSON is a format for encoding a variety of geographic data structures. Take a look at the documentation: https://geojson.org/
 
 == Google API Key ==
 This step is mandatory:
@@ -26,9 +27,9 @@ Snazzy Maps is a community built around creating and sharing great looking style
 * Multiple markers
 * Marker info window (marker tooltips)
 * Coordinates: 3 center area controls
+* Upload up to 3 GeoJSON files upload in order to draw boundaries, shapes, add markers and tooltips on the map.
+* 1 Snazzy Maps Skin
 * Zoom: world, landmass/continent, city, streets, buildings
-* Snazzy Maps Skins
-* Unlimited GEOJSON files upload in order to draw boundaries, shapes, add markers and tooltips on the map.
 * Responsive layout
 * Full screen map
 * Change event type on tooltip
@@ -44,6 +45,12 @@ Snazzy Maps is a community built around creating and sharing great looking style
 * Go to Files tabs and upload your GEO JSON and Snazzy files
 
 == Change log ==
+== 1.3.5 ==
+* Limit to 3 GeoJSON files
+* Fix deprecated filters for PHP 8.1
+* Tested on PHP 8.1.20 and WordPress 6.4.2
+* Minor changes
+
 == 1.3.2 ==
 * Minor changes
 

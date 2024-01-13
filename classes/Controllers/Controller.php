@@ -2,8 +2,10 @@
 
 namespace SGGM\Controller\Classes;
 
+use Exception;
 use SGGM\General\Classes\Basic;
 use SGGM\General\Classes\Common;
+use SGGM\General\Classes\View;
 
 if(!interface_exists('SGGM\Controller\Classes\iController'))
 {
@@ -20,30 +22,26 @@ if(!class_exists('\SGGM\Controllers\Classes\Controller'))
      * @name Controller
      * @description Generic class for the Controller
      *
-     * @author G.Maccario <g_maccario@hotmail.com>
      * @return
      */
     class Controller extends Basic implements iController
 	{		
-		protected $common;
-		
-		/**
-		 * @name __construct
-		 *
-		 * @param Common $common
-		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
-		 * @return
-		 */
-		public function __construct(Common $common)
+		protected Common $common;
+		protected View $view;
+
+        /**
+         * @param Common $common
+         * @param View $view
+         */
+		public function __construct(Common $common, View $view)
 		{
 			$this->common = $common;
+            $this->view = $view;
 		}
 		
 		/**
 		 * @name getCommon
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return Common
 		 */
 		public function getCommon() : Common
@@ -51,23 +49,22 @@ if(!class_exists('\SGGM\Controllers\Classes\Controller'))
 		    return $this->common;
 		}
 
-		/**
-		 * @name renderTemplate
-		 *
-		 * @param string $template
-		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
-		 * 
-		 * @return string
-		 */
+        /**
+         * @name renderTemplate
+         *
+         * @param string $template
+         *
+         * @return string
+         * @throws Exception
+         */
 		public function renderTemplate(string $template = '') : string
 		{
 		    if($template == '')
 		    {
-		        throw new \Exception('Please, set a new template inside the config file and use it.');
+		        throw new Exception('Please, set a new template inside the config file and use it.');
 		    } else {
 		        
-		        return $this->common->renderView($this, $template, $this->params);
+		        return $this->view->renderView($this, $template, $this->params);
 		    }
 		}
     }

@@ -1,12 +1,14 @@
 <?php
 /**
  * @name Dispatcher
- * @description The dispatcer is in charge of taking the right decision about what side of the plugin to set up and launch (frontend or backend).
+ * @description The dispatcher is in charge of taking the right decision about what side of the plugin to set up and launch (frontend or backend).
  *
- * @author G.Maccario <g_maccario@hotmail.com>
  */
 
+use SGGM\General\Classes\Config;
+use SGGM\General\Classes\View;
 use SGGM\General\Classes\Common;
+use SGGM\General\Classes\Files;
 use SGGM\Controller\Classes\Backend;
 use SGGM\Controller\Classes\Frontend;
 use SGGM\Setup\Classes\FrontendManager;
@@ -14,20 +16,19 @@ use SGGM\Setup\Classes\BackendManager;
 use SGGM\Setup\Classes\AjaxLoader;
 use SGGM\Setup\Classes\Loader;
 
-$common = new Common();
+$config = new Config();
 
-if($common->checkDependencies())
+if($config->checkDependencies())
 {
-    $common->prepareFolders();
-    $common->prepare();
+    $config->prepareFolders();
 
     /* In case of ajax call I need to load both Frontend and Backend to match the right method inside the right class */
     if (defined('DOING_AJAX') && DOING_AJAX)
     {
         /* Both side */
         $controllers = [
-            new Backend($common),
-            new Frontend($common)
+            new Backend(new Common($config), new View(), new Files()),
+            new Frontend(new Common($config), new View())
         ];
 
         /* WARNING: WordPress must register AJAX CALLS and new ROUTES before add any action or filters! */
@@ -50,7 +51,7 @@ if($common->checkDependencies())
         if(is_admin())
         {
             /* BACKEND SIDE */
-            $controller = new Backend($common);
+            $controller = new Backend(new Common($config), new View(), new Files());
 
             /* BACKEND MANAGER */
             $manager = new BackendManager($controller);
@@ -58,21 +59,18 @@ if($common->checkDependencies())
         } else {
 
             /* FRONTEND SIDE */
-            $controller = new Frontend($common);
+            $controller = new Frontend(new Common($config), new View());
 
             /* FRONTEND MANAGER */
             $manager = new FrontendManager($controller);
         }
 
-        if( $controller && $manager )
-        {
-          /* HOOKS AND FILTERS HERE */
-          $loader = new Loader();
+        /* HOOKS AND FILTERS HERE */
+        $loader = new Loader(new View());
 
-          $loader->setController($controller);
-          $loader->setControllerManager($manager);
+        $loader->setController($controller);
+        $loader->setControllerManager($manager);
 
-          $loader->loadFeatures();
-        }
+        $loader->loadFeatures();
     }
 }

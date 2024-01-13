@@ -16,7 +16,6 @@ if( !class_exists('\SGGM\General\Classes\Basic'))
      * @name Basic
      * @description Set basic attributes
      *
-     * @author G.Maccario <g_maccario@hotmail.com>
      * @return
      */
     class Basic implements iBasic
@@ -26,7 +25,6 @@ if( !class_exists('\SGGM\General\Classes\Basic'))
 		/**
 		 * @name __construct
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return
 		 */
 		public function __construct(){}

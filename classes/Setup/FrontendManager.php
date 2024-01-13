@@ -1,9 +1,8 @@
 <?php
 /**
  * @name FrontendManager
- * @description The FrontendManager is a wrapper for all frontend wordpress related activites for example add the backend js/css and check the ajaxurl.
+ * @description The FrontendManager is a wrapper for all frontend WordPress related activities for example add the backend js/css and check the ajaxurl.
  *
- * @author G.Maccario <g_maccario@hotmail.com>
  */
 
 namespace SGGM\Setup\Classes;
@@ -21,14 +20,14 @@ if(!interface_exists('SGGM\Setup\Classes\iFrontendManager'))
 
 if(!class_exists('\SGGM\Setup\Classes\FrontendManager'))
 {
-    class FrontendManager extends Manager
+    class FrontendManager extends Manager implements iFrontendManager
 	{
-		/**
-		 * __construct
-		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
-		 * @return
-		 */
+        /**
+         * __construct
+         *
+         * @param Controller $frontend
+
+         */
 		public function __construct(Controller $frontend)
 		{
 		    parent::__construct($frontend);
@@ -39,7 +38,6 @@ if(!class_exists('\SGGM\Setup\Classes\FrontendManager'))
 		/**
 		 * @name frontendEnqueue
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return void
 		 */
 		public function frontendEnqueue()
@@ -81,15 +79,14 @@ if(!class_exists('\SGGM\Setup\Classes\FrontendManager'))
 				/*
 				 * Add basic static files
 				 */
-				wp_enqueue_style( 'smart_geo_gmap-frontend-css', sprintf( '%s%s', SMART_GEO_GMAP_URL, '/assets/css/frontend.css' ), array(), '1.0' );
-				wp_enqueue_script( 'smart_geo_gmap-frontend-js', sprintf( '%s%s', SMART_GEO_GMAP_URL, '/assets/js/frontend.js' ), array( 'jquery' ), '1.0', true );
+				wp_enqueue_style( 'smart_geo_gmap-frontend-css', sprintf( '%s%s', SMART_GEO_GMAP_URL, '/assets/css/frontend.css' ), [], '1.0' );
+				wp_enqueue_script( 'smart_geo_gmap-frontend-js', sprintf( '%s%s', SMART_GEO_GMAP_URL, '/assets/js/frontend.js' ), ['jquery'], '1.0', true );
 			}
 		}
 		
 		/**
 		 * @name setAjaxurl
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return void
 		 */
 		public function setAjaxurl()

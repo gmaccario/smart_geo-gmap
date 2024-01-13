@@ -56,6 +56,6 @@
 
 <p>
 	<span class="dashicons dashicons-wordpress"> </span>
-	<span><?php echo __( "Author", 'smart_geo_gmap' ); ?>:</span>
-	<a href="https://www.giuseppemaccario.com/" target="_blank">Giuseppe Maccario</a>
+	<span><?php echo __( "Contributors", 'smart_geo_gmap' ); ?>:</span>
+	<a href="https://www.giuseppemaccario.com/" target="_blank">gmaccario</a>
 </p>

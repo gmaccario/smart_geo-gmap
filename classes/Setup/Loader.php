@@ -3,6 +3,7 @@
 namespace SGGM\Setup\Classes;
 
 use SGGM\Controller\Classes\Controller;
+use SGGM\General\Classes\View;
 
 if(!interface_exists('SGGM\Setup\Classes\iLoader'))
 {
@@ -11,7 +12,6 @@ if(!interface_exists('SGGM\Setup\Classes\iLoader'))
         public function setController(Controller $controller);
         public function setControllerManager(Manager $manager);
         public function loadFeatures();
-        /* Methods you declare in Interfaces ought to be public. */
     }
 }
 
@@ -21,44 +21,39 @@ if(!class_exists('\SGGM\Setup\Classes\Loader'))
      * @name Loader
      * @description Generic loader
      *
-     * @author G.Maccario <g_maccario@hotmail.com>
      * @return
      */
     class Loader implements iLoader
 	{
         protected $controller;
         protected $controllerManager;
-		
-		/**
-		 * @name __construct
-		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
-		 * @return
-		 */
-        public function __construct(){}
+        private View $_view;
+
+        /**
+         * @param View $view
+         *
+         */
+        public function __construct(View $view)
+        {
+            $this->_view = $view;
+        }
 		
 		/**
 		 * @name setController
 		 *
 		 * @param Controller $controller
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return void
 		 */
 		public function setController(Controller $controller)
 		{
 		    $this->controller = $controller;
 		}
-		
-		/**
-		 * @name setControllerManager
-		 *
-		 * @param Manager $manager
-		 * @param AjaxLoader $ajaxLoader
-		 * 
-		 * @author G.Maccario <g_maccario@hotmail.com>
-		 * @return void
-		 */
+
+        /**
+         * @param Manager $manager
+         * @return void
+         */
 		public function setControllerManager(Manager $manager)
 		{
 		    $this->controllerManager = $manager;
@@ -67,7 +62,6 @@ if(!class_exists('\SGGM\Setup\Classes\Loader'))
 		/**
 		 * @name publicInit (Frontend)
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return
 		 */
 		public function publicInit()
@@ -78,7 +72,6 @@ if(!class_exists('\SGGM\Setup\Classes\Loader'))
 		/**
 		 * @name adminInit (Backend)
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return
 		 */
 		public function adminInit()
@@ -89,16 +82,13 @@ if(!class_exists('\SGGM\Setup\Classes\Loader'))
 		/**
 		 * @name loadFeatures
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return void
 		 */
 		public function loadFeatures()
 		{
-		    if(strtolower($this->controller->getCommon()->getNameClass($this->controller)) != 'backend')
-		    {
+		    if(strtolower($this->_view->getNameClass($this->controller)) != 'backend') {
 		        $this->loadFrontendFeatures();
-		    }
-		    else {
+		    } else {
 		        $this->loadBackendFeatures();
 		    }
 		}
@@ -106,7 +96,6 @@ if(!class_exists('\SGGM\Setup\Classes\Loader'))
 		/**
 		 * @name loadBackendFeatures
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return void
 		 */
 		protected function loadBackendFeatures()
@@ -124,7 +113,6 @@ if(!class_exists('\SGGM\Setup\Classes\Loader'))
 		/**
 		 * @name loadFrontendFeatures
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return void
 		 */
 		protected function loadFrontendFeatures()
@@ -140,7 +128,6 @@ if(!class_exists('\SGGM\Setup\Classes\Loader'))
 		/**
 		 * @name automaticLoadingOfHooksFiltersAndShortcodes
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return void
 		 */
 		protected function automaticLoadingOfHooksFiltersAndShortcodes()
@@ -148,7 +135,7 @@ if(!class_exists('\SGGM\Setup\Classes\Loader'))
 		    $common = $this->controller->getCommon();
 		    $config = $common->getConfig();
 		    
-		    $side = strtolower($common->getNameClass($this->controller));
+		    $side = strtolower($this->_view->getNameClass($this->controller));
 			
 			$hooks 		= $config[ 'features' ][ $side ][ 'hooks' ];
 			$filters 	= $config[ 'features' ][ $side ][ 'filters' ];
@@ -164,13 +151,11 @@ if(!class_exists('\SGGM\Setup\Classes\Loader'))
 		 *
 		 * @param array $hooks
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return void
 		 */
 		protected function loadingHooks(array $hooks)
 		{
-		    foreach( $hooks as $hook => $function )
-			{
+		    foreach( $hooks as $hook => $function ) {
 			    add_action( $hook, array( $this->controller, $function ));
 			}
 		}
@@ -180,13 +165,11 @@ if(!class_exists('\SGGM\Setup\Classes\Loader'))
 		 * 
 		 * @param array $filters
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return void
 		 */
 		protected function loadingFilters(array $filters)
 		{
-			foreach( $filters as $filter => $function )
-			{
+			foreach( $filters as $filter => $function ) {
 			    add_filter( $filter, array( $this->controller, $function ));
 			}
 		}
@@ -196,13 +179,11 @@ if(!class_exists('\SGGM\Setup\Classes\Loader'))
 		 *
 		 * @param array $shortcodes
 		 *
-		 * @author G.Maccario <g_maccario@hotmail.com>
 		 * @return void
 		 */
 		protected function loadingShortcodes(array $shortcodes)
 		{
-			foreach( $shortcodes as $shortcode => $function )
-			{
+			foreach( $shortcodes as $shortcode => $function ) {
 			    add_shortcode( $shortcode, array( $this->controller, $function ));
 			}
 		}
