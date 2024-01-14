@@ -4,7 +4,7 @@ Donate link: https://www.giuseppemaccario.com/wordpress-map-plugin-smart-geo-gma
 Requires at least: 4.8.15
 Tested up to: 6.4.2
 Requires PHP: 7.2
-Stable tag: 1.3.5
+Stable tag: 1.3.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
