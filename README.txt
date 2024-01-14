@@ -45,7 +45,7 @@ Snazzy Maps is a community built around creating and sharing great looking style
 * Go to Files tabs and upload your GEO JSON and Snazzy files
 
 == Change log ==
-== 1.3.5 ==
+== 1.3.6 ==
 * Limit to 3 GeoJSON files
 * Fix deprecated filters for PHP 8.1
 * Tested on PHP 8.1.20 and WordPress 6.4.2
