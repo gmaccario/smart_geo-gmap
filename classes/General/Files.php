@@ -11,7 +11,7 @@ if(!interface_exists('SGGM\General\Classes\iFiles'))
     }
 }
 
-if(!class_exists('\General\Classes\Files')) {
+if(!class_exists('\SGGM\General\Classes\Files')) {
 
     /**
      * @name Files

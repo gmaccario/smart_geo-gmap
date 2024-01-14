@@ -14,7 +14,7 @@ if(!interface_exists('SGGM\General\Classes\iView'))
     }
 }
 
-if(!class_exists('\General\Classes\Common')) {
+if(!class_exists('\SGGM\General\Classes\View')) {
     /**
      * @name View
      * @description View behaviour

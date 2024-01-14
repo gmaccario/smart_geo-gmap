@@ -12,7 +12,7 @@ if(!interface_exists('SGGM\General\Classes\iConfig'))
     }
 }
 
-if(!class_exists('\General\Classes\Config'))
+if(!class_exists('\SGGM\General\Classes\Config'))
 {
     /**
      * @name Config

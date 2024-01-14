@@ -12,7 +12,7 @@ if(!interface_exists('SGGM\General\Classes\iCommon'))
     }
 }
 
-if(!class_exists('\General\Classes\Common'))
+if(!class_exists('\SGGM\General\Classes\Common'))
 {
     /**
      * @name Common
