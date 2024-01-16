@@ -1,25 +1,23 @@
 <?php
-/* die when the file is called directly */
-if ( !defined( 'WP_UNINSTALL_PLUGIN' ))
-{
-    die;
+
+if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
+    return;
 }
 
-include('smart_geo_gmap.php');
+delete_option('snapwizard_app_id');
+delete_option('snapwizard_app_secret');
+delete_option('snapwizard_secret_key');
+delete_option('snapwizard_redirect_url');
+delete_option('snapwizard_process_ig_feed_url');
+delete_option('snapwizard_token');
+delete_option('snapwizard_crypted_token');
 
-delete_option( SMART_GEO_GMAP_OPT_SETTINGS_FIELDS );
-delete_option( SMART_GEO_GMAP_OPT_GOOGLE_API_KEY );
-delete_option( SMART_GEO_GMAP_OPT_DEFAULT_ZOOM );
-delete_option( SMART_GEO_GMAP_OPT_COORD_CENTER_1 );
-delete_option( SMART_GEO_GMAP_OPT_COORD_CENTER_2 );
-delete_option( SMART_GEO_GMAP_OPT_COORD_CENTER_3 );
-delete_option( SMART_GEO_GMAP_OPT_COORD_CENTER_1_NAME );
-delete_option( SMART_GEO_GMAP_OPT_COORD_CENTER_2_NAME );
-delete_option( SMART_GEO_GMAP_OPT_COORD_CENTER_3_NAME );
-delete_option( SMART_GEO_GMAP_OPT_JAVASCRIPT_EVENT_INFO_WINDOWS );
+delete_option('snapwizard_file_type');
+delete_option('snapwizard_author');
+delete_option('snapwizard_post_categories');
+delete_option('snapwizard_media_categories');
+delete_option('snapwizard_limit_per_page');
+delete_option('snapwizard_exclude');
 
-array_map('unlink', glob(SMART_GEO_GMAP_PATH_DATA . "/*.*"));
-rmdir(SMART_GEO_GMAP_PATH_DATA);
-
-array_map('unlink', glob(SMART_GEO_GMAP_PATH_SNAZZY_STYLE . "/*.*"));
-rmdir(SMART_GEO_GMAP_PATH_SNAZZY_STYLE);
+delete_option('snapwizard_last_run');
+delete_option('snapwizard_last_refreshing_token');

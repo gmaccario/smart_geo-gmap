@@ -6,7 +6,12 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'SGGM\\Setup\\Classes\\' => array($baseDir . '/Classes/Setup'),
-    'SGGM\\General\\Classes\\' => array($baseDir . '/Classes/General'),
-    'SGGM\\Controller\\Classes\\' => array($baseDir . '/Classes/Controllers'),
+    'SmartGeoGMap\\' => array($baseDir . '/app'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
+    'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
+    'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
+    'Lablnet\\' => array($vendorDir . '/lablnet/encryption/src'),
+    'EspressoDev\\InstagramBasicDisplay\\' => array($vendorDir . '/espresso-dev/instagram-basic-display-php/src'),
+    'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),
+    'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
 );

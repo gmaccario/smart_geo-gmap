@@ -1,14 +1,15 @@
 === Smart GEO GMap ===
 Contributors: gmaccario
 Donate link: https://www.giuseppemaccario.com/wordpress-map-plugin-smart-geo-gmap/
+Tags: Google Maps, WordPress, geojson, snazzy, map, markers, tooltip, boundaries, polygon, coordinates, 
 Requires at least: 4.8.15
 Tested up to: 6.4.2
 Requires PHP: 7.2
-Stable tag: 1.3.6
+Stable tag: 1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Smart GEO GMap is a WordPress plugin that provides an easy way to integrate a Google Map over WordPress Page/Post using an easy Shortcode.
+Smart GEO GMap free plugin simplifies the process of embedding a Google Map on your WordPress website using GeoJSON for encoding geographic data structures.
 
 == Description ==
 Smart GEO GMap is a WordPress plugin that provides an easy way to integrate a Google Map over WordPress Page/Post using an easy Shortcode. Upload up to 3 GeoJSON files for encoding a variety of geographic data structures and showing and drawing boundaries, shapes, markers and infowindows (tooltips) on the map. Make your map funny: Upload a Snazzy file to stylize the map.
@@ -45,34 +46,9 @@ Snazzy Maps is a community built around creating and sharing great looking style
 * Go to Files tabs and upload your GEO JSON and Snazzy files
 
 == Change log ==
-== 1.3.6 ==
-* Limit to 3 GeoJSON files
-* Fix deprecated filters for PHP 8.1
-* Tested on PHP 8.1.20 and WordPress 6.4.2
-* Minor changes
-
-== 1.3.2 ==
-* Minor changes
-
-== 1.3.1 ==
-* Bug fix
-
-== 1.3 ==
-* Include assets only when needed
-* Bug fix
-* Fixed files deletion
-* Minor changes
-
-== 1.2 ==
-* Fixed error on file storing
-
-== 1.1 ==
-* Minor changes
-
-== 1.0 ==
-* Compatible with PHP 7.0 (Linting)
-* General improvement
-* Skeleton Plugin replaced with Devon WPF
+== 1.5 ==
+* ...
+* Architecture Refactoring
 
 == Author ==
 Giuseppe Maccario

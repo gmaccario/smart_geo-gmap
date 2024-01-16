@@ -1,43 +1,29 @@
 <?php
 /*
-Plugin Name: Smart GEO GMap
+Plugin Name: Smart Geo GMap
 Plugin URI: https://www.giuseppemaccario.com/wordpress-map-plugin-smart-geo-gmap/
-Description: Smart GEO GMap provides an easy way to integrate a Google Map over WordPress Page/Post using an easy Shortcode.
-Version: 1.3.6
+Description: Smart GEO GMap free plugin simplifies the process of embedding a Google Map on your WordPress website using GeoJSON for encoding geographic data structures.
 Author: Giuseppe Maccario
-Author URI: https://www.giuseppemaccario.com
-License: GPLv2 or later
+Author URI: http://www.giuseppemaccario.com
+Version: 1.5
 */
 
-if( !defined( 'ABSPATH' )) {
-    return false;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
 }
 
-if( defined( WP_DEBUG ) && WP_DEBUG )
-{
-    ini_set( 'display_errors', 1 );
-    ini_set( 'display_startup_errors', 1 );
-    error_reporting( E_ALL );
+if ( WP_DEBUG ) {
+	ini_set( 'display_errors', 1 );
+	ini_set( 'display_startup_errors', 1 );
+	error_reporting( E_ALL );
 }
 
-/* GENERAL CONSTANTS */
-const SMART_GEO_GMAP_NAME = 'Smart GEO GMap';
+require_once( 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php' );
 
-/* BASIC CONSTANTS - MANDATORY HERE CAUSE __FILE__ */
-define( 'SMART_GEO_GMAP_BASENAME', plugin_basename( __FILE__ ));
-define( 'SMART_GEO_GMAP_URL', plugins_url( '', __FILE__ ));
-define( 'SMART_GEO_GMAP_DIR_PATH', plugin_dir_path( __FILE__ ) );
+use SmartGeoGMap\Dispatcher;
 
-function smartGeoGmapInit()
-{
-	/* PSR-4: Autoloader - PHP-FIG */
-	require SMART_GEO_GMAP_DIR_PATH . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+define( "SMARTGEOGMAP_SLUG", dirname( plugin_basename( __FILE__ ) ) );
+// define( "SMARTGEOGMAP_PLUGIN_URL", plugins_url('', __FILE__) );
 
-    /* DEFINE CONSTANTS	*/
-	require_once SMART_GEO_GMAP_DIR_PATH . 'include' . DIRECTORY_SEPARATOR . 'constants.php';
-
-	/* DISPATCHER */
-	require_once SMART_GEO_GMAP_DIR_PATH . 'include' . DIRECTORY_SEPARATOR . 'dispatcher.php';
-}
-
-smartGeoGmapInit();
+$dispatcher = new Dispatcher();
+$dispatcher->dispatch();
