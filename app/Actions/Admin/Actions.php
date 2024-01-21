@@ -3,6 +3,7 @@
 namespace SmartGeoGMap\Actions\Admin;
 
 use Exception;
+use SmartGeoGMap\Helpers\MapFiles;
 use SmartGeoGMap\Helpers\View;
 use SmartGeoGMap\Helpers\Field;
 use SmartGeoGMap\Helpers\AdminSettings;
@@ -11,12 +12,14 @@ use SmartGeoGMap\Helpers\Constants;
 class Actions {
 	public Field $field;
 	public AdminSettings $adminSettings;
+	public MapFiles $mapFiles;
 
 	public string $side = Constants::SMARTGEOGMAP_SIDE_ADMIN;
 
-	public function __construct( Field $field, AdminSettings $adminSettings ) {
+	public function __construct( Field $field, AdminSettings $adminSettings, MapFiles $mapFiles ) {
 		$this->field = $field;
 		$this->adminSettings = $adminSettings;
+		$this->mapFiles = $mapFiles;
 
 		add_action( 'admin_init', [ $this, 'smartgeogmap_register_script' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'smartgeogmap_admin_enqueue_scripts' ] );
@@ -84,7 +87,7 @@ class Actions {
 		$this->addSettingsFieldGoogleAPIKey();
 		$this->addSettingsWelcomeAvailablesShortcodes();
 
-		add_settings_section (
+		add_settings_section(
 			Constants::SMARTGEOGMAP_SETTINGS_SECTION,
 			'', //'<span class="dashicons-before dashicons-editor-customchar"></span>' . __( 'Custom Settings' ),
 			false, //[ $this, 'snapwizard_config_section_info' ],
@@ -100,6 +103,17 @@ class Actions {
 		$this->addSettingsFieldCoordinateLatLong3();
 		$this->addSettingsFieldZoom();
 		$this->addSettingsFieldJavascriptTooltip();
+
+		add_settings_section(
+			Constants::SMARTGEOGMAP_FILES_SECTION,
+			'', //'<span class="dashicons-before dashicons-editor-customchar"></span>' . __( 'Custom Settings' ),
+			false, //[ $this, 'snapwizard_config_section_info' ],
+			Constants::SMARTGEOGMAP_FILES_PAGE,
+			[]
+		);
+
+		$this->addSettingsFieldSnazzyFile();
+		$this->addSettingsFieldGeoJSONFile1();
 	}
 
 	/**
@@ -143,7 +157,8 @@ class Actions {
 			$this->adminSettings,
 			'smartgeogmap_welcome_available_shortcodes_field'
 		], Constants::SMARTGEOGMAP_WELCOME_PAGE, Constants::SMARTGEOGMAP_WELCOME_SECTION );
-		$this->field->registerSetting( Constants::SMARTGEOGMAP_WELCOME_GROUP, 'smartgeogmap_welcome_available_shortcodes' );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_WELCOME_GROUP,
+			'smartgeogmap_welcome_available_shortcodes' );
 	}
 
 	/**
@@ -161,10 +176,14 @@ class Actions {
 	 * @return void
 	 */
 	private function addSettingsFieldCoordinateLatLong1(): void {
-		$this->field->addSettingsField( 'smartgeogmap_settings_coordinates_lat_long_1_field', 'Coordinates Lat Long 1', [
-			$this->adminSettings,
-			'smartgeogmap_settings_coordinates_lat_long_1_field'
-		], Constants::SMARTGEOGMAP_SETTINGS_PAGE, Constants::SMARTGEOGMAP_SETTINGS_SECTION );
+		$this->field->addSettingsField( 'smartgeogmap_settings_coordinates_lat_long_1_field',
+			'Coordinates Lat Long 1',
+			[
+				$this->adminSettings,
+				'smartgeogmap_settings_coordinates_lat_long_1_field'
+			],
+			Constants::SMARTGEOGMAP_SETTINGS_PAGE,
+			Constants::SMARTGEOGMAP_SETTINGS_SECTION );
 		$this->field->registerSetting( Constants::SMARTGEOGMAP_SETTINGS_GROUP, 'smartgeogmap_coordinates_lat_long_1' );
 	}
 
@@ -183,10 +202,14 @@ class Actions {
 	 * @return void
 	 */
 	private function addSettingsFieldCoordinateLatLong2(): void {
-		$this->field->addSettingsField( 'smartgeogmap_settings_coordinates_lat_long_2_field', 'Coordinates Lat Long 2', [
-			$this->adminSettings,
-			'smartgeogmap_settings_coordinates_lat_long_2_field'
-		], Constants::SMARTGEOGMAP_SETTINGS_PAGE, Constants::SMARTGEOGMAP_SETTINGS_SECTION );
+		$this->field->addSettingsField( 'smartgeogmap_settings_coordinates_lat_long_2_field',
+			'Coordinates Lat Long 2',
+			[
+				$this->adminSettings,
+				'smartgeogmap_settings_coordinates_lat_long_2_field'
+			],
+			Constants::SMARTGEOGMAP_SETTINGS_PAGE,
+			Constants::SMARTGEOGMAP_SETTINGS_SECTION );
 		$this->field->registerSetting( Constants::SMARTGEOGMAP_SETTINGS_GROUP, 'smartgeogmap_coordinates_lat_long_2' );
 	}
 
@@ -205,10 +228,14 @@ class Actions {
 	 * @return void
 	 */
 	private function addSettingsFieldCoordinateLatLong3(): void {
-		$this->field->addSettingsField( 'smartgeogmap_settings_coordinates_lat_long_3_field', 'Coordinates Lat Long 3', [
-			$this->adminSettings,
-			'smartgeogmap_settings_coordinates_lat_long_3_field'
-		], Constants::SMARTGEOGMAP_SETTINGS_PAGE, Constants::SMARTGEOGMAP_SETTINGS_SECTION );
+		$this->field->addSettingsField( 'smartgeogmap_settings_coordinates_lat_long_3_field',
+			'Coordinates Lat Long 3',
+			[
+				$this->adminSettings,
+				'smartgeogmap_settings_coordinates_lat_long_3_field'
+			],
+			Constants::SMARTGEOGMAP_SETTINGS_PAGE,
+			Constants::SMARTGEOGMAP_SETTINGS_SECTION );
 		$this->field->registerSetting( Constants::SMARTGEOGMAP_SETTINGS_GROUP, 'smartgeogmap_coordinates_lat_long_3' );
 	}
 
@@ -227,10 +254,40 @@ class Actions {
 	 * @return void
 	 */
 	private function addSettingsFieldJavascriptTooltip(): void {
-		$this->field->addSettingsField( 'smartgeogmap_settings_javascript_tooltip_field', 'Javascript event for Info Windows (tooltip)', [
-			$this->adminSettings,
-			'smartgeogmap_settings_javascript_tooltip_field'
-		], Constants::SMARTGEOGMAP_SETTINGS_PAGE, Constants::SMARTGEOGMAP_SETTINGS_SECTION );
+		$this->field->addSettingsField( 'smartgeogmap_settings_javascript_tooltip_field',
+			'Javascript event for Info Windows (tooltip)',
+			[
+				$this->adminSettings,
+				'smartgeogmap_settings_javascript_tooltip_field'
+			],
+			Constants::SMARTGEOGMAP_SETTINGS_PAGE,
+			Constants::SMARTGEOGMAP_SETTINGS_SECTION );
 		$this->field->registerSetting( Constants::SMARTGEOGMAP_SETTINGS_GROUP, 'smartgeogmap_javascript_tooltip' );
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldSnazzyFile(): void {
+		$this->field->addSettingsField( 'smartgeogmap_settings_snazzy_file_field', 'Snazzy file', [
+			$this->adminSettings,
+			'smartgeogmap_settings_snazzy_file_field'
+		], Constants::SMARTGEOGMAP_FILES_PAGE, Constants::SMARTGEOGMAP_FILES_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_FILES_GROUP,
+			'smartgeogmap_snazzy_file',
+			[ 'sanitize_callback' => [ $this->mapFiles, 'smartGeoGMapManageSnazzyMapFiles' ] ] );
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldGeoJSONFile1(): void {
+		$this->field->addSettingsField( 'smartgeogmap_settings_geojson_file_field', 'GeoJSON files <br />(max. 3 files)', [
+			$this->adminSettings,
+			'smartgeogmap_settings_geojson_file_field'
+		], Constants::SMARTGEOGMAP_FILES_PAGE, Constants::SMARTGEOGMAP_FILES_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_FILES_GROUP,
+			'smartgeogmap_geojson_file',
+			[ 'sanitize_callback' => [ $this->mapFiles, 'smartGeoGMapManageGeoJSONFiles' ] ] );
 	}
 }

@@ -3,13 +3,18 @@
 namespace SmartGeoGMap\Actions\Public;
 
 use SmartGeoGMap\Helpers\Constants;
+use SmartGeoGMap\Helpers\LoggerAdapter;
 
 class Actions
 {
     public string $side = Constants::SMARTGEOGMAP_SIDE_PUBLIC;
 
-    public function __construct()
+	private LoggerAdapter $logger;
+
+    public function __construct( LoggerAdapter $logger = null )
     {
+	    $this->logger = $logger;
+
         // add_action ( 'rest_api_init', [$this, 'prepare_rest_init'] );
     }
 

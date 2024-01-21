@@ -1,6 +1,6 @@
 <?php
 
-namespace SnapWizard\Actions\ajax;
+namespace SmartGeoGMap\Actions\ajax;
 
 class Actions
 {

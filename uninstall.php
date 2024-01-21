@@ -4,20 +4,20 @@ if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
     return;
 }
 
-delete_option('snapwizard_app_id');
-delete_option('snapwizard_app_secret');
-delete_option('snapwizard_secret_key');
-delete_option('snapwizard_redirect_url');
-delete_option('snapwizard_process_ig_feed_url');
-delete_option('snapwizard_token');
-delete_option('snapwizard_crypted_token');
+delete_option('smartgeogmap_google_api_key');
+delete_option('smartgeogmap_zoom');
+delete_option('smartgeogmap_coordinates_city_1');
+delete_option('smartgeogmap_coordinates_lat_long_1');
+delete_option('smartgeogmap_coordinates_city_2');
+delete_option('smartgeogmap_coordinates_lat_long_2');
+delete_option('smartgeogmap_coordinates_city_3');
+delete_option('smartgeogmap_coordinates_lat_long_3');
 
-delete_option('snapwizard_file_type');
-delete_option('snapwizard_author');
-delete_option('snapwizard_post_categories');
-delete_option('snapwizard_media_categories');
-delete_option('snapwizard_limit_per_page');
-delete_option('snapwizard_exclude');
+delete_option('smartgeogmap_javascript_tooltip');
+delete_option('smartgeogmap_welcome_description');
+delete_option('smartgeogmap_welcome_how_to');
+delete_option('smartgeogmap_welcome_available_shortcodes');
+delete_option('smartgeogmap_snazzy_file');
+delete_option('smartgeogmap_geojson_file');
 
-delete_option('snapwizard_last_run');
-delete_option('snapwizard_last_refreshing_token');
+// ...TODO... cancellare anche i file

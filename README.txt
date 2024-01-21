@@ -28,7 +28,7 @@ Snazzy Maps is a community built around creating and sharing great looking style
 * Multiple markers
 * Marker info window (marker tooltips)
 * Coordinates: 3 center area controls
-* Upload up to 3 GeoJSON files upload in order to draw boundaries, shapes, add markers and tooltips on the map.
+* Upload up to 3 GeoJSON files and draw boundaries, shapes, add markers and tooltips on the map.
 * 1 Snazzy Maps Skin
 * Zoom: world, landmass/continent, city, streets, buildings
 * Responsive layout

@@ -171,28 +171,19 @@ class AdminSettings {
 		] );
 	}
 
-
-
-
-
-
-
-
-
-
 	/**
 	 * @param array $args
 	 *
 	 * @return View
 	 * @throws Exception
 	 */
-	public function smartgeogmap_setting_app_id_field( array $args ): View {
+	public function smartgeogmap_settings_snazzy_file_field( array $args ): View {
 		// Get the value of the setting we've registered with register_setting()
-		$snapWizardAppId = get_option( 'snapwizard_app_id' );
+		$smartgeogmapSnazzyFile = get_option( 'smartgeogmap_snazzy_file' );
 
-		return new View( 'show-snapWizard-admin-settings_fields', [
-			'snapWizardAppId' => $snapWizardAppId,
-			'args'            => $args,
+		return new View( 'show-smartgeogmap-admin-files_fields', [
+			'args' => $args,
+			'smartgeogmapSnazzyFile' => $smartgeogmapSnazzyFile,
 		] );
 	}
 
@@ -202,217 +193,13 @@ class AdminSettings {
 	 * @return View
 	 * @throws Exception
 	 */
-	public function smartgeogmap_setting_app_secret_field( array $args ): View {
+	public function smartgeogmap_settings_geojson_file_field( array $args ): View {
 		// Get the value of the setting we've registered with register_setting()
-		$snapWizardAppSecret = get_option( 'snapwizard_app_secret' );
+		$smartgeogmapGeoJSONFile = get_option( 'smartgeogmap_geojson_file' );
 
-		return new View( 'show-snapWizard-admin-settings_fields', [
-			'snapWizardAppSecret' => $snapWizardAppSecret,
-			'args'                => $args,
+		return new View( 'show-smartgeogmap-admin-files_fields', [
+			'args' => $args,
+			'smartgeogmapGeoJSONFile' => $smartgeogmapGeoJSONFile,
 		] );
-	}
-
-	/**
-	 * @param array $args
-	 *
-	 * @return View
-	 * @throws Exception
-	 */
-	public function smartgeogmap_setting_redirect_url_field( array $args ): View {
-		// Get the value of the setting
-		$snapWizardRedirectUrl = sprintf( '%s%s%s%s',
-			site_url( '/', 'https' ),
-			'wp-json/',
-			Constants::SNAPWIZARD_API_NAMESPACE,
-			Constants::SNAPWIZARD_API_AUTH
-		);
-
-		//get_option( 'snapwizard_redirect_url' );
-
-		return new View( 'show-snapWizard-admin-settings_fields', [
-			'snapWizardRedirectUrl' => $snapWizardRedirectUrl,
-			'args'                  => $args,
-		] );
-	}
-
-	/**
-	 * @param array $args
-	 *
-	 * @return View
-	 * @throws Exception
-	 */
-	public function smartgeogmap_setting_process_ig_feed_field( array $args ): View {
-		$snapWizardToken = get_option( 'snapwizard_crypted_token' );
-
-		$loggedIn = false;
-		if ( $snapWizardToken ) {
-			$loggedIn = true;
-		}
-
-		// Get the value of the setting
-		$snapWizardProcessIGFeedUrl = sprintf( '%s%s%s%s?appid=%s',
-			site_url( '/', 'https' ),
-			'wp-json/',
-			Constants::SNAPWIZARD_API_NAMESPACE,
-			Constants::SNAPWIZARD_API_PROCESS,
-			get_option( 'snapwizard_app_id' )
-		);
-
-		return new View( 'show-snapWizard-admin-settings_fields', [
-			'loggedIn'                   => $loggedIn,
-			'snapWizardProcessIGFeedUrl' => $snapWizardProcessIGFeedUrl,
-			'args'                       => $args,
-		] );
-	}
-
-	/**
-	 * @param array $args
-	 *
-	 * @return View
-	 * @throws Exception
-	 */
-//    public function smartgeogmap_setting_processing_type_field( array $args ): View
-//    {
-//        // Get the value of the setting we've registered with register_setting()
-//        $snapWizardProcessingType = get_option( 'snapwizard_processing_type' );
-//
-//        return new View('show-snapWizard-admin-settings_fields', [
-//            'snapWizardProcessingType' => $snapWizardProcessingType,
-//            'args' => $args,
-//        ]);
-//    }
-
-	/**
-	 * @param array $args
-	 *
-	 * @return View
-	 * @throws Exception
-	 */
-	public function smartgeogmap_setting_file_type_field( array $args ): View {
-		// Get the value of the setting we've registered with register_setting()
-		$snapWizardFileType = get_option( 'snapwizard_file_type' );
-
-		return new View( 'show-snapWizard-admin-settings_fields', [
-			'snapWizardFileType' => $snapWizardFileType,
-			'args'               => $args,
-		] );
-	}
-
-	/**
-	 * @param array $args
-	 *
-	 * @return View
-	 * @throws Exception
-	 */
-	public function smartgeogmap_setting_author_field( array $args ): View {
-		// Get the value of the setting we've registered with register_setting()
-		$snapwizardAuthor     = get_option( 'snapwizard_author' );
-		$snapwizardAuthorsAll = $this->getAllAuthors();
-
-		return new View( 'show-snapWizard-admin-settings_fields', [
-			'snapwizardAuthor'     => $snapwizardAuthor,
-			'snapwizardAuthorsAll' => $snapwizardAuthorsAll,
-			'args'                 => $args,
-		] );
-	}
-
-	/**
-	 * @param array $args
-	 *
-	 * @return View
-	 * @throws Exception
-	 */
-	public function smartgeogmap_setting_post_categories_field( array $args ): View {
-		// Get the value of the setting we've registered with register_setting()
-		$snapwizardPostCategories    = get_option( 'snapwizard_post_categories' );
-		$snapwizardPostCategoriesAll = $this->getCategories();
-
-		return new View( 'show-snapWizard-admin-settings_fields', [
-			'snapwizardPostCategories'    => $snapwizardPostCategories,
-			'snapwizardPostCategoriesAll' => $snapwizardPostCategoriesAll,
-			'args'                        => $args,
-		] );
-	}
-
-	/**
-	 * @param array $args
-	 *
-	 * @return View
-	 * @throws Exception
-	 */
-	public function smartgeogmap_setting_media_categories_field( array $args ): View {
-		// Get the value of the setting we've registered with register_setting()
-		$snapwizardMediaCategories    = get_option( 'snapwizard_media_categories' );
-		$snapwizardMediaCategoriesAll = $this->getCategories();
-
-		return new View( 'show-snapWizard-admin-settings_fields', [
-			'snapwizardMediaCategories'    => $snapwizardMediaCategories,
-			'snapwizardMediaCategoriesAll' => $snapwizardMediaCategoriesAll,
-			'args'                         => $args,
-		] );
-	}
-
-	/**
-	 * @param array $args
-	 *
-	 * @return View
-	 * @throws Exception
-	 */
-	public function smartgeogmap_setting_limit_per_page_field( array $args ): View {
-		// Get the value of the setting we've registered with register_setting()
-		$snapWizardLimitPerPage = get_option( 'snapwizard_limit_per_page' );
-
-		return new View( 'show-snapWizard-admin-settings_fields', [
-			'snapWizardLimitPerPage' => $snapWizardLimitPerPage,
-			'args'                   => $args,
-		] );
-	}
-
-	/**
-	 * @param array $args
-	 *
-	 * @return View
-	 * @throws Exception
-	 */
-	public function smartgeogmap_setting_exclude_field( array $args ): View {
-		// Get the value of the setting we've registered with register_setting()
-		$snapWizardExclude = get_option( 'snapwizard_exclude' );
-
-		return new View( 'show-snapWizard-admin-settings_fields', [
-			'snapWizardExclude' => $snapWizardExclude,
-			'args'              => $args,
-		] );
-	}
-
-	/**
-	 * @return array
-	 */
-	private function getAllAuthors(): array {
-		$args = [
-			'orderby'    => 'display_name',
-			'order'      => 'DESC',
-			'capability' => [ 'edit_posts' ],
-		];
-
-		// Capability queries were only introduced in WP 5.9.
-		if ( version_compare( $GLOBALS['wp_version'], '5.9', '<' ) ) {
-			$args['who'] = 'authors';
-			unset( $args['capability'] );
-		}
-
-		// Get the results
-		return get_users( $args );
-	}
-
-	/**
-	 * @return array
-	 */
-	private function getCategories(): array {
-		$args = [
-			'orderby'    => 'name',
-			'hide_empty' => false,
-		];
-
-		return get_categories( $args );
 	}
 }

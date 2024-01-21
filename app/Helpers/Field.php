@@ -30,11 +30,12 @@ class Field implements iField
      * @param string $optionGroup
      * @param string $optionName
      */
-    public function registerSetting(string $optionGroup, string $optionName): void
+    public function registerSetting(string $optionGroup, string $optionName, $args = []): void
     {
         register_setting(
             $optionGroup,
             $optionName,
+	        $args
         );
     }
 }

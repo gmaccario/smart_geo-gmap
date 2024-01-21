@@ -26,6 +26,10 @@ final class Constants
 	public const SMARTGEOGMAP_FILES_GROUP = 'smartgeogmap_files_group';
 	public const SMARTGEOGMAP_FILES_SECTION = 'smartgeogmap_files_section';
 
+	public const SMARTGEOGMAP_MAX_GEOJSON_ALLOWED = 3;
+
+    public const SMARTGEOGMAP_DATA_FOLDER = 'smart-geo-gmap-data';
+    public const SMARTGEOGMAP_SNAZZY_FOLDER = 'smart-geo-gmap-snazzy';
 
 //    public const SMARTGEOGMAP_SECRET_KEY_DEFAULT = '7h3S3cr37H1s70ry0f1GIn73gra710n';
 
