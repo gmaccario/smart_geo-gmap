@@ -10,6 +10,7 @@ final class Constants
 
 	public const SMARTGEOGMAP_WELCOME_TAB = 'welcome';
 	public const SMARTGEOGMAP_SETTINGS_TAB = 'settings';
+	public const SMARTGEOGMAP_COORDINATES_TAB = 'coordinates';
 	public const SMARTGEOGMAP_FILES_TAB = 'files';
 
     public const SMARTGEOGMAP_MENU_SLUG = 'smartgeogmap-admin-page';
@@ -21,6 +22,10 @@ final class Constants
 	public const SMARTGEOGMAP_SETTINGS_PAGE = 'smartgeogmap_settings_page';
 	public const SMARTGEOGMAP_SETTINGS_GROUP = 'smartgeogmap_settings_group';
     public const SMARTGEOGMAP_SETTINGS_SECTION = 'smartgeogmap_settings_section';
+
+	public const SMARTGEOGMAP_COORDINATES_PAGE = 'smartgeogmap_coordinates_page';
+	public const SMARTGEOGMAP_COORDINATES_GROUP = 'smartgeogmap_coordinates_group';
+	public const SMARTGEOGMAP_COORDINATES_SECTION = 'smartgeogmap_coordinates_section';
 
 	public const SMARTGEOGMAP_FILES_PAGE = 'smartgeogmap_files_page';
 	public const SMARTGEOGMAP_FILES_GROUP = 'smartgeogmap_files_group';

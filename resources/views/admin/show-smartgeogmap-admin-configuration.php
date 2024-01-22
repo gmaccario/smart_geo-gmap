@@ -15,6 +15,9 @@ if (isset($_GET['tab'])) {
         <a href="?page=<?php echo \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_MENU_SLUG; ?>&tab=<?php echo \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_SETTINGS_TAB; ?>" class="nav-tab <?php if ( $tab === \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_SETTINGS_TAB ): ?>nav-tab-active<?php endif; ?>">
 	        <?php echo ucfirst(\SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_SETTINGS_TAB); ?>
         </a>
+        <a href="?page=<?php echo \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_MENU_SLUG; ?>&tab=<?php echo \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_COORDINATES_TAB; ?>" class="nav-tab <?php if ( $tab === \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_COORDINATES_TAB ): ?>nav-tab-active<?php endif; ?>">
+		    <?php echo ucfirst(\SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_COORDINATES_TAB); ?>
+        </a>
         <a href="?page=<?php echo \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_MENU_SLUG; ?>&tab=<?php echo \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_FILES_TAB; ?>" class="nav-tab <?php if ( $tab === \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_FILES_TAB ): ?>nav-tab-active<?php endif; ?>">
 	        <?php echo ucfirst(\SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_FILES_TAB); ?>
         </a>
@@ -35,6 +38,12 @@ if (isset($_GET['tab'])) {
 				settings_fields( \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_FILES_GROUP );
 
 				do_settings_sections( \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_FILES_PAGE );
+
+				break;
+			case \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_COORDINATES_TAB:
+				settings_fields( \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_COORDINATES_GROUP );
+
+				do_settings_sections( \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_COORDINATES_PAGE );
 
 				break;
 			default:

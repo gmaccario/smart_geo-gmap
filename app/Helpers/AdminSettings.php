@@ -67,21 +67,21 @@ class AdminSettings {
 	 * @return View
 	 * @throws Exception
 	 */
-	public function smartgeogmap_settings_coordinates_city_1_field( array $args ): View {
+	public function smartgeogmap_coordinates_city_1_field( array $args ): View {
 		// Get the value of the setting we've registered with register_setting()
 		$smartgeogmapCoordinatesCity1 = get_option( 'smartgeogmap_coordinates_city_1' );
 
-		return new View( 'show-smartgeogmap-admin-settings_fields', [
+		return new View( 'show-smartgeogmap-admin-coordinates_fields', [
 			'args' => $args,
 			'smartgeogmapCoordinatesCity1' => $smartgeogmapCoordinatesCity1,
 		] );
 	}
 
-	public function smartgeogmap_settings_coordinates_lat_long_1_field( array $args ): View {
+	public function smartgeogmap_coordinates_lat_long_1_field( array $args ): View {
 		// Get the value of the setting we've registered with register_setting()
 		$smartgeogmapCoordinatesLatLong1 = get_option( 'smartgeogmap_coordinates_lat_long_1' );
 
-		return new View( 'show-smartgeogmap-admin-settings_fields', [
+		return new View( 'show-smartgeogmap-admin-coordinates_fields', [
 			'args' => $args,
 			'smartgeogmapCoordinatesLatLong1' => $smartgeogmapCoordinatesLatLong1,
 		] );
@@ -93,21 +93,21 @@ class AdminSettings {
 	 * @return View
 	 * @throws Exception
 	 */
-	public function smartgeogmap_settings_coordinates_city_2_field( array $args ): View {
+	public function smartgeogmap_coordinates_city_2_field( array $args ): View {
 		// Get the value of the setting we've registered with register_setting()
 		$smartgeogmapCoordinatesCity2 = get_option( 'smartgeogmap_coordinates_city_2' );
 
-		return new View( 'show-smartgeogmap-admin-settings_fields', [
+		return new View( 'show-smartgeogmap-admin-coordinates_fields', [
 			'args' => $args,
 			'smartgeogmapCoordinatesCity2' => $smartgeogmapCoordinatesCity2,
 		] );
 	}
 
-	public function smartgeogmap_settings_coordinates_lat_long_2_field( array $args ): View {
+	public function smartgeogmap_coordinates_lat_long_2_field( array $args ): View {
 		// Get the value of the setting we've registered with register_setting()
 		$smartgeogmapCoordinatesLatLong2 = get_option( 'smartgeogmap_coordinates_lat_long_2' );
 
-		return new View( 'show-smartgeogmap-admin-settings_fields', [
+		return new View( 'show-smartgeogmap-admin-coordinates_fields', [
 			'args' => $args,
 			'smartgeogmapCoordinatesLatLong2' => $smartgeogmapCoordinatesLatLong2,
 		] );
@@ -119,21 +119,21 @@ class AdminSettings {
 	 * @return View
 	 * @throws Exception
 	 */
-	public function smartgeogmap_settings_coordinates_city_3_field( array $args ): View {
+	public function smartgeogmap_coordinates_city_3_field( array $args ): View {
 		// Get the value of the setting we've registered with register_setting()
 		$smartgeogmapCoordinatesCity3 = get_option( 'smartgeogmap_coordinates_city_3' );
 
-		return new View( 'show-smartgeogmap-admin-settings_fields', [
+		return new View( 'show-smartgeogmap-admin-coordinates_fields', [
 			'args' => $args,
 			'smartgeogmapCoordinatesCity3' => $smartgeogmapCoordinatesCity3,
 		] );
 	}
 
-	public function smartgeogmap_settings_coordinates_lat_long_3_field( array $args ): View {
+	public function smartgeogmap_coordinates_lat_long_3_field( array $args ): View {
 		// Get the value of the setting we've registered with register_setting()
 		$smartgeogmapCoordinatesLatLong3 = get_option( 'smartgeogmap_coordinates_lat_long_3' );
 
-		return new View( 'show-smartgeogmap-admin-settings_fields', [
+		return new View( 'show-smartgeogmap-admin-coordinates_fields', [
 			'args' => $args,
 			'smartgeogmapCoordinatesLatLong3' => $smartgeogmapCoordinatesLatLong3,
 		] );

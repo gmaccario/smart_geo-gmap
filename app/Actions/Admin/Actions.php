@@ -95,14 +95,23 @@ class Actions {
 			[]
 		);
 
+		$this->addSettingsFieldZoom();
+		$this->addSettingsFieldJavascriptTooltip();
+
+		add_settings_section(
+			Constants::SMARTGEOGMAP_COORDINATES_SECTION,
+			'', //'<span class="dashicons-before dashicons-editor-customchar"></span>' . __( 'Custom Settings' ),
+			false, //[ $this, 'snapwizard_config_section_info' ],
+			Constants::SMARTGEOGMAP_COORDINATES_PAGE,
+			[]
+		);
+
 		$this->addSettingsFieldCoordinateCity1();
 		$this->addSettingsFieldCoordinateLatLong1();
 		$this->addSettingsFieldCoordinateCity2();
 		$this->addSettingsFieldCoordinateLatLong2();
 		$this->addSettingsFieldCoordinateCity3();
 		$this->addSettingsFieldCoordinateLatLong3();
-		$this->addSettingsFieldZoom();
-		$this->addSettingsFieldJavascriptTooltip();
 
 		add_settings_section(
 			Constants::SMARTGEOGMAP_FILES_SECTION,
@@ -164,84 +173,6 @@ class Actions {
 	/**
 	 * @return void
 	 */
-	private function addSettingsFieldCoordinateCity1(): void {
-		$this->field->addSettingsField( 'smartgeogmap_settings_coordinates_city_1_field', 'Coordinates City 1', [
-			$this->adminSettings,
-			'smartgeogmap_settings_coordinates_city_1_field'
-		], Constants::SMARTGEOGMAP_SETTINGS_PAGE, Constants::SMARTGEOGMAP_SETTINGS_SECTION );
-		$this->field->registerSetting( Constants::SMARTGEOGMAP_SETTINGS_GROUP, 'smartgeogmap_coordinates_city_1' );
-	}
-
-	/**
-	 * @return void
-	 */
-	private function addSettingsFieldCoordinateLatLong1(): void {
-		$this->field->addSettingsField( 'smartgeogmap_settings_coordinates_lat_long_1_field',
-			'Coordinates Lat Long 1',
-			[
-				$this->adminSettings,
-				'smartgeogmap_settings_coordinates_lat_long_1_field'
-			],
-			Constants::SMARTGEOGMAP_SETTINGS_PAGE,
-			Constants::SMARTGEOGMAP_SETTINGS_SECTION );
-		$this->field->registerSetting( Constants::SMARTGEOGMAP_SETTINGS_GROUP, 'smartgeogmap_coordinates_lat_long_1' );
-	}
-
-	/**
-	 * @return void
-	 */
-	private function addSettingsFieldCoordinateCity2(): void {
-		$this->field->addSettingsField( 'smartgeogmap_settings_coordinates_city_2_field', 'Coordinates City 2', [
-			$this->adminSettings,
-			'smartgeogmap_settings_coordinates_city_2_field'
-		], Constants::SMARTGEOGMAP_SETTINGS_PAGE, Constants::SMARTGEOGMAP_SETTINGS_SECTION );
-		$this->field->registerSetting( Constants::SMARTGEOGMAP_SETTINGS_GROUP, 'smartgeogmap_coordinates_city_2' );
-	}
-
-	/**
-	 * @return void
-	 */
-	private function addSettingsFieldCoordinateLatLong2(): void {
-		$this->field->addSettingsField( 'smartgeogmap_settings_coordinates_lat_long_2_field',
-			'Coordinates Lat Long 2',
-			[
-				$this->adminSettings,
-				'smartgeogmap_settings_coordinates_lat_long_2_field'
-			],
-			Constants::SMARTGEOGMAP_SETTINGS_PAGE,
-			Constants::SMARTGEOGMAP_SETTINGS_SECTION );
-		$this->field->registerSetting( Constants::SMARTGEOGMAP_SETTINGS_GROUP, 'smartgeogmap_coordinates_lat_long_2' );
-	}
-
-	/**
-	 * @return void
-	 */
-	private function addSettingsFieldCoordinateCity3(): void {
-		$this->field->addSettingsField( 'smartgeogmap_settings_coordinates_city_3_field', 'Coordinates City 3', [
-			$this->adminSettings,
-			'smartgeogmap_settings_coordinates_city_3_field'
-		], Constants::SMARTGEOGMAP_SETTINGS_PAGE, Constants::SMARTGEOGMAP_SETTINGS_SECTION );
-		$this->field->registerSetting( Constants::SMARTGEOGMAP_SETTINGS_GROUP, 'smartgeogmap_coordinates_city_3' );
-	}
-
-	/**
-	 * @return void
-	 */
-	private function addSettingsFieldCoordinateLatLong3(): void {
-		$this->field->addSettingsField( 'smartgeogmap_settings_coordinates_lat_long_3_field',
-			'Coordinates Lat Long 3',
-			[
-				$this->adminSettings,
-				'smartgeogmap_settings_coordinates_lat_long_3_field'
-			],
-			Constants::SMARTGEOGMAP_SETTINGS_PAGE,
-			Constants::SMARTGEOGMAP_SETTINGS_SECTION );
-		$this->field->registerSetting( Constants::SMARTGEOGMAP_SETTINGS_GROUP, 'smartgeogmap_coordinates_lat_long_3' );
-	}
-
-	/**
-	 * @return void
-	 */
 	private function addSettingsFieldZoom(): void {
 		$this->field->addSettingsField( 'smartgeogmap_settings_zoom_field', 'Zoom', [
 			$this->adminSettings,
@@ -263,6 +194,84 @@ class Actions {
 			Constants::SMARTGEOGMAP_SETTINGS_PAGE,
 			Constants::SMARTGEOGMAP_SETTINGS_SECTION );
 		$this->field->registerSetting( Constants::SMARTGEOGMAP_SETTINGS_GROUP, 'smartgeogmap_javascript_tooltip' );
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldCoordinateCity1(): void {
+		$this->field->addSettingsField( 'smartgeogmap_coordinates_city_1_field', 'City 1', [
+			$this->adminSettings,
+			'smartgeogmap_coordinates_city_1_field'
+		], Constants::SMARTGEOGMAP_COORDINATES_PAGE, Constants::SMARTGEOGMAP_COORDINATES_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_COORDINATES_GROUP, 'smartgeogmap_coordinates_city_1' );
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldCoordinateLatLong1(): void {
+		$this->field->addSettingsField( 'smartgeogmap_coordinates_lat_long_1_field',
+			'Lat/Long 1',
+			[
+				$this->adminSettings,
+				'smartgeogmap_coordinates_lat_long_1_field'
+			],
+			Constants::SMARTGEOGMAP_COORDINATES_PAGE,
+			Constants::SMARTGEOGMAP_COORDINATES_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_COORDINATES_GROUP, 'smartgeogmap_coordinates_lat_long_1' );
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldCoordinateCity2(): void {
+		$this->field->addSettingsField( 'smartgeogmap_coordinates_city_2_field', 'City 2', [
+			$this->adminSettings,
+			'smartgeogmap_coordinates_city_2_field'
+		], Constants::SMARTGEOGMAP_COORDINATES_PAGE, Constants::SMARTGEOGMAP_COORDINATES_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_COORDINATES_GROUP, 'smartgeogmap_coordinates_city_2' );
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldCoordinateLatLong2(): void {
+		$this->field->addSettingsField( 'smartgeogmap_coordinates_lat_long_2_field',
+			'Lat/Long 2',
+			[
+				$this->adminSettings,
+				'smartgeogmap_coordinates_lat_long_2_field'
+			],
+			Constants::SMARTGEOGMAP_COORDINATES_PAGE,
+			Constants::SMARTGEOGMAP_COORDINATES_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_COORDINATES_GROUP, 'smartgeogmap_coordinates_lat_long_2' );
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldCoordinateCity3(): void {
+		$this->field->addSettingsField( 'smartgeogmap_coordinates_city_3_field', 'City 3', [
+			$this->adminSettings,
+			'smartgeogmap_coordinates_city_3_field'
+		], Constants::SMARTGEOGMAP_COORDINATES_PAGE, Constants::SMARTGEOGMAP_COORDINATES_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_COORDINATES_GROUP, 'smartgeogmap_coordinates_city_3' );
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldCoordinateLatLong3(): void {
+		$this->field->addSettingsField( 'smartgeogmap_coordinates_lat_long_3_field',
+			'Lat/Long 3',
+			[
+				$this->adminSettings,
+				'smartgeogmap_coordinates_lat_long_3_field'
+			],
+			Constants::SMARTGEOGMAP_COORDINATES_PAGE,
+			Constants::SMARTGEOGMAP_COORDINATES_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_COORDINATES_GROUP, 'smartgeogmap_coordinates_lat_long_3' );
 	}
 
 	/**
