@@ -1,5 +1,7 @@
 <?php
 
+use SmartGeoGMap\Helpers\Constants;
+
 if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
     return;
 }
@@ -12,6 +14,7 @@ delete_option('smartgeogmap_welcome_available_shortcodes');
 delete_option('smartgeogmap_google_api_key');
 
 // Settings
+delete_option('smartgeogmap_default_width');
 delete_option('smartgeogmap_map_type');
 delete_option('smartgeogmap_zoom');
 delete_option('smartgeogmap_javascript_tooltip');
@@ -39,4 +42,15 @@ delete_option('smartgeogmap_legend_image_3');
 delete_option('smartgeogmap_legend_label_3');
 
 // Files
-// ...TODO... cancellare anche i file
+$uploadBaseDir = isset( wp_upload_dir()['basedir'] )
+	? wp_upload_dir()['basedir']
+	: DIRECTORY_SEPARATOR . 'uploads';
+
+$smartGeoGMapDataPath = $uploadBaseDir . DIRECTORY_SEPARATOR . Constants::SMARTGEOGMAP_DATA_FOLDER . DIRECTORY_SEPARATOR;
+$smartGeoGMapSnazzyPath = $uploadBaseDir . DIRECTORY_SEPARATOR . Constants::SMARTGEOGMAP_SNAZZY_FOLDER . DIRECTORY_SEPARATOR;
+
+array_map('unlink', glob($smartGeoGMapDataPath . "/*.*"));
+rmdir($smartGeoGMapDataPath);
+
+array_map('unlink', glob($smartGeoGMapSnazzyPath . "/*.*"));
+rmdir($smartGeoGMapSnazzyPath);
