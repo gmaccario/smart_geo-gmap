@@ -1,10 +1,27 @@
-<?php if ( isset ( $smartgeogmapZoom ) ): ?>
+<?php if ( isset ( $smartgeogmapDefaultWidth ) ): ?>
+    <div>
+        <input type="radio" class="default_width" value="full_width" name="smartgeogmap_default_width" id="smartgeogmap_default_width_full_width" <?php echo ($smartgeogmapDefaultWidth === 'full_width') ? 'checked' : ''; ?>>
+        <label for="smartgeogmap_default_width_full_width" class="radio"><?php echo __( 'Full width' ); ?></label>
+    </div>
+    <div>
+        <input type="radio" class="default_width" value="half_centered" name="smartgeogmap_default_width" id="smartgeogmap_default_width_half_centered" <?php echo ($smartgeogmapDefaultWidth === 'half_centered' || !$smartgeogmapDefaultWidth) ? 'checked' : ''; ?>>
+        <label for="smartgeogmap_default_width_half_centered" class="radio"><?php echo __( 'Half centered' ); ?></label>
+    </div>
+<?php elseif ( isset ( $smartgeogmapMapType ) ): ?>
+    <select id="smartgeogmap_map_type" name="smartgeogmap_map_type">
+        <option value="" <?php echo ($smartgeogmapMapType === "1") ? 'selected' : ''; ?>><?php echo __( 'Map' ); ?></option>
+        <option value="HYBRID" <?php echo ($smartgeogmapMapType === "HYBRID") ? 'selected' : ''; ?>><?php echo __( 'Hybrid' ); ?></option>
+        <option value="ROADMAP" <?php echo ($smartgeogmapMapType === "ROADMAP") ? 'selected' : ''; ?>><?php echo __( 'Roadmap' ); ?></option>
+        <option value="SATELLITE" <?php echo ($smartgeogmapMapType === "SATELLITE") ? 'selected' : ''; ?>><?php echo __( 'Satellite' ); ?></option>
+        <option value="TERRAIN" <?php echo ($smartgeogmapMapType === "TERRAIN") ? 'selected' : ''; ?>><?php echo __( 'Terrain' ); ?></option>
+    </select>
+<?php elseif ( isset ( $smartgeogmapZoom ) ): ?>
     <select id="smartgeogmap_zoom" name="smartgeogmap_zoom">
-        <option value="1" <?php echo ($smartgeogmapZoom == "1") ? 'selected' : ''; ?>><?php echo __( 'World' ); ?></option>
-        <option value="5" <?php echo ($smartgeogmapZoom == "5") ? 'selected' : ''; ?>><?php echo __( 'Landmass/continent' ); ?></option>
-        <option value="10" <?php echo ($smartgeogmapZoom == "10") ? 'selected' : ''; ?>><?php echo __( 'City' ); ?></option>
-        <option value="15" <?php echo ($smartgeogmapZoom == "15") ? 'selected' : ''; ?>><?php echo __( 'Streets' ); ?></option>
-        <option value="20" <?php echo ($smartgeogmapZoom == "20") ? 'selected' : ''; ?>><?php echo __( 'Buildings' ); ?></option>
+        <option value="1" <?php echo ($smartgeogmapZoom === "1") ? 'selected' : ''; ?>><?php echo __( 'World' ); ?></option>
+        <option value="5" <?php echo ($smartgeogmapZoom === "5") ? 'selected' : ''; ?>><?php echo __( 'Landmass/continent' ); ?></option>
+        <option value="10" <?php echo ($smartgeogmapZoom === "10") ? 'selected' : ''; ?>><?php echo __( 'City' ); ?></option>
+        <option value="15" <?php echo ($smartgeogmapZoom === "15") ? 'selected' : ''; ?>><?php echo __( 'Streets' ); ?></option>
+        <option value="20" <?php echo ($smartgeogmapZoom === "20") ? 'selected' : ''; ?>><?php echo __( 'Buildings' ); ?></option>
     </select>
 <?php elseif ( isset ( $smartgeogmapJavascriptTooltip ) ): ?>
     <div>

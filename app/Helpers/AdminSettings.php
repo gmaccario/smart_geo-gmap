@@ -145,6 +145,38 @@ class AdminSettings {
 	 * @return View
 	 * @throws Exception
 	 */
+	public function smartgeogmap_settings_default_width_field( array $args ): View {
+		// Get the value of the setting we've registered with register_setting()
+		$smartgeogmapDefaultWidth = get_option( 'smartgeogmap_default_width' );
+
+		return new View( 'show-smartgeogmap-admin-settings_fields', [
+			'args' => $args,
+			'smartgeogmapDefaultWidth' => $smartgeogmapDefaultWidth,
+		] );
+	}
+
+	/**
+	 * @param array $args
+	 *
+	 * @return View
+	 * @throws Exception
+	 */
+	public function smartgeogmap_settings_map_type_field( array $args ): View {
+		// Get the value of the setting we've registered with register_setting()
+		$smartgeogmapMapType = get_option( 'smartgeogmap_map_type' );
+
+		return new View( 'show-smartgeogmap-admin-settings_fields', [
+			'args' => $args,
+			'smartgeogmapMapType' => $smartgeogmapMapType,
+		] );
+	}
+
+	/**
+	 * @param array $args
+	 *
+	 * @return View
+	 * @throws Exception
+	 */
 	public function smartgeogmap_settings_zoom_field( array $args ): View {
 		// Get the value of the setting we've registered with register_setting()
 		$smartgeogmapZoom = get_option( 'smartgeogmap_zoom' );
@@ -193,13 +225,141 @@ class AdminSettings {
 	 * @return View
 	 * @throws Exception
 	 */
-	public function smartgeogmap_settings_geojson_file_field( array $args ): View {
+	public function smartgeogmap_settings_geojson_files_field( array $args ): View {
 		// Get the value of the setting we've registered with register_setting()
-		$smartgeogmapGeoJSONFile = get_option( 'smartgeogmap_geojson_file' );
+		$smartgeogmapGeoJSONFiles = get_option( 'smartgeogmap_geojson_files' );
 
 		return new View( 'show-smartgeogmap-admin-files_fields', [
 			'args' => $args,
-			'smartgeogmapGeoJSONFile' => $smartgeogmapGeoJSONFile,
+			'smartgeogmapGeoJSONFiles' => $smartgeogmapGeoJSONFiles,
+		] );
+	}
+
+	/**
+	 * @param array $args
+	 *
+	 * @return View
+	 * @throws Exception
+	 */
+	public function smartgeogmap_legend_toggle_field( array $args ): View {
+		// Get the value of the setting we've registered with register_setting()
+		$smartgeogmapLegendToggle = get_option( 'smartgeogmap_legend_toggle' );
+
+		return new View( 'show-smartgeogmap-admin-legend_fields', [
+			'args' => $args,
+			'smartgeogmapLegendToggle' => $smartgeogmapLegendToggle,
+		] );
+	}
+
+	/**
+	 * @param array $args
+	 *
+	 * @return View
+	 * @throws Exception
+	 */
+	public function smartgeogmap_legend_position_field( array $args ): View {
+		// Get the value of the setting we've registered with register_setting()
+		$smartgeogmapLegendPosition = get_option( 'smartgeogmap_legend_position' );
+
+		return new View( 'show-smartgeogmap-admin-legend_fields', [
+			'args' => $args,
+			'smartgeogmapLegendPosition' => $smartgeogmapLegendPosition,
+		] );
+	}
+
+	/**
+	 * @param array $args
+	 *
+	 * @return View
+	 * @throws Exception
+	 */
+	public function smartgeogmap_legend_image_1_field( array $args ): View {
+		// Get the value of the setting we've registered with register_setting()
+		$smartgeogmapLegendImage1 = get_option( 'smartgeogmap_legend_image_1' );
+
+		return new View( 'show-smartgeogmap-admin-legend_fields', [
+			'args' => $args,
+			'smartgeogmapLegendImage1' => $smartgeogmapLegendImage1,
+		] );
+	}
+
+	/**
+	 * @param array $args
+	 *
+	 * @return View
+	 * @throws Exception
+	 */
+	public function smartgeogmap_legend_label_1_field( array $args ): View {
+		// Get the value of the setting we've registered with register_setting()
+		$smartgeogmapLegendLabel1 = get_option( 'smartgeogmap_legend_label_1' );
+
+		return new View( 'show-smartgeogmap-admin-legend_fields', [
+			'args' => $args,
+			'smartgeogmapLegendLabel1' => $smartgeogmapLegendLabel1,
+		] );
+	}
+
+	/**
+	 * @param array $args
+	 *
+	 * @return View
+	 * @throws Exception
+	 */
+	public function smartgeogmap_legend_image_2_field( array $args ): View {
+		// Get the value of the setting we've registered with register_setting()
+		$smartgeogmapLegendImage2 = get_option( 'smartgeogmap_legend_image_2' );
+
+		return new View( 'show-smartgeogmap-admin-legend_fields', [
+			'args' => $args,
+			'smartgeogmapLegendImage2' => $smartgeogmapLegendImage2,
+		] );
+	}
+
+	/**
+	 * @param array $args
+	 *
+	 * @return View
+	 * @throws Exception
+	 */
+	public function smartgeogmap_legend_label_2_field( array $args ): View {
+		// Get the value of the setting we've registered with register_setting()
+		$smartgeogmapLegendLabel2 = get_option( 'smartgeogmap_legend_label_2' );
+
+		return new View( 'show-smartgeogmap-admin-legend_fields', [
+			'args' => $args,
+			'smartgeogmapLegendLabel2' => $smartgeogmapLegendLabel2,
+		] );
+	}
+
+	/**
+	 * @param array $args
+	 *
+	 * @return View
+	 * @throws Exception
+	 */
+	public function smartgeogmap_legend_image_3_field( array $args ): View {
+		// Get the value of the setting we've registered with register_setting()
+		$smartgeogmapLegendImage3 = get_option( 'smartgeogmap_legend_image_3' );
+
+		return new View( 'show-smartgeogmap-admin-legend_fields', [
+			'args' => $args,
+			'smartgeogmapLegendImage3' => $smartgeogmapLegendImage3,
+		] );
+	}
+
+	/**
+	 * @param array $args
+	 *
+	 * @return View
+	 * @throws Exception
+	 */
+	public function smartgeogmap_legend_label_3_field( array $args ): View {
+		// Get the value of the setting we've registered with register_setting()
+		$smartgeogmapLegendLabel3 = get_option( 'smartgeogmap_legend_label_3' );
+
+		return new View( 'show-smartgeogmap-admin-legend_fields', [
+			'args' => $args,
+			'smartgeogmapLegendLabel3' => $smartgeogmapLegendLabel3,
 		] );
 	}
 }

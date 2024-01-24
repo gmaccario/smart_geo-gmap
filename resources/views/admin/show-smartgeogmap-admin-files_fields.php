@@ -22,10 +22,10 @@ $uploadBaseUrl = isset( wp_upload_dir()['baseurl'] )
     <?php endif; ?>
 <?php endif; ?>
 
-<?php if ( isset ( $smartgeogmapGeoJSONFile )): ?>
-    <?php $geoJSONFiles = json_decode( $smartgeogmapGeoJSONFile, true ); ?>
+<?php if ( isset ( $smartgeogmapGeoJSONFiles )): ?>
+    <?php $geoJSONFiles = json_decode( $smartgeogmapGeoJSONFiles, true ); ?>
     <?php if ( $geoJSONFiles === null || count ( $geoJSONFiles ) < \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_MAX_GEOJSON_ALLOWED ): ?>
-        <input type="file" id="smartgeogmap_geojson_file" name="smartgeogmap_geojson_file[]" multiple data-max-geojson-allowed="3" /> <?php // accept="application/JSON"  ?>
+        <input type="file" id="smartgeogmap_geojson_files" name="smartgeogmap_geojson_files[]" multiple data-max-geojson-allowed="3" /> <?php // accept="application/JSON"  ?>
     <?php endif; ?>
 	<?php if ( ! empty ( $geoJSONFiles )): ?>
         <br />

@@ -79,30 +79,30 @@ class MapFiles {
 	 */
 	public function smartGeoGMapManageGeoJSONFiles(): string {
 
-		$smartgeogmapGeoJSONFile = get_option( 'smartgeogmap_geojson_file' );
+		$smartgeogmapGeoJSONFiles = get_option( 'smartgeogmap_geojson_files' );
 
 		if ( WP_DEBUG ) {
-			$this->logger->addLog( 'INFO', 'smartGeoGMapManageGeoJSONFiles starting...', [ $smartgeogmapGeoJSONFile ] );
+			$this->logger->addLog( 'INFO', 'smartGeoGMapManageGeoJSONFiles starting...', [ $smartgeogmapGeoJSONFiles ] );
 		}
 
 		// Deleting files
 		if ( ! empty( $_POST['smartgeogmap_delete_geojson_file'] ) ) {
-			return $this->deleteGeoJSONFiles( $smartgeogmapGeoJSONFile );
+			return $this->deleteGeoJSONFiles( $smartgeogmapGeoJSONFiles );
 		}
 
 		// Uploading files
-		if ( ! empty( $_FILES['smartgeogmap_geojson_file'] ) ) {
+		if ( ! empty( $_FILES['smartgeogmap_geojson_files'] ) ) {
 			// Preparing file for upload
-			$filesData = $this->getFilesData( 'smartgeogmap_geojson_file' );
+			$filesData = $this->getFilesData( 'smartgeogmap_geojson_files' );
 
 			if ( empty ( $filesData ) ) {
-				return $smartgeogmapGeoJSONFile;
+				return $smartgeogmapGeoJSONFiles;
 			}
 
-			return $this->uploadGeoJSONFiles( $filesData, $smartgeogmapGeoJSONFile );
+			return $this->uploadGeoJSONFiles( $filesData, $smartgeogmapGeoJSONFiles );
 		}
 
-		return $smartgeogmapGeoJSONFile;
+		return $smartgeogmapGeoJSONFiles;
 	}
 
 	/**
@@ -217,11 +217,11 @@ class MapFiles {
 	}
 
 	/**
-	 * @param mixed $smartgeogmapGeoJSONFile
+	 * @param mixed $smartgeogmapGeoJSONFiles
 	 *
 	 * @return false|string
 	 */
-	private function deleteGeoJSONFiles( mixed $smartgeogmapGeoJSONFile ): string|false {
+	private function deleteGeoJSONFiles( mixed $smartgeogmapGeoJSONFiles ): string|false {
 		$files = [];
 		foreach ( $_POST['smartgeogmap_delete_geojson_file'] as $geoJSONFileName ) {
 
@@ -241,7 +241,7 @@ class MapFiles {
 				}
 			} else {
 				if ( empty ( $files ) ) {
-					$files = json_decode( $smartgeogmapGeoJSONFile, true );
+					$files = json_decode( $smartgeogmapGeoJSONFiles, true );
 				}
 
 				if ( WP_DEBUG ) {
@@ -286,15 +286,15 @@ class MapFiles {
 		foreach ( $filesData['name'] as $index => $name ) {
 			if ( ! empty ( $name ) ) {
 
-				$smartgeogmapGeoJSONFile = $this->getSanitizedFilePath( $this->smartGeoGMapDataPath, $name );
+				$smartgeogmapGeoJSONFiles = $this->getSanitizedFilePath( $this->smartGeoGMapDataPath, $name );
 
 				$tmpFilePath = $filesData['tmp_name'][ $index ];
 
 				if ( WP_DEBUG ) {
-					$this->logger->addLog( 'INFO', 'Uploading GeoJSON file', [ $name, $smartgeogmapGeoJSONFile ] );
+					$this->logger->addLog( 'INFO', 'Uploading GeoJSON file', [ $name, $smartgeogmapGeoJSONFiles ] );
 				}
 
-				$files[] = $this->smartGeoGMapUploadMapFiles( $smartgeogmapGeoJSONFile,
+				$files[] = $this->smartGeoGMapUploadMapFiles( $smartgeogmapGeoJSONFiles,
 					$name,
 					$this->smartGeoGMapDataPath,
 					$filesData,

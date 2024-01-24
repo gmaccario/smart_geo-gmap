@@ -41,7 +41,7 @@
 <?php elseif ( $field === 'available_shortcodes'): ?>
     <ul>
         <li>
-            <input type="text" id="smartgeogmap_shortcode" disabled value="[smart_geo_gmap]"/>
+            <input type="text" id="smartgeogmap_shortcode" disabled value="[<?php echo \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_SHORTCODE; ?>]"/>
             <a href="#" target="_blank" class="smartgeogmap_dashicons copy-to-clipboard" title="<?php echo __( 'Copy to clipboard' ); ?>">
                 <span class="dashicons dashicons-clipboard" data-inputid="smartgeogmap_shortcode"></span>
             </a>

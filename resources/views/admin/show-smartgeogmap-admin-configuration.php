@@ -9,18 +9,7 @@ if (isset($_GET['tab'])) {
 
     <?php // WordPress provides the styling for tabs ?>
     <h2 class="nav-tab-wrapper">
-        <a href="?page=<?php echo \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_MENU_SLUG; ?>" class="nav-tab <?php if ( $tab === \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_WELCOME_TAB ): ?>nav-tab-active<?php endif; ?>">
-	        <?php echo ucfirst(\SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_WELCOME_TAB); ?>
-        </a>
-        <a href="?page=<?php echo \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_MENU_SLUG; ?>&tab=<?php echo \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_SETTINGS_TAB; ?>" class="nav-tab <?php if ( $tab === \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_SETTINGS_TAB ): ?>nav-tab-active<?php endif; ?>">
-	        <?php echo ucfirst(\SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_SETTINGS_TAB); ?>
-        </a>
-        <a href="?page=<?php echo \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_MENU_SLUG; ?>&tab=<?php echo \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_COORDINATES_TAB; ?>" class="nav-tab <?php if ( $tab === \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_COORDINATES_TAB ): ?>nav-tab-active<?php endif; ?>">
-		    <?php echo ucfirst(\SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_COORDINATES_TAB); ?>
-        </a>
-        <a href="?page=<?php echo \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_MENU_SLUG; ?>&tab=<?php echo \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_FILES_TAB; ?>" class="nav-tab <?php if ( $tab === \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_FILES_TAB ): ?>nav-tab-active<?php endif; ?>">
-	        <?php echo ucfirst(\SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_FILES_TAB); ?>
-        </a>
+        <?php include( 'include' . DIRECTORY_SEPARATOR . 'tabs.php' ); ?>
     </h2>
 
     <form action="options.php" method="post" id="smartgeogmap_main_form" name="smartgeogmap_main_form"
@@ -46,6 +35,12 @@ if (isset($_GET['tab'])) {
 				do_settings_sections( \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_COORDINATES_PAGE );
 
 				break;
+			case \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_LEGEND_TAB:
+				settings_fields( \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_LEGEND_GROUP );
+
+				do_settings_sections( \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_LEGEND_PAGE );
+
+				break;
 			default:
 				settings_fields( \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_WELCOME_GROUP );
 
@@ -60,4 +55,4 @@ if (isset($_GET['tab'])) {
 </div>
 
 <?php
-include( 'include/contributors.php' ); ?>
+include( 'include' . DIRECTORY_SEPARATOR . 'contributors.php' ); ?>

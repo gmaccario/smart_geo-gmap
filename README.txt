@@ -47,7 +47,11 @@ Snazzy Maps is a community built around creating and sharing great looking style
 
 == Change log ==
 == 1.5 ==
-* ...
+* Minor fixes
+* Backward compatibility
+* Implement full or half centered width
+* Implement map type
+* Implemented dynamic legend
 * Architecture Refactoring
 
 == Author ==

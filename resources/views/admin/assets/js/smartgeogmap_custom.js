@@ -19,7 +19,7 @@ function copyToClipboard()
 
 function trySubmitFile()
 {
-    document.getElementById("smartgeogmap_geojson_file").addEventListener("change", function(event) {
+    document.getElementById("smartgeogmap_geojson_files").addEventListener("change", function(event) {
         if (this.files.length > this.dataset.maxGeojsonAllowed) {
             alert('You are only allowed to upload a maximum of ' + this.dataset.maxGeojsonAllowed + ' files at a time');
             this.value = null;

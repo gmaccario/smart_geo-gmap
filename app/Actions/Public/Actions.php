@@ -3,48 +3,47 @@
 namespace SmartGeoGMap\Actions\Public;
 
 use SmartGeoGMap\Helpers\Constants;
-use SmartGeoGMap\Helpers\LoggerAdapter;
 
 class Actions
 {
     public string $side = Constants::SMARTGEOGMAP_SIDE_PUBLIC;
 
-	private LoggerAdapter $logger;
-
-    public function __construct( LoggerAdapter $logger = null )
+    public function __construct()
     {
-	    $this->logger = $logger;
-
-        // add_action ( 'rest_api_init', [$this, 'prepare_rest_init'] );
+	    add_action( 'init', [ $this, 'smartgeogmap_register_public_script' ] );
+	    add_action( 'wp_footer', [ $this, 'smartgeogmap_public_enqueue_scripts' ] );
     }
 
-    /*public function prepare_rest_init(): void
-    {
-        $this->at_rest_init_oauth();
-        $this->at_rest_init_process();
-    }
+	public function smartgeogmap_register_public_script(): void {
+		$smartgeogmapGoogleApiKey = get_option( 'smartgeogmap_google_api_key' );
 
-    public function at_rest_init_oauth(): void
-    {
-        // route url: domain.com/wp-json/$namespace/$route
-        $namespace = Constants::SNAPWIZARD_API_NAMESPACE;
-        $route     = Constants::SNAPWIZARD_API_AUTH;
+		wp_register_script(
+			'smartgeogmap_maps_googleapis_com',
+			   sprintf('https://maps.googleapis.com/maps/api/js?key=%s&amp;callback=initMap', $smartgeogmapGoogleApiKey),
+		);
 
-        register_rest_route($namespace, $route, [
-            'methods'   => \WP_REST_Server::READABLE,
-            'callback'  => [$this->tokenManager, 'snapwizard_create_token_from_oauth_redirect_url_public_page']
-        ]);
-    }
+		wp_register_script(
+			'smartgeogmap_custom_js',
+			plugins_url( SMARTGEOGMAP_SLUG . '/resources/views/public/assets/js/smartgeogmap_custom.js' ),
+			[],
+			'1.0.1',
+		);
 
-    public function at_rest_init_process(): void
-    {
-        // route url: domain.com/wp-json/$namespace/$route
-        $namespace = Constants::SNAPWIZARD_API_NAMESPACE;
-        $route     = Constants::SNAPWIZARD_API_PROCESS;
+		wp_register_style(
+			'smartgeogmap_custom_css',
+			plugins_url( SMARTGEOGMAP_SLUG . '/resources/views/public/assets/css/smartgeogmap_custom.css' ),
+			false,
+			'1.0.0',
+			'all'
+		);
+	}
 
-        register_rest_route($namespace, $route, [
-            'methods'   => \WP_REST_Server::READABLE,
-            'callback'  => [$this->feedProcessor, 'snapwizard_process_ig_feed_url']
-        ]);
-    }*/
+	public function smartgeogmap_public_enqueue_scripts(): void {
+
+		wp_enqueue_script( 'smartgeogmap_custom_js' );
+
+		wp_enqueue_script( 'smartgeogmap_maps_googleapis_com' );
+
+		wp_enqueue_style( 'smartgeogmap_custom_css' );
+	}
 }

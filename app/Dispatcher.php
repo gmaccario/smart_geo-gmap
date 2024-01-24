@@ -7,11 +7,12 @@ use SmartGeoGMap\Helpers\Field;
 use SmartGeoGMap\Helpers\AdminSettings;
 use SmartGeoGMap\Helpers\LoggerAdapter;
 use SmartGeoGMap\Helpers\MapFiles;
+use SmartGeoGMap\Helpers\SmartGeoGMapFrontend;
 use SmartGeoGMap\Filters\Admin\Filters as AdminFilters;
 use SmartGeoGMap\Actions\Admin\Actions as AdminActions;
 use SmartGeoGMap\Actions\Public\Actions as PublicActions;
 use SmartGeoGMap\Actions\Ajax\Actions as AjaxActions;
-use SmartGeoGMap\Http\Controllers\InstagramController;
+use SmartGeoGMap\Shortcodes\Public\Shortcodes as PublicShortcodes;
 
 class Dispatcher {
 	/**
@@ -27,9 +28,8 @@ class Dispatcher {
 		} elseif ( is_admin() && ( defined( 'DOING_AJAX' ) || DOING_AJAX ) ) {
 			new AjaxActions();
 		} else {
-			$logger = new LoggerAdapter(Constants::SMARTGEOGMAP_SIDE_PUBLIC);
-
-			new PublicActions($logger);
+			new PublicShortcodes( new SmartGeoGMapFrontend() );
+			new PublicActions();
 		}
 
 		return true;

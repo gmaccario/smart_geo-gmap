@@ -21,14 +21,14 @@ class Actions {
 		$this->adminSettings = $adminSettings;
 		$this->mapFiles = $mapFiles;
 
-		add_action( 'admin_init', [ $this, 'smartgeogmap_register_script' ] );
+		add_action( 'admin_init', [ $this, 'smartgeogmap_register_admin_script' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'smartgeogmap_admin_enqueue_scripts' ] );
 
 		add_action( 'admin_menu', [ $this, 'create_smartgeogmap_admin_menu' ] );
 		add_action( 'admin_init', [ $this, 'create_smartgeogmap_admin_page_settings' ] );
 	}
 
-	public function smartgeogmap_register_script(): void {
+	public function smartgeogmap_register_admin_script(): void {
 		wp_register_script(
 			'smartgeogmap_custom_js',
 			plugins_url( SMARTGEOGMAP_SLUG . '/resources/views/admin/assets/js/smartgeogmap_custom.js' ),
@@ -95,6 +95,8 @@ class Actions {
 			[]
 		);
 
+		$this->addSettingsFieldDefaultWidth();
+		$this->addSettingsFieldMapType();
 		$this->addSettingsFieldZoom();
 		$this->addSettingsFieldJavascriptTooltip();
 
@@ -123,6 +125,23 @@ class Actions {
 
 		$this->addSettingsFieldSnazzyFile();
 		$this->addSettingsFieldGeoJSONFile1();
+
+		add_settings_section(
+			Constants::SMARTGEOGMAP_LEGEND_SECTION,
+			'', //'<span class="dashicons-before dashicons-editor-customchar"></span>' . __( 'Custom Settings' ),
+			false, //[ $this, 'snapwizard_config_section_info' ],
+			Constants::SMARTGEOGMAP_LEGEND_PAGE,
+			[]
+		);
+
+		$this->addSettingsFieldLegendToggleLegend();
+		$this->addSettingsFieldLegendPosition();
+		$this->addSettingsFieldLegendImg1();
+		$this->addSettingsFieldLegendLabel1();
+		$this->addSettingsFieldLegendImg2();
+		$this->addSettingsFieldLegendLabel2();
+		$this->addSettingsFieldLegendImg3();
+		$this->addSettingsFieldLegendLabel3();
 	}
 
 	/**
@@ -168,6 +187,28 @@ class Actions {
 		], Constants::SMARTGEOGMAP_WELCOME_PAGE, Constants::SMARTGEOGMAP_WELCOME_SECTION );
 		$this->field->registerSetting( Constants::SMARTGEOGMAP_WELCOME_GROUP,
 			'smartgeogmap_welcome_available_shortcodes' );
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldDefaultWidth(): void {
+		$this->field->addSettingsField( 'smartgeogmap_settings_default_width_field', 'Map type', [
+			$this->adminSettings,
+			'smartgeogmap_settings_default_width_field'
+		], Constants::SMARTGEOGMAP_SETTINGS_PAGE, Constants::SMARTGEOGMAP_SETTINGS_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_SETTINGS_GROUP, 'smartgeogmap_default_width' );
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldMapType(): void {
+		$this->field->addSettingsField( 'smartgeogmap_settings_map_type_field', 'Map type', [
+			$this->adminSettings,
+			'smartgeogmap_settings_map_type_field'
+		], Constants::SMARTGEOGMAP_SETTINGS_PAGE, Constants::SMARTGEOGMAP_SETTINGS_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_SETTINGS_GROUP, 'smartgeogmap_map_type' );
 	}
 
 	/**
@@ -291,12 +332,100 @@ class Actions {
 	 * @return void
 	 */
 	private function addSettingsFieldGeoJSONFile1(): void {
-		$this->field->addSettingsField( 'smartgeogmap_settings_geojson_file_field', 'GeoJSON files <br />(max. 3 files)', [
+		$this->field->addSettingsField( 'smartgeogmap_settings_geojson_files_field', 'GeoJSON files <br />(max. 3 files)', [
 			$this->adminSettings,
-			'smartgeogmap_settings_geojson_file_field'
+			'smartgeogmap_settings_geojson_files_field'
 		], Constants::SMARTGEOGMAP_FILES_PAGE, Constants::SMARTGEOGMAP_FILES_SECTION );
 		$this->field->registerSetting( Constants::SMARTGEOGMAP_FILES_GROUP,
-			'smartgeogmap_geojson_file',
+			'smartgeogmap_geojson_files',
 			[ 'sanitize_callback' => [ $this->mapFiles, 'smartGeoGMapManageGeoJSONFiles' ] ] );
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldLegendToggleLegend(): void {
+		$this->field->addSettingsField( 'smartgeogmap_legend_toggle_field', 'Toggle (show/hide)', [
+			$this->adminSettings,
+			'smartgeogmap_legend_toggle_field'
+		], Constants::SMARTGEOGMAP_LEGEND_PAGE, Constants::SMARTGEOGMAP_LEGEND_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_LEGEND_GROUP, 'smartgeogmap_legend_toggle');
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldLegendPosition(): void {
+		$this->field->addSettingsField( 'smartgeogmap_legend_position_field', 'Position', [
+			$this->adminSettings,
+			'smartgeogmap_legend_position_field'
+		], Constants::SMARTGEOGMAP_LEGEND_PAGE, Constants::SMARTGEOGMAP_LEGEND_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_LEGEND_GROUP, 'smartgeogmap_legend_position');
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldLegendImg1(): void {
+		$this->field->addSettingsField( 'smartgeogmap_legend_image_1_field', 'Image 1', [
+			$this->adminSettings,
+			'smartgeogmap_legend_image_1_field'
+		], Constants::SMARTGEOGMAP_LEGEND_PAGE, Constants::SMARTGEOGMAP_LEGEND_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_LEGEND_GROUP, 'smartgeogmap_legend_image_1');
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldLegendLabel1(): void {
+		$this->field->addSettingsField( 'smartgeogmap_legend_label_1_field', 'Label 1', [
+			$this->adminSettings,
+			'smartgeogmap_legend_label_1_field'
+		], Constants::SMARTGEOGMAP_LEGEND_PAGE, Constants::SMARTGEOGMAP_LEGEND_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_LEGEND_GROUP, 'smartgeogmap_legend_label_1');
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldLegendImg2(): void {
+		$this->field->addSettingsField( 'smartgeogmap_legend_image_2_field', 'Image 2', [
+			$this->adminSettings,
+			'smartgeogmap_legend_image_2_field'
+		], Constants::SMARTGEOGMAP_LEGEND_PAGE, Constants::SMARTGEOGMAP_LEGEND_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_LEGEND_GROUP, 'smartgeogmap_legend_image_2');
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldLegendLabel2(): void {
+		$this->field->addSettingsField( 'smartgeogmap_legend_label_2_field', 'Label 2', [
+			$this->adminSettings,
+			'smartgeogmap_legend_label_2_field'
+		], Constants::SMARTGEOGMAP_LEGEND_PAGE, Constants::SMARTGEOGMAP_LEGEND_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_LEGEND_GROUP, 'smartgeogmap_legend_label_2');
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldLegendImg3(): void {
+		$this->field->addSettingsField( 'smartgeogmap_legend_image_3_field', 'Image 3', [
+			$this->adminSettings,
+			'smartgeogmap_legend_image_3_field'
+		], Constants::SMARTGEOGMAP_LEGEND_PAGE, Constants::SMARTGEOGMAP_LEGEND_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_LEGEND_GROUP, 'smartgeogmap_legend_image_3');
+	}
+
+	/**
+	 * @return void
+	 */
+	private function addSettingsFieldLegendLabel3(): void {
+		$this->field->addSettingsField( 'smartgeogmap_legend_label_3_field', 'Label 3', [
+			$this->adminSettings,
+			'smartgeogmap_legend_label_3_field'
+		], Constants::SMARTGEOGMAP_LEGEND_PAGE, Constants::SMARTGEOGMAP_LEGEND_SECTION );
+		$this->field->registerSetting( Constants::SMARTGEOGMAP_LEGEND_GROUP, 'smartgeogmap_legend_label_3');
 	}
 }

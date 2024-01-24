@@ -12,6 +12,7 @@ final class Constants
 	public const SMARTGEOGMAP_SETTINGS_TAB = 'settings';
 	public const SMARTGEOGMAP_COORDINATES_TAB = 'coordinates';
 	public const SMARTGEOGMAP_FILES_TAB = 'files';
+	public const SMARTGEOGMAP_LEGEND_TAB = 'legend';
 
     public const SMARTGEOGMAP_MENU_SLUG = 'smartgeogmap-admin-page';
 
@@ -31,29 +32,18 @@ final class Constants
 	public const SMARTGEOGMAP_FILES_GROUP = 'smartgeogmap_files_group';
 	public const SMARTGEOGMAP_FILES_SECTION = 'smartgeogmap_files_section';
 
+	public const SMARTGEOGMAP_LEGEND_PAGE = 'smartgeogmap_legend_page';
+	public const SMARTGEOGMAP_LEGEND_GROUP = 'smartgeogmap_legend_group';
+	public const SMARTGEOGMAP_LEGEND_SECTION = 'smartgeogmap_legend_section';
+
 	public const SMARTGEOGMAP_MAX_GEOJSON_ALLOWED = 3;
 
     public const SMARTGEOGMAP_DATA_FOLDER = 'smart-geo-gmap-data';
     public const SMARTGEOGMAP_SNAZZY_FOLDER = 'smart-geo-gmap-snazzy';
 
-//    public const SMARTGEOGMAP_SECRET_KEY_DEFAULT = '7h3S3cr37H1s70ry0f1GIn73gra710n';
+	public const SMARTGEOGMAP_SHORTCODE = 'smart_geo_gmap';
 
-    public const SMARTGEOGMAP_API_NAMESPACE = 'api-smartgeogmap/v1';
+//    public const SMARTGEOGMAP_API_NAMESPACE = 'api-smartgeogmap/v1';
 //    public const SMARTGEOGMAP_API_AUTH = '/auth';
 //    public const SMARTGEOGMAP_API_PROCESS = '/process';
-//
-//    public const SMARTGEOGMAP_INSTAGRAM_LIMIT_PER_PAGE = 75;
-//
-//    public const SMARTGEOGMAP_INSTAGRAM_MEDIA_TYPE_IMAGE = 'IMAGE';
-//    public const SMARTGEOGMAP_INSTAGRAM_MEDIA_TYPE_VIDEO = 'VIDEO';
-//    public const SMARTGEOGMAP_INSTAGRAM_MEDIA_TYPE_CAROUSEL_ALBUM = 'CAROUSEL_ALBUM';
-//
-//    public const SMARTGEOGMAP_INSTAGRAM_MEDIA_TYPE_SELECT_ALL = 'all';
-//    public const SMARTGEOGMAP_INSTAGRAM_MEDIA_TYPE_SELECT_ONLY_IMAGES = 'images';
-//    public const SMARTGEOGMAP_INSTAGRAM_MEDIA_TYPE_SELECT_ONLY_VIDEOS = 'videos';
-//    public const SMARTGEOGMAP_INSTAGRAM_MEDIA_TYPE_SELECT_ONLY_CAROUSEL_ALBUM = 'carousel';
-//
-//    public const SMARTGEOGMAP_INSTAGRAM_PROCESSING_TYPE_SELECT_ALL = 'all';
-//    public const SMARTGEOGMAP_INSTAGRAM_PROCESSING_TYPE_SELECT_ONLY_MEDIA = 'media';
-//    public const SMARTGEOGMAP_INSTAGRAM_PROCESSING_TYPE_SELECT_ONLY_POSTS = 'posts';
 }
