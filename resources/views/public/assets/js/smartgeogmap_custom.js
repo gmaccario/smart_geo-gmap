@@ -4,8 +4,7 @@
  *
  */
 var smartgeojson_toggle = document.querySelector('.smartgeojson.wrapper #legend .header .toggle');
-if (typeof smartgeojson_toggle !== 'undefined' && smartgeojson_toggle !== null)
-{
+if (typeof smartgeojson_toggle !== 'undefined' && smartgeojson_toggle !== null) {
     smartgeojson_toggle.addEventListener('click', toggleLegend, false);
 }
 
@@ -14,20 +13,17 @@ if (typeof smartgeojson_toggle !== 'undefined' && smartgeojson_toggle !== null)
  * Events functions
  *
  */
-function toggleLegend(event)
-{
+function toggleLegend(event) {
     let legend_toggle = document.querySelector('.smartgeojson.wrapper #legend .header .toggle');
 
     let legend_content_wrapper = document.querySelector('.smartgeojson.wrapper #legend .body');
 
-    if(legend_content_wrapper.classList.contains('hide'))
-    {
+    if (legend_content_wrapper.classList.contains('hide')) {
         legend_content_wrapper.classList.remove('hide');
 
         legend_toggle.classList.add('minus');
         legend_toggle.classList.remove('plus');
-    }
-    else{
+    } else {
         legend_content_wrapper.classList.add('hide');
 
         legend_toggle.classList.add('plus');
@@ -40,22 +36,22 @@ function toggleLegend(event)
  * Helper functions
  *
  */
-function printdebug(label = 'debug', par0 = '', par1 = '', par2 = '', par3 = '', par4 = ''){
+function printdebug(label = 'debug', par0 = '', par1 = '', par2 = '', par3 = '', par4 = '') {
 
     if (smartGeoGmapDebug) {
         console.log(label, par0, par1, par2, par3, par4);
     }
 }
 
-function setSnazzyStyle()
-{
+function setSnazzyStyle() {
     printdebug("snazzyStyleJson", snazzyStyleJson);
 
     return snazzyStyleJson;
 }
 
-function setSmartGeoGMap()
-{
+function setSmartGeoGMap() {
+    let mapElement = document.getElementById('smart-geo-gmap');
+
     let mapOptions = {
         zoom: default_zoom,
 
@@ -63,51 +59,37 @@ function setSmartGeoGMap()
 
         streetViewControl: false,
 
-        center: new google.maps.LatLng( coord_center_1[ 'lat'], coord_center_1[ 'lng'] ),
+        styles: setSnazzyStyle(),
+
+        center: new google.maps.LatLng(coord_center_1['lat'], coord_center_1['lng']),
     };
 
-    printdebug("Zoom and coords", default_zoom, coord_center_1[ 'lat'], coord_center_1[ 'lng']);
+    printdebug("Zoom and center", default_zoom, coord_center_1['lat'], coord_center_1['lng']);
 
-    let mapElement = document.getElementById('smart-geo-gmap');
+    map = new google.maps.Map(mapElement, mapOptions);
 
-    map = new google.maps.Map( mapElement, mapOptions );
-
-    if ( map_type !== '' ) {
+    if (map_type !== '') {
         setMapType(map);
     }
 
-    map.setOptions({ styles: setSnazzyStyle() });
-
-    for(let i = 0; i < geojson_files.length; i++)
-    {
+    for (let i = 0; i < geojson_files.length; i++) {
         printdebug("Geo json files", geojson_files[i]);
 
         map.data.loadGeoJson(geojson_files[i]);
     }
 }
 
-function setMapType(map)
-{
+function setMapType(map) {
     printdebug("Map type", map_type);
 
-    if ( map_type === 'HYBRID' ) {
-        map.setMapTypeId(google.maps.MapTypeId.HYBRID);
-    } else if ( map_type === 'ROADMAP' ) {
-        map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
-    } else if ( map_type === 'SATELLITE' ) {
-        map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
-    } else if ( map_type === 'TERRAIN' ) {
-        map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
-    }
+    map.setMapTypeId(google.maps.MapTypeId[map_type]);
 }
 
-function setCenterControls()
-{
+function setCenterControls() {
     printdebug("custom_centers", custom_centers);
 
-    for(let i = 0; i < custom_centers.length; i++){
-        if(custom_centers[i].coord_center.lat != '0,0' && custom_centers[i].coord_center.lng != '0,0')
-        {
+    for (let i = 0; i < custom_centers.length; i++) {
+        if (custom_centers[i].coord_center.lat != '0,0' && custom_centers[i].coord_center.lng != '0,0') {
             let centerControlDiv = document.createElement('div');
             let centerControl = new CenterControl(centerControlDiv, map, custom_centers[i].coord_center, custom_centers[i].label);
 
@@ -117,8 +99,7 @@ function setCenterControls()
     }
 }
 
-function CenterControl(controlDiv, map, coord_center, message)
-{
+function CenterControl(controlDiv, map, coord_center, message) {
     /**
      * Set CSS for the control border.
      */
@@ -138,7 +119,7 @@ function CenterControl(controlDiv, map, coord_center, message)
     /**
      * Setup the click event listeners: simply set the map to desidered center lat/lng.
      */
-    controlUI.addEventListener('click', function() {
+    controlUI.addEventListener('click', function () {
         map.setZoom(default_zoom);
         map.setCenter(new google.maps.LatLng(
             coord_center.lat,
@@ -147,20 +128,18 @@ function CenterControl(controlDiv, map, coord_center, message)
     });
 }
 
-function setInfoWindows()
-{
+function setInfoWindows() {
     let infowindow = new google.maps.InfoWindow();
 
-    map.data.addListener(js_evt_info_windows, function(event) {
+    map.data.addListener(js_evt_info_windows, function (event) {
 
         let showTooltip = false;
 
         let features = event.feature;
 
         let markerInfo = '<ul>';
-        features.forEachProperty(function(featureValue, featureIndex){
-            if( featureValue != '' && featureValue != null )
-            {
+        features.forEachProperty(function (featureValue, featureIndex) {
+            if (featureValue != '' && featureValue != null) {
                 let friendlyFeatureIndex = featureIndex.split('_').join(' ');
                 friendlyFeatureIndex = friendlyFeatureIndex.charAt(0).toUpperCase() + friendlyFeatureIndex.slice(1);
 
@@ -171,21 +150,19 @@ function setInfoWindows()
         });
         markerInfo = markerInfo + '</ul>';
 
-        if(showTooltip)
-        {
+        if (showTooltip) {
             infowindow.setContent(markerInfo);
 
             infowindow.setPosition(event.latLng);
 
-            infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
+            infowindow.setOptions({pixelOffset: new google.maps.Size(0, -30)});
 
             infowindow.open(map);
         }
     });
 }
 
-function setLegend()
-{
+function setLegend() {
     if (!showLegend) {
         return;
     }
@@ -216,12 +193,11 @@ function setLegend()
  * Make sure that initMap function is visible from the global scope
  *
  */
-window.initMap = function(){
+window.initMap = function () {
 
     let mapElement = document.getElementById('smart-geo-gmap');
 
-    if (typeof mapElement !== 'undefined' && mapElement !== null)
-    {
+    if (typeof mapElement !== 'undefined' && mapElement !== null) {
         setSmartGeoGMap();
         setCenterControls();
         setInfoWindows();
