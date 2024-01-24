@@ -21,9 +21,15 @@ if ( WP_DEBUG ) {
 require_once( 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php' );
 
 use SmartGeoGMap\Dispatcher;
+use SmartGeoGMap\Helpers\BackwardCompatibilityEngine;
 
 define( "SMARTGEOGMAP_SLUG", dirname( plugin_basename( __FILE__ ) ) );
 // define( "SMARTGEOGMAP_PLUGIN_URL", plugins_url('', __FILE__) );
+
+if (!get_option( 'smartgeogmap_backward_compatibility' )) {
+	$bce = new BackwardCompatibilityEngine();
+	$bce->upgradeSmartGeoGMap();
+}
 
 $dispatcher = new Dispatcher();
 $dispatcher->dispatch();

@@ -6,11 +6,13 @@ if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
     return;
 }
 
+// General
+delete_option('smartgeogmap_backward_compatibility');
+
 // Welcome
 delete_option('smartgeogmap_welcome_description');
 delete_option('smartgeogmap_welcome_how_to');
 delete_option('smartgeogmap_welcome_available_shortcodes');
-
 delete_option('smartgeogmap_google_api_key');
 
 // Settings
@@ -27,7 +29,7 @@ delete_option('smartgeogmap_coordinates_lat_long_2');
 delete_option('smartgeogmap_coordinates_city_3');
 delete_option('smartgeogmap_coordinates_lat_long_3');
 
-// Files
+// Files (on db)
 delete_option('smartgeogmap_snazzy_file');
 delete_option('smartgeogmap_geojson_files');
 
@@ -41,7 +43,7 @@ delete_option('smartgeogmap_legend_label_2');
 delete_option('smartgeogmap_legend_image_3');
 delete_option('smartgeogmap_legend_label_3');
 
-// Files
+// Files (on filesystem)
 $uploadBaseDir = isset( wp_upload_dir()['basedir'] )
 	? wp_upload_dir()['basedir']
 	: DIRECTORY_SEPARATOR . 'uploads';
