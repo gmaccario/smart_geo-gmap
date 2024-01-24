@@ -5,12 +5,14 @@ namespace SmartGeoGMap\Filters\Admin;
 use SmartGeoGMap\Helpers\Constants;
 
 class Filters {
-	public string $side = 'admin';
+
+	public string $side = Constants::SMARTGEOGMAP_SIDE_ADMIN;
 
 	public function __construct() {
+
 		add_filter(
 			'plugin_action_links_' . SMARTGEOGMAP_SLUG . '/' . SMARTGEOGMAP_SLUG . '.php',
-			[ $this, 'smartgeogmap_settings_link' ]
+			[$this, 'smartgeogmap_settings_link']
 		);
 	}
 
