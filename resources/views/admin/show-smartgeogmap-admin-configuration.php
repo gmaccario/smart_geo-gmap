@@ -1,3 +1,5 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
+
 <?php
 if (isset($_GET['tab'])) {
 	$tab = trim(strip_tags(htmlspecialchars($_GET['tab'])));
@@ -5,7 +7,7 @@ if (isset($_GET['tab'])) {
 ?>
 
 <div class="wrap admin-homepage">
-    <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+    <h1><?php esc_html_e( get_admin_page_title() ); ?></h1>
 
     <?php // WordPress provides the styling for tabs ?>
     <h2 class="nav-tab-wrapper">

@@ -16,14 +16,17 @@ class Field implements iField
      */
     public function addSettingsField(string $id, string $label, array $callback, string $page, string $section): void
     {
-        add_settings_field(
-            $id,
-            __($label),
-            $callback,
-            $page,
-            $section,
-            []
-        );
+	    add_settings_field(
+		    $id,
+		    sprintf(
+			    esc_html__( '%s' ),
+			    esc_html($label)
+		    ),
+		    $callback,
+		    $page,
+		    $section,
+		    []
+	    );
     }
 
     /**

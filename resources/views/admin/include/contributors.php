@@ -1,9 +1,10 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
+
 <div class="contributors">
     <p>
-        <span class="dashicons dashicons-wordpress"> </span>
-        <span><?php echo __( 'Contributors' ); ?></span>:
-        <span>
-            <a href="https://www.giuseppemaccario.com" target="_blank">gmaccario</a>
-        </span>
+        <span><?php esc_html_e( 'Creator' ); ?></span>:
+        <a href="https://www.giuseppemaccario.com" target="_blank">
+            <span><?php esc_html_e( 'gmaccario' ); ?></span>
+        </a>
     </p>
 </div>

@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use SnapWizard\Helpers\View;
+use SmartGeoGMap\Helpers\View;
 
 final class ViewTest extends TestCase
 {

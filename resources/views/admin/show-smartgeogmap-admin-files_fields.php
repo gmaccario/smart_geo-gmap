@@ -1,3 +1,5 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
+
 <?php
 $uploadBaseUrl = isset( wp_upload_dir()['baseurl'] )
     ? wp_upload_dir()['baseurl']
@@ -10,14 +12,14 @@ $uploadBaseUrl = isset( wp_upload_dir()['baseurl'] )
     <?php else: ?>
 		<?php $basename = basename($smartgeogmapSnazzyFile); ?>
         <input type="checkbox" id="smartgeogmap_delete_snazzy_file" name="smartgeogmap_delete_snazzy_file"
-               value="<?php echo $basename; ?>" title="<?php echo __( 'Tick the checkbox in order to delete the Snazzy file' ); ?>"
+               value="<?php esc_attr_e($basename); ?>" title="<?php esc_attr_e( 'Tick the checkbox in order to delete the Snazzy file' ); ?>"
         <p>
-            <a href="<?php echo $uploadBaseUrl . '/' . \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_SNAZZY_FOLDER . '/' . $basename; ?>" target="_blank">
-                <span><?php echo $basename; ?></span>
+            <a href="<?php esc_attr_e($uploadBaseUrl) . '/' . \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_SNAZZY_FOLDER . '/' . $basename; ?>" target="_blank">
+                <span><?php esc_html_e($basename); ?></span>
             </a>
         </p>
         <p>
-            <span><?php echo __( 'Tick the checkbox in order to delete the Snazzy file' ); ?></span>
+            <span><?php esc_html_e( 'Tick the checkbox in order to delete the Snazzy file' ); ?></span>
         </p>
     <?php endif; ?>
 <?php endif; ?>
@@ -32,15 +34,15 @@ $uploadBaseUrl = isset( wp_upload_dir()['baseurl'] )
         <?php foreach ( $geoJSONFiles as $index => $geoJSONFile): ?>
             <?php $basename = basename($geoJSONFile); ?>
             <input type="checkbox" id="smartgeogmap_delete_geojson_file" name="smartgeogmap_delete_geojson_file[]"
-                   value="<?php echo $basename; ?>" title="<?php echo __( 'Tick the checkboxes in order to delete the GeoJSON files' ); ?>"
+                   value="<?php esc_attr_e($basename); ?>" title="<?php esc_attr_e( 'Tick the checkboxes in order to delete the GeoJSON files' ); ?>"
             <p>
-                <a href="<?php echo $uploadBaseUrl . '/' . \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_DATA_FOLDER . '/' . $basename; ?>" target="_blank">
-                    <span><?php echo $basename; ?></span>
+                <a href="<?php esc_attr_e($uploadBaseUrl) . '/' . \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_DATA_FOLDER . '/' . $basename; ?>" target="_blank">
+                    <span><?php esc_html_e($basename); ?></span>
                 </a>
             </p>
             <?php endforeach; ?>
         <p>
-            <span><?php echo __( 'Tick the checkboxes in order to delete the GeoJSON files' ); ?></span>
+            <span><?php esc_html_e( 'Tick the checkboxes in order to delete the GeoJSON files' ); ?></span>
         </p>
     <?php endif; ?>
 <?php endif; ?>

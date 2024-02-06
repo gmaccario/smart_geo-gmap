@@ -77,7 +77,7 @@ class Actions {
 		add_settings_section(
 			Constants::SMARTGEOGMAP_WELCOME_SECTION,
 			'', // '<span class="dashicons-before dashicons-admin-site"></span>' . __( 'Welcome' ),
-			false, //[ $this, 'snapwizard_config_section_info' ],
+			false, //[ $this, 'smartgeogmap_config_section_info' ],
 			Constants::SMARTGEOGMAP_WELCOME_PAGE,
 			[]
 		);
@@ -90,7 +90,7 @@ class Actions {
 		add_settings_section(
 			Constants::SMARTGEOGMAP_SETTINGS_SECTION,
 			'', //'<span class="dashicons-before dashicons-editor-customchar"></span>' . __( 'Custom Settings' ),
-			false, //[ $this, 'snapwizard_config_section_info' ],
+			false, //[ $this, 'smartgeogmap_config_section_info' ],
 			Constants::SMARTGEOGMAP_SETTINGS_PAGE,
 			[]
 		);
@@ -103,7 +103,7 @@ class Actions {
 		add_settings_section(
 			Constants::SMARTGEOGMAP_COORDINATES_SECTION,
 			'', //'<span class="dashicons-before dashicons-editor-customchar"></span>' . __( 'Custom Settings' ),
-			false, //[ $this, 'snapwizard_config_section_info' ],
+			false, //[ $this, 'smartgeogmap_config_section_info' ],
 			Constants::SMARTGEOGMAP_COORDINATES_PAGE,
 			[]
 		);
@@ -118,7 +118,7 @@ class Actions {
 		add_settings_section(
 			Constants::SMARTGEOGMAP_FILES_SECTION,
 			'', //'<span class="dashicons-before dashicons-editor-customchar"></span>' . __( 'Custom Settings' ),
-			false, //[ $this, 'snapwizard_config_section_info' ],
+			false, //[ $this, 'smartgeogmap_config_section_info' ],
 			Constants::SMARTGEOGMAP_FILES_PAGE,
 			[]
 		);
@@ -129,7 +129,7 @@ class Actions {
 		add_settings_section(
 			Constants::SMARTGEOGMAP_LEGEND_SECTION,
 			'', //'<span class="dashicons-before dashicons-editor-customchar"></span>' . __( 'Custom Settings' ),
-			false, //[ $this, 'snapwizard_config_section_info' ],
+			false, //[ $this, 'smartgeogmap_config_section_info' ],
 			Constants::SMARTGEOGMAP_LEGEND_PAGE,
 			[]
 		);
