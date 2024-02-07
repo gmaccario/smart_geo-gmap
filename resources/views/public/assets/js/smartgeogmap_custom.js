@@ -89,7 +89,8 @@ function setCenterControls() {
     printdebug("custom_centers", custom_centers);
 
     for (let i = 0; i < custom_centers.length; i++) {
-        if (custom_centers[i].coord_center.lat != '0,0' && custom_centers[i].coord_center.lng != '0,0') {
+        if (custom_centers[i].coord_center.lat != '0,0' && custom_centers[i].coord_center.lng != '0,0'
+            && custom_centers[i].coord_center.lat != '' && custom_centers[i].coord_center.lng != '') {
             let centerControlDiv = document.createElement('div');
             let centerControl = new CenterControl(centerControlDiv, map, custom_centers[i].coord_center, custom_centers[i].label);
 

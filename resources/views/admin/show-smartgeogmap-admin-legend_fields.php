@@ -6,19 +6,19 @@
 
 <?php if ( isset ( $smartgeogmapLegendPosition ) ): ?>
     <select id="smartgeogmap_legend_position" name="smartgeogmap_legend_position">
-        <option value="" <?php esc_attr_e($smartgeogmapLegendPosition === "") ? 'selected' : ''; ?>><?php esc_html_e( 'Choose a position' ); ?></option>
-        <option value="TOP_CENTER" <?php esc_attr_e($smartgeogmapLegendPosition === "TOP_CENTER") ? 'selected' : ''; ?>><?php esc_html_e( 'Top Center' ); ?></option>
-        <option value="TOP_LEFT" <?php esc_attr_e($smartgeogmapLegendPosition === "TOP_LEFT") ? 'selected' : ''; ?>><?php esc_html_e( 'Top Left' ); ?></option>
-        <option value="TOP_RIGHT" <?php esc_attr_e($smartgeogmapLegendPosition === "TOP_RIGHT") ? 'selected' : ''; ?>><?php esc_html_e( 'Top Right' ); ?></option>
-        <option value="LEFT_TOP" <?php esc_attr_e($smartgeogmapLegendPosition === "LEFT_TOP") ? 'selected' : ''; ?>><?php esc_html_e( 'Left Top' ); ?></option>
-        <option value="RIGHT_TOP" <?php esc_attr_e($smartgeogmapLegendPosition === "RIGHT_TOP") ? 'selected' : ''; ?>><?php esc_html_e( 'Right Top' ); ?></option>
-        <option value="LEFT_CENTER" <?php esc_attr_e($smartgeogmapLegendPosition === "LEFT_CENTER") ? 'selected' : ''; ?>><?php esc_html_e( 'Left Center' ); ?></option>
-        <option value="RIGHT_CENTER" <?php esc_attr_e($smartgeogmapLegendPosition === "RIGHT_CENTER") ? 'selected' : ''; ?>><?php esc_html_e( 'Right Center' ); ?></option>
-        <option value="LEFT_BOTTOM" <?php esc_attr_e($smartgeogmapLegendPosition === "LEFT_BOTTOM") ? 'selected' : ''; ?>><?php esc_html_e( 'Left Bottom' ); ?></option>
-        <option value="RIGHT_BOTTOM" <?php esc_attr_e($smartgeogmapLegendPosition === "RIGHT_BOTTOM") ? 'selected' : ''; ?>><?php esc_html_e( 'Right Bottom' ); ?></option>
-        <option value="BOTTOM_CENTER" <?php esc_attr_e($smartgeogmapLegendPosition === "BOTTOM_CENTER") ? 'selected' : ''; ?>><?php esc_html_e( 'Bottom Center' ); ?></option>
-        <option value="BOTTOM_LEFT" <?php esc_attr_e($smartgeogmapLegendPosition === "BOTTOM_LEFT") ? 'selected' : ''; ?>><?php esc_html_e( 'Bottom Left' ); ?></option>
-        <option value="BOTTOM_RIGHT" <?php esc_attr_e($smartgeogmapLegendPosition === "BOTTOM_RIGHT") ? 'selected' : ''; ?>><?php esc_html_e( 'Bottom Right' ); ?></option>
+        <option value="" <?php ($smartgeogmapLegendPosition === "") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Choose a position' ); ?></option>
+        <option value="TOP_CENTER" <?php ($smartgeogmapLegendPosition === "TOP_CENTER") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Top Center' ); ?></option>
+        <option value="TOP_LEFT" <?php ($smartgeogmapLegendPosition === "TOP_LEFT") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Top Left' ); ?></option>
+        <option value="TOP_RIGHT" <?php ($smartgeogmapLegendPosition === "TOP_RIGHT") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Top Right' ); ?></option>
+        <option value="LEFT_TOP" <?php ($smartgeogmapLegendPosition === "LEFT_TOP") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Left Top' ); ?></option>
+        <option value="RIGHT_TOP" <?php ($smartgeogmapLegendPosition === "RIGHT_TOP") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Right Top' ); ?></option>
+        <option value="LEFT_CENTER" <?php ($smartgeogmapLegendPosition === "LEFT_CENTER") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Left Center' ); ?></option>
+        <option value="RIGHT_CENTER" <?php ($smartgeogmapLegendPosition === "RIGHT_CENTER") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Right Center' ); ?></option>
+        <option value="LEFT_BOTTOM" <?php ($smartgeogmapLegendPosition === "LEFT_BOTTOM") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Left Bottom' ); ?></option>
+        <option value="RIGHT_BOTTOM" <?php ($smartgeogmapLegendPosition === "RIGHT_BOTTOM") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Right Bottom' ); ?></option>
+        <option value="BOTTOM_CENTER" <?php ($smartgeogmapLegendPosition === "BOTTOM_CENTER") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Bottom Center' ); ?></option>
+        <option value="BOTTOM_LEFT" <?php ($smartgeogmapLegendPosition === "BOTTOM_LEFT") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Bottom Left' ); ?></option>
+        <option value="BOTTOM_RIGHT" <?php ($smartgeogmapLegendPosition === "BOTTOM_RIGHT") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Bottom Right' ); ?></option>
     </select>
 <?php endif; ?>
 

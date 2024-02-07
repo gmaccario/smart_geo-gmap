@@ -39,21 +39,21 @@
 
         let markers = [];
 
-        let map_type = "<?php (!empty( $smartgeogmapMapType )) ? esc_html_e($smartgeogmapMapType) : ''; ?>";
+        let map_type = "<?php (!empty( $smartgeogmapMapType )) ? esc_html_e($smartgeogmapMapType) : esc_html_e(''); ?>";
 
-        let default_zoom = <?php (!empty( $smartgeogmapZoom )) ? esc_html_e($smartgeogmapZoom) : 10; ?>;
+        let default_zoom = <?php (!empty( $smartgeogmapZoom )) ? esc_html_e($smartgeogmapZoom) : esc_html_e(10); ?>;
 
         let coord_center_1 = {
-            lat: '<?php (!empty($coordinates['smartgeogmapCoordinatesLatLong1'])) ? esc_html_e(trim(explode(',', $coordinates['smartgeogmapCoordinatesLatLong1'])[0])) : ''; ?>',
-            lng: '<?php (!empty($coordinates['smartgeogmapCoordinatesLatLong1'])) ? esc_html_e(trim(explode(',', $coordinates['smartgeogmapCoordinatesLatLong1'])[1])) : ''; ?>',
+            lat: '<?php (!empty($coordinates['smartgeogmapCoordinatesLatLong1'])) ? esc_html_e(trim(explode(',', $coordinates['smartgeogmapCoordinatesLatLong1'])[0])) : esc_html_e(''); ?>',
+            lng: '<?php (!empty($coordinates['smartgeogmapCoordinatesLatLong1'])) ? esc_html_e(trim(explode(',', $coordinates['smartgeogmapCoordinatesLatLong1'])[1])) : esc_html_e(''); ?>',
         };
         let coord_center_2 = {
-            lat: '<?php (!empty($coordinates['smartgeogmapCoordinatesLatLong2'])) ? esc_html_e(trim(explode(',', $coordinates['smartgeogmapCoordinatesLatLong2'])[0])) : ''; ?>',
-            lng: '<?php (!empty($coordinates['smartgeogmapCoordinatesLatLong2'])) ? esc_html_e(trim(explode(',', $coordinates['smartgeogmapCoordinatesLatLong2'])[1])) : ''; ?>',
+            lat: '<?php (!empty($coordinates['smartgeogmapCoordinatesLatLong2'])) ? esc_html_e(trim(explode(',', $coordinates['smartgeogmapCoordinatesLatLong2'])[0])) : esc_html_e(''); ?>',
+            lng: '<?php (!empty($coordinates['smartgeogmapCoordinatesLatLong2'])) ? esc_html_e(trim(explode(',', $coordinates['smartgeogmapCoordinatesLatLong2'])[1])) : esc_html_e(''); ?>',
         };
         let coord_center_3 = {
-            lat: '<?php (!empty($coordinates['smartgeogmapCoordinatesLatLong3'])) ? esc_html_e(trim(explode(',', $coordinates['smartgeogmapCoordinatesLatLong3'])[0])) : ''; ?>',
-            lng: '<?php (!empty($coordinates['smartgeogmapCoordinatesLatLong3'])) ? esc_html_e(trim(explode(',', $coordinates['smartgeogmapCoordinatesLatLong3'])[1])) : ''; ?>',
+            lat: '<?php (!empty($coordinates['smartgeogmapCoordinatesLatLong3'])) ? esc_html_e(trim(explode(',', $coordinates['smartgeogmapCoordinatesLatLong3'])[0])) : esc_html_e(''); ?>',
+            lng: '<?php (!empty($coordinates['smartgeogmapCoordinatesLatLong3'])) ? esc_html_e(trim(explode(',', $coordinates['smartgeogmapCoordinatesLatLong3'])[1])) : esc_html_e(''); ?>',
         };
 
         let custom_centers = [

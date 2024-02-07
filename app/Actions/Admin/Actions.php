@@ -345,7 +345,7 @@ class Actions {
 	 * @return void
 	 */
 	private function addSettingsFieldLegendToggleLegend(): void {
-		$this->field->addSettingsField( 'smartgeogmap_legend_toggle_field', 'Toggle (show/hide)', [
+		$this->field->addSettingsField( 'smartgeogmap_legend_toggle_field', 'Toggle (Tick for show)', [
 			$this->adminSettings,
 			'smartgeogmap_legend_toggle_field'
 		], Constants::SMARTGEOGMAP_LEGEND_PAGE, Constants::SMARTGEOGMAP_LEGEND_SECTION );
