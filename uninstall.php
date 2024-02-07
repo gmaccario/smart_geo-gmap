@@ -1,5 +1,7 @@
 <?php
 
+require_once( 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php' );
+
 use SmartGeoGMap\Helpers\Constants;
 
 if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
