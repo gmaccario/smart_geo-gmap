@@ -18,8 +18,8 @@ class Dispatcher {
 	/**
 	 * @return bool
 	 */
-	public function dispatch(): bool {
-
+	public function dispatch(): bool
+	{
 		if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 			$logger = new LoggerAdapter(Constants::SMARTGEOGMAP_SIDE_ADMIN);
 

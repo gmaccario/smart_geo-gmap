@@ -332,7 +332,7 @@ class Actions {
 	 * @return void
 	 */
 	private function addSettingsFieldGeoJSONFile1(): void {
-		$this->field->addSettingsField( 'smartgeogmap_settings_geojson_files_field', 'GeoJSON files <br />(max. 3 files)', [
+		$this->field->addSettingsField( 'smartgeogmap_settings_geojson_files_field', 'GeoJSON files (max. 3 files)', [
 			$this->adminSettings,
 			'smartgeogmap_settings_geojson_files_field'
 		], Constants::SMARTGEOGMAP_FILES_PAGE, Constants::SMARTGEOGMAP_FILES_SECTION );
