@@ -28,10 +28,33 @@ Here the main steps you have to follow:
 
 ## Settings documentation
 ### Welcome tab
-* **Google API Key**: insert here the Google API Key after you follow all the steps here [Use API Keys](https://developers.google.com/maps/documentation/javascript/get-api-key)
+* **Google API Key**: Insert here the Google API Key after you follow all the steps here [Use API Keys](https://developers.google.com/maps/documentation/javascript/get-api-key)
 
 ### Settings tab
-* **Map type**:
+* **Map width**: This changes the width of the rendered map. You can display the map to occupy either half or the full width of the window.
+* **Map type**: Choose among four types of maps available within the Maps JavaScript API: Hybrid, Roadmap, Satellite, Terrain.
+* **Zoom**: Choose among five zoom options in order to render the map as you want.
+* **Javascript event for Info Windows (tooltip)**: If you inject a GeoJSON file, you may want to modify the method for opening tooltips on the map.
+
+### Coordinates tab
+* **City #**: Insert a city name to display at the center of the map. Users can click on it to be directed to the city (coordinates are mandatory).
+* **Lat/Long #**: In combination with a city name, insert here the latitude and the longitude of the related city.
+
+### Files tab
+* **Snazzy file**: Download your favorite skin from [Snazzy Maps](https://snazzymaps.com/) and upload from this setting. The map will then be styled accordingly.
+* **GeoJSON files**: Upload a max. of 3 [GEOJson](https://geojson.org/) files in order to encode a variety of geographic data structures. GeoJSON supports the following geometry types: Point, LineString, Polygon, MultiPoint, MultiLineString, and MultiPolygon.
+
+### Legend tab
+* **Toggle (Tick for show)**: Tick the checkbox if you want to display the legend with the map. By default, legend is not shown.
+* **Position**: Choose where to place for the legend.
+* **Icon #**: Choose among a multitude of icons to show inside the legend.
+* **Label #**: Insert here a text to display next to the icon.
+
+## Architecture Refactoring
+The current version (1.5) of this plugin has undergone a complete refactor, featuring an entirely new architecture. It now embraces a framework-based approach, adopting object-oriented principles akin to a real framework, following the Laravel style.
+
+## Backward compatibility
+Due to the architecture refactoring, this version implements a backward compatibility system that converts old option names to the new ones. Additionally, it saves the names of Snazzy and GeoJSON files to the database.
 
 ### Contributors
 Giuseppe Maccario - [gmaccario](https://www.giuseppemaccario.com/)
