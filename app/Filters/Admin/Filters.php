@@ -11,7 +11,7 @@ class Filters {
 	public function __construct() {
 
 		add_filter(
-			'plugin_action_links_' . SMARTGEOGMAP_SLUG . '/' . SMARTGEOGMAP_SLUG . '.php',
+			'plugin_action_links_' . SMARTGEOGMAP_SLUG . '/smart-geo-gmap.php',
 			[$this, 'smartgeogmap_settings_link']
 		);
 	}
