@@ -193,7 +193,7 @@ class Actions {
 	 * @return void
 	 */
 	private function addSettingsFieldDefaultWidth(): void {
-		$this->field->addSettingsField( 'smartgeogmap_settings_default_width_field', 'Map type', [
+		$this->field->addSettingsField( 'smartgeogmap_settings_default_width_field', 'Map width', [
 			$this->adminSettings,
 			'smartgeogmap_settings_default_width_field'
 		], Constants::SMARTGEOGMAP_SETTINGS_PAGE, Constants::SMARTGEOGMAP_SETTINGS_SECTION );
@@ -367,7 +367,7 @@ class Actions {
 	 * @return void
 	 */
 	private function addSettingsFieldLegendImg1(): void {
-		$this->field->addSettingsField( 'smartgeogmap_legend_image_1_field', 'Image 1', [
+		$this->field->addSettingsField( 'smartgeogmap_legend_image_1_field', 'Icon 1', [
 			$this->adminSettings,
 			'smartgeogmap_legend_image_1_field'
 		], Constants::SMARTGEOGMAP_LEGEND_PAGE, Constants::SMARTGEOGMAP_LEGEND_SECTION );
@@ -389,7 +389,7 @@ class Actions {
 	 * @return void
 	 */
 	private function addSettingsFieldLegendImg2(): void {
-		$this->field->addSettingsField( 'smartgeogmap_legend_image_2_field', 'Image 2', [
+		$this->field->addSettingsField( 'smartgeogmap_legend_image_2_field', 'Icon 2', [
 			$this->adminSettings,
 			'smartgeogmap_legend_image_2_field'
 		], Constants::SMARTGEOGMAP_LEGEND_PAGE, Constants::SMARTGEOGMAP_LEGEND_SECTION );
@@ -411,7 +411,7 @@ class Actions {
 	 * @return void
 	 */
 	private function addSettingsFieldLegendImg3(): void {
-		$this->field->addSettingsField( 'smartgeogmap_legend_image_3_field', 'Image 3', [
+		$this->field->addSettingsField( 'smartgeogmap_legend_image_3_field', 'Icon 3', [
 			$this->adminSettings,
 			'smartgeogmap_legend_image_3_field'
 		], Constants::SMARTGEOGMAP_LEGEND_PAGE, Constants::SMARTGEOGMAP_LEGEND_SECTION );
