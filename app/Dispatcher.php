@@ -5,7 +5,7 @@ namespace SmartGeoGMap;
 use SmartGeoGMap\Helpers\Constants;
 use SmartGeoGMap\Helpers\Field;
 use SmartGeoGMap\Helpers\AdminSettings;
-use SmartGeoGMap\Helpers\LoggerAdapter;
+use SmartGeoGMap\Helpers\Logger;
 use SmartGeoGMap\Helpers\MapFiles;
 use SmartGeoGMap\Helpers\SmartGeoGMapFrontend;
 use SmartGeoGMap\Filters\Admin\Filters as AdminFilters;
@@ -21,10 +21,12 @@ class Dispatcher {
 	public function dispatch(): bool
 	{
 		if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
-			$logger = new LoggerAdapter(Constants::SMARTGEOGMAP_SIDE_ADMIN);
+			$logger = new Logger();
+            $logger->setAction(Constants::SMARTGEOGMAP_SIDE_ADMIN);
+            $logInstance = $logger->getInstance();
 
 			new AdminFilters();
-			new AdminActions( new Field(), new AdminSettings(), new MapFiles( $logger ) );
+			new AdminActions( new Field(), new AdminSettings(), new MapFiles( $logInstance ) );
 		} elseif ( is_admin() && ( defined( 'DOING_AJAX' ) || DOING_AJAX ) ) {
 			new AjaxActions();
 		} else {

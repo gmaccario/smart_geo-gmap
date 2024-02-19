@@ -7,9 +7,9 @@ class MapFiles {
 	private string $smartGeoGMapDataPath = '';
 	private string $smartGeoGMapSnazzyPath = '';
 
-	private LoggerAdapter $logger;
+	private Logger $logger;
 
-	public function __construct( LoggerAdapter $logger = null ) {
+	public function __construct( Logger $logger = null ) {
 		$this->logger = $logger;
 
 		$uploadBaseDir = isset( wp_upload_dir()['basedir'] )
@@ -31,9 +31,7 @@ class MapFiles {
 			if ( ! $this->deleteFile( $smartgeogmapSnazzyFile ) ) {
 				return $smartgeogmapSnazzyFile;
 			} else {
-				if ( WP_DEBUG ) {
-					$this->logger->addLog( 'INFO', 'Deleting Snazzy file', [ $smartgeogmapSnazzyFile ] );
-				}
+                $this->logger->info('Deleting Snazzy file', [ 'smartgeogmapSnazzyFile' => $smartgeogmapSnazzyFile ] );
 
 				return '';
 			}
@@ -50,25 +48,23 @@ class MapFiles {
 			// Upload files
 			$tmpFilePath = $filesData['tmp_name'];
 
-			if ( WP_DEBUG ) {
-				$this->logger->addLog( 'INFO',
-					'Uploading snazzy file',
-					[
-						$smartgeogmapSnazzyFile,
-						$filesData['name'],
-						$this->smartGeoGMapSnazzyPath,
-						$filesData,
-						$tmpFilePath,
-						[ 'json' ]
-					] );
-			}
+            $this->logger->info('Uploading snazzy file',
+                [
+                    'smartgeogmapSnazzyFile' => $smartgeogmapSnazzyFile,
+                    'filesData->name' => $filesData['name'],
+                    'smartGeoGMapSnazzyPath' => $this->smartGeoGMapSnazzyPath,
+                    'filesData' => $filesData,
+                    'tmpFilePath' => $tmpFilePath,
+                    'json' => [ 'json' ],
+                ] );
 
 			return $this->smartGeoGMapUploadMapFiles( $smartgeogmapSnazzyFile,
 				$filesData['name'],
 				$this->smartGeoGMapSnazzyPath,
 				$filesData,
 				$tmpFilePath,
-				[ 'json' ] );
+				[ 'json' ]
+            );
 		}
 
 		return $smartgeogmapSnazzyFile;
@@ -81,9 +77,7 @@ class MapFiles {
 
 		$smartgeogmapGeoJSONFiles = get_option( 'smartgeogmap_geojson_files' );
 
-		if ( WP_DEBUG ) {
-			$this->logger->addLog( 'INFO', 'smartGeoGMapManageGeoJSONFiles starting...', [ $smartgeogmapGeoJSONFiles ] );
-		}
+        $this->logger->info(  'smartGeoGMapManageGeoJSONFiles starting...', [ 'smartgeogmapGeoJSONFiles' => $smartgeogmapGeoJSONFiles ] );
 
 		// Deleting files
 		if ( ! empty( $_POST['smartgeogmap_delete_geojson_file'] ) ) {
@@ -189,9 +183,7 @@ class MapFiles {
 	 * @return bool
 	 */
 	private function deleteFile( string $path = '' ): bool {
-		if ( WP_DEBUG ) {
-			$this->logger->addLog( 'INFO', 'Check if file path exist before deleting it', [ file_exists( $path ) ] );
-		}
+        $this->logger->info('Check if file path exist before deleting it', [ 'file_exists' => file_exists( $path ) ] );
 
 		if ( file_exists( $path ) ) {
 			unlink( $path );
@@ -227,50 +219,30 @@ class MapFiles {
 
 			$singleSmartGeoGMapGeoJSONFileToDelete = $this->getSanitizedFilePath( $geoJSONFileName, $this->smartGeoGMapDataPath );
 
-			if ( WP_DEBUG ) {
-				$this->logger->addLog( 'INFO',
-					'Deleting GeoJSON file',
-					[ $geoJSONFileName, $singleSmartGeoGMapGeoJSONFileToDelete ] );
-			}
+            $this->logger->info('Deleting GeoJSON file', [ 'geoJSONFileName' => $geoJSONFileName, 'singleSmartGeoGMapGeoJSONFileToDelete' => $singleSmartGeoGMapGeoJSONFileToDelete ] );
 
 			if ( ! $this->deleteFile( $singleSmartGeoGMapGeoJSONFileToDelete ) ) {
-				if ( WP_DEBUG ) {
-					$this->logger->addLog( 'ERROR',
-						'Deleting GeoJSON file failed!',
-						[ $singleSmartGeoGMapGeoJSONFileToDelete ] );
-				}
+                $this->logger->error('Deleting GeoJSON file failed!', [ 'singleSmartGeoGMapGeoJSONFileToDelete' => $singleSmartGeoGMapGeoJSONFileToDelete ] );
 			} else {
 				if ( empty ( $files ) ) {
 					$files = json_decode( $smartgeogmapGeoJSONFiles, true );
 				}
 
-				if ( WP_DEBUG ) {
-					$this->logger->addLog( 'INFO',
-						'File deleted on filesystem!',
-						[ $singleSmartGeoGMapGeoJSONFileToDelete, $files ] );
-				}
+                $this->logger->info('File deleted on filesystem!', [ 'singleSmartGeoGMapGeoJSONFileToDelete' => $singleSmartGeoGMapGeoJSONFileToDelete, 'files' => $files ] );
 
 				$indexToDelete = array_search( $singleSmartGeoGMapGeoJSONFileToDelete, $files );
 
-				if ( WP_DEBUG ) {
-					$this->logger->addLog( 'INFO', 'Index to delete', [ $indexToDelete ] );
-				}
+                $this->logger->info( 'Index to delete', [ 'indexToDelete' => $indexToDelete ] );
 
 				unset( $files[ $indexToDelete ] );
 
-				if ( WP_DEBUG ) {
-					$this->logger->addLog( 'INFO', 'After index deletion', [ $files ] );
-				}
+				$this->logger->info( 'After index deletion', [ 'files' => $files ] );
 			}
 
-			if ( WP_DEBUG ) {
-				$this->logger->addLog( 'INFO', 'End another loop - Files are: ', [ $files ] );
-			}
+            $this->logger->info( 'End another loop - Files are: ', [ 'files' => $files ] );
 		}
 
-		if ( WP_DEBUG ) {
-			$this->logger->addLog( 'INFO', 'Final return ', [ $files ] );
-		}
+        $this->logger->info( 'Final return ', [ 'files' => $files ] );
 
 		return ( empty( $files ) ? '' : json_encode( array_unique( $files ) ) );
 }
@@ -290,9 +262,7 @@ class MapFiles {
 
 				$tmpFilePath = $filesData['tmp_name'][ $index ];
 
-				if ( WP_DEBUG ) {
-					$this->logger->addLog( 'INFO', 'Uploading GeoJSON file', [ $name, $smartgeogmapGeoJSONFiles ] );
-				}
+                $this->logger->info('Uploading GeoJSON file', [ 'name' => $name, 'smartgeogmapGeoJSONFiles' => $smartgeogmapGeoJSONFiles ] );
 
 				$files[] = $this->smartGeoGMapUploadMapFiles( $smartgeogmapGeoJSONFiles,
 					$name,
@@ -310,14 +280,10 @@ class MapFiles {
 		// Remove files in excess including only the first 3 files in $files (the previous ones will be replaced with the new files)
 		$totFilesExisting = count( $files );
 
-		if ( WP_DEBUG ) {
-			$this->logger->addLog( 'INFO', 'How many files already exist?', [ $totFilesExisting ] );
-		}
+        $this->logger->info('How many files already exist?', [ 'totFilesExisting' => $totFilesExisting ] );
 
 		if ( $totFilesExisting > Constants::SMARTGEOGMAP_MAX_GEOJSON_ALLOWED ) {
-			if ( WP_DEBUG ) {
-				$this->logger->addLog( 'INFO', 'Files  before', [ $files ] );
-			}
+            $this->logger->info('Files  before', [ 'files' => $files ] );
 
 			// Remove surplus files on filesystem
 			foreach( $files as $index => $file ) {
@@ -332,9 +298,7 @@ class MapFiles {
 				Constants::SMARTGEOGMAP_MAX_GEOJSON_ALLOWED
 			);
 
-			if ( WP_DEBUG ) {
-				$this->logger->addLog( 'INFO', 'Files  after', [ $files ] );
-			}
+            $this->logger->info('Files  after', [ 'files' => $files ] );
 		}
 
 		return json_encode( $files );

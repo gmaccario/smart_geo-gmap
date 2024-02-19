@@ -28,11 +28,11 @@
         </li>
     </ul>
 <?php elseif ( isset ( $smartgeogmapGoogleApiKey ) ): ?>
-    <input type="text" id="smartgeogmap_google_api_key" name="smartgeogmap_google_api_key" value="<?php esc_attr_e($smartgeogmapGoogleApiKey); ?>" />
+    <input type="text" id="smartgeogmap_google_api_key" name="smartgeogmap_google_api_key" value="<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e($smartgeogmapGoogleApiKey); ?>" />
 <?php elseif ( $field === 'available_shortcodes'): ?>
     <ul>
         <li>
-            <input type="text" id="smartgeogmap_shortcode" disabled value="[<?php esc_attr_e(\SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_SHORTCODE); ?>]"/>
+            <input type="text" id="smartgeogmap_shortcode" disabled value="[<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e(\SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_SHORTCODE); ?>]"/>
             <a href="#" target="_blank" class="smartgeogmap_dashicons copy-to-clipboard" title="<?php esc_html_e( 'Copy to clipboard' ); ?>">
                 <span class="dashicons dashicons-clipboard" data-inputid="smartgeogmap_shortcode"></span>
             </a>

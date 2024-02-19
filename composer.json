@@ -5,7 +5,6 @@
     }
   },
   "require": {
-    "lablnet/encryption": "^1.0",
-    "monolog/monolog": "^3.5"
+    "lablnet/encryption": "^1.0"
   }
 }

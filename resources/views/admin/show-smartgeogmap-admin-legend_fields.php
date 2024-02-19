@@ -31,7 +31,7 @@
         include( 'include' . DIRECTORY_SEPARATOR . 'select-images-legend.php' );
     ?>
 <?php elseif ( isset ( $smartgeogmapLegendLabel1 ) ): ?>
-	<input type="text" id="smartgeogmap_legend_label_1" name="smartgeogmap_legend_label_1" value="<?php esc_attr_e($smartgeogmapLegendLabel1); ?>" />
+	<input type="text" id="smartgeogmap_legend_label_1" name="smartgeogmap_legend_label_1" value="<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e($smartgeogmapLegendLabel1); ?>" />
 <?php endif; ?>
 
 <?php if ( isset ( $smartgeogmapLegendImage2 ) ): ?>
@@ -43,7 +43,7 @@
 	include( 'include' . DIRECTORY_SEPARATOR . 'select-images-legend.php' );
 	?>
 <?php elseif ( isset ( $smartgeogmapLegendLabel2 ) ): ?>
-    <input type="text" id="smartgeogmap_legend_label_2" name="smartgeogmap_legend_label_2" value="<?php esc_attr_e($smartgeogmapLegendLabel2); ?>" />
+    <input type="text" id="smartgeogmap_legend_label_2" name="smartgeogmap_legend_label_2" value="<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e($smartgeogmapLegendLabel2); ?>" />
 <?php endif; ?>
 
 <?php if ( isset ( $smartgeogmapLegendImage3 ) ): ?>
@@ -55,5 +55,5 @@
 	include( 'include' . DIRECTORY_SEPARATOR . 'select-images-legend.php' );
 	?>
 <?php elseif ( isset ( $smartgeogmapLegendLabel3 ) ): ?>
-    <input type="text" id="smartgeogmap_legend_label_3" name="smartgeogmap_legend_label_3" value="<?php esc_attr_e($smartgeogmapLegendLabel3); ?>" />
+    <input type="text" id="smartgeogmap_legend_label_3" name="smartgeogmap_legend_label_3" value="<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e($smartgeogmapLegendLabel3); ?>" />
 <?php endif; ?>
