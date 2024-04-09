@@ -3,11 +3,11 @@ Contributors: gmaccario
 Donate link: https://www.giuseppemaccario.com/wordpress-map-plugin-smart-geo-gmap/
 Tags: Google Maps, WordPress, geojson, snazzy, map, markers, tooltip, boundaries, polygon, coordinates, 
 Requires at least: 4.8.15
-Tested up to: 6.4.2
+Tested up to: 6.5
 Requires PHP: 7.2
 Stable tag: 1.5
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Smart GEO GMap free plugin simplifies the process of embedding a Google Map on your WordPress website using GeoJSON for encoding geographic data structures.
 
@@ -47,12 +47,12 @@ Snazzy Maps is a community built around creating and sharing great looking style
 
 == Change log ==
 == 1.5 ==
-* Minor fixes
+* Architecture Refactoring
 * Backward compatibility
 * Implement full or half centered width
 * Implement map type
 * Implemented dynamic legend
-* Architecture Refactoring
+* Minor fixes
 
 == Author ==
 Giuseppe Maccario

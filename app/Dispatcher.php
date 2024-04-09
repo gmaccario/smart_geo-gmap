@@ -13,12 +13,29 @@ use SmartGeoGMap\Actions\Admin\Actions as AdminActions;
 use SmartGeoGMap\Actions\Public\Actions as PublicActions;
 use SmartGeoGMap\Actions\Ajax\Actions as AjaxActions;
 use SmartGeoGMap\Shortcodes\Public\Shortcodes as PublicShortcodes;
+use SmartGeoGMap\Interfaces\iDispatcher;
 
-class Dispatcher {
+class Dispatcher implements iDispatcher
+{
+    private static ?Dispatcher $instance = null;
+
+    private function __construct()
+    {
+    }
+
+    public static function getInstance(): iDispatcher
+    {
+        if (self::$instance === null) {
+            self::$instance = new Dispatcher();
+        }
+
+        return self::$instance;
+    }
+
 	/**
-	 * @return bool
+	 * @return void
 	 */
-	public function dispatch(): bool
+	public function dispatch(): void
 	{
 		if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 			$logger = new Logger();
@@ -33,7 +50,5 @@ class Dispatcher {
 			new PublicShortcodes( new SmartGeoGMapFrontend() );
 			new PublicActions();
 		}
-
-		return true;
 	}
 }

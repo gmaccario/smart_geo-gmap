@@ -2,10 +2,14 @@
 /*
 Plugin Name: Smart Geo GMap
 Plugin URI: https://www.giuseppemaccario.com/wordpress-map-plugin-smart-geo-gmap/
-Description: Smart GEO GMap free plugin simplifies the process of embedding a Google Map on your WordPress website using GeoJSON for encoding geographic data structures.
+Description: Embed Google Map in your WordPress website using GeoJSON for encoding geographic data structures.
+Text Domain: smartgeogmap
 Author: Giuseppe Maccario
-Author URI: http://www.giuseppemaccario.com
+Author URI: https://www.giuseppemaccario.com
 Version: 1.5
+Requires PHP: 7.2
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,15 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once( 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php' );
 
 use SmartGeoGMap\Dispatcher;
-use SmartGeoGMap\Helpers\BackwardCompatibilityEngine;
+use SmartGeoGMap\Services\BackwardCompatibilityEngineService;
 
 define( "SMARTGEOGMAP_SLUG", dirname( plugin_basename( __FILE__ ) ) );
 // define( "SMARTGEOGMAP_PLUGIN_URL", plugins_url('', __FILE__) );
 
 if (!get_option( 'smartgeogmap_backward_compatibility' )) {
-	$bce = new BackwardCompatibilityEngine();
+	$bce = new BackwardCompatibilityEngineService();
 	$bce->upgradeSmartGeoGMap();
 }
 
-$dispatcher = new Dispatcher();
-$dispatcher->dispatch();
+(Dispatcher::getInstance())->dispatch();

@@ -181,7 +181,11 @@ function setLegend() {
         printdebug("SetLegend -> icon", type, name, icon);
 
         div.innerHTML = '<img src="' + icon + '"> ' + name;
-        legend.appendChild(div);
+
+        if (typeof legend !== 'undefined'
+            && legend !== null) {
+            legend.appendChild(div);
+        }
     }
 
     map.controls[google.maps.ControlPosition[legend_position]].push(legend);
