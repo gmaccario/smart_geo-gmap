@@ -1,25 +1,60 @@
 <?php
-/* die when the file is called directly */
-if ( !defined( 'WP_UNINSTALL_PLUGIN' ))
-{
-    die;
+
+require_once( 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php' );
+
+use SmartGeoGMap\Helpers\Constants;
+
+if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
+    return;
 }
 
-include('smart_geo_gmap.php');
+// General
+delete_option('smartgeogmap_backward_compatibility');
 
-delete_option( SMART_GEO_GMAP_OPT_SETTINGS_FIELDS );
-delete_option( SMART_GEO_GMAP_OPT_GOOGLE_API_KEY );
-delete_option( SMART_GEO_GMAP_OPT_DEFAULT_ZOOM );
-delete_option( SMART_GEO_GMAP_OPT_COORD_CENTER_1 );
-delete_option( SMART_GEO_GMAP_OPT_COORD_CENTER_2 );
-delete_option( SMART_GEO_GMAP_OPT_COORD_CENTER_3 );
-delete_option( SMART_GEO_GMAP_OPT_COORD_CENTER_1_NAME );
-delete_option( SMART_GEO_GMAP_OPT_COORD_CENTER_2_NAME );
-delete_option( SMART_GEO_GMAP_OPT_COORD_CENTER_3_NAME );
-delete_option( SMART_GEO_GMAP_OPT_JAVASCRIPT_EVENT_INFO_WINDOWS );
+// Welcome
+delete_option('smartgeogmap_welcome_description');
+delete_option('smartgeogmap_welcome_how_to');
+delete_option('smartgeogmap_welcome_available_shortcodes');
+delete_option('smartgeogmap_google_api_key');
 
-array_map('unlink', glob(SMART_GEO_GMAP_PATH_DATA . "/*.*"));
-rmdir(SMART_GEO_GMAP_PATH_DATA);
+// Settings
+delete_option('smartgeogmap_default_width');
+delete_option('smartgeogmap_map_type');
+delete_option('smartgeogmap_zoom');
+delete_option('smartgeogmap_javascript_tooltip');
 
-array_map('unlink', glob(SMART_GEO_GMAP_PATH_SNAZZY_STYLE . "/*.*"));
-rmdir(SMART_GEO_GMAP_PATH_SNAZZY_STYLE);
+// Coordinates
+delete_option('smartgeogmap_coordinates_city_1');
+delete_option('smartgeogmap_coordinates_lat_long_1');
+delete_option('smartgeogmap_coordinates_city_2');
+delete_option('smartgeogmap_coordinates_lat_long_2');
+delete_option('smartgeogmap_coordinates_city_3');
+delete_option('smartgeogmap_coordinates_lat_long_3');
+
+// Files (on db)
+delete_option('smartgeogmap_snazzy_file');
+delete_option('smartgeogmap_geojson_files');
+
+// Legend
+delete_option('smartgeogmap_legend_toggle');
+delete_option('smartgeogmap_legend_position');
+delete_option('smartgeogmap_legend_image_1');
+delete_option('smartgeogmap_legend_label_1');
+delete_option('smartgeogmap_legend_image_2');
+delete_option('smartgeogmap_legend_label_2');
+delete_option('smartgeogmap_legend_image_3');
+delete_option('smartgeogmap_legend_label_3');
+
+// Files (on filesystem)
+$uploadBaseDir = isset( wp_upload_dir()['basedir'] )
+	? wp_upload_dir()['basedir']
+	: DIRECTORY_SEPARATOR . 'uploads';
+
+$smartGeoGMapDataPath = $uploadBaseDir . DIRECTORY_SEPARATOR . Constants::SMARTGEOGMAP_DATA_FOLDER . DIRECTORY_SEPARATOR;
+$smartGeoGMapSnazzyPath = $uploadBaseDir . DIRECTORY_SEPARATOR . Constants::SMARTGEOGMAP_SNAZZY_FOLDER . DIRECTORY_SEPARATOR;
+
+array_map('unlink', glob($smartGeoGMapDataPath . "/*.*"));
+rmdir($smartGeoGMapDataPath);
+
+array_map('unlink', glob($smartGeoGMapSnazzyPath . "/*.*"));
+rmdir($smartGeoGMapSnazzyPath);

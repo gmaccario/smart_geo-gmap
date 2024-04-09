@@ -1,10 +1,10 @@
 {
-	"autoload": {
-		"psr-4": {
-			"SGGM\\Controller\\Classes\\": "Classes/Controllers/",
-			"SGGM\\General\\Classes\\": "Classes/General/",
-			"SGGM\\Setup\\Classes\\": "Classes/Setup/"
-		}
-	},
-	"require-dev" : {}
+  "autoload": {
+    "psr-4": {
+      "SmartGeoGMap\\": "app/"
+    }
+  },
+  "require": {
+    "lablnet/encryption": "^1.0"
+  }
 }

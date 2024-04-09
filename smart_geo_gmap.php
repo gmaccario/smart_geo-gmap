@@ -1,43 +1,32 @@
 <?php
-/*
-Plugin Name: Smart GEO GMap
-Plugin URI: https://www.giuseppemaccario.com/wordpress-map-plugin-smart-geo-gmap/
-Description: Smart GEO GMap provides an easy way to integrate a Google Map over WordPress Page/Post using an easy Shortcode.
-Version: 1.3.6
-Author: Giuseppe Maccario
-Author URI: https://www.giuseppemaccario.com
-License: GPLv2 or later
-*/
+/**
+ * My SmartGeoGMap old main file upgrade routine
+ *
+ * This is the old plugin main file.
+ * Keep it for backward upgrade compatibility.
+ *
+ * @package SmartGeoGMap
+ */
 
-if( !defined( 'ABSPATH' )) {
-    return false;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
 }
 
-if( defined( WP_DEBUG ) && WP_DEBUG )
-{
-    ini_set( 'display_errors', 1 );
-    ini_set( 'display_startup_errors', 1 );
-    error_reporting( E_ALL );
+$old = 'smart_geo_gmap.php'; // Change this.
+$new = 'smart-geo-gmap.php'; // Change this.
+
+// Change the active plugin settings to make WP start using the new one.
+$active_plugins = (array) get_option( 'active_plugins', [] );
+
+$old_plugin_array = [ basename( __DIR__ ) . DIRECTORY_SEPARATOR . $old ];
+$active_plugins   = array_diff( $active_plugins, $old_plugin_array );
+
+$new_plugin = basename( __DIR__ ) . DIRECTORY_SEPARATOR . $new;
+if ( ! in_array( $new_plugin, $active_plugins ) ) {
+	$active_plugins[] = $new_plugin;
+
+	include_once __DIR__ . DIRECTORY_SEPARATOR . $new;
 }
 
-/* GENERAL CONSTANTS */
-const SMART_GEO_GMAP_NAME = 'Smart GEO GMap';
-
-/* BASIC CONSTANTS - MANDATORY HERE CAUSE __FILE__ */
-define( 'SMART_GEO_GMAP_BASENAME', plugin_basename( __FILE__ ));
-define( 'SMART_GEO_GMAP_URL', plugins_url( '', __FILE__ ));
-define( 'SMART_GEO_GMAP_DIR_PATH', plugin_dir_path( __FILE__ ) );
-
-function smartGeoGmapInit()
-{
-	/* PSR-4: Autoloader - PHP-FIG */
-	require SMART_GEO_GMAP_DIR_PATH . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
-
-    /* DEFINE CONSTANTS	*/
-	require_once SMART_GEO_GMAP_DIR_PATH . 'include' . DIRECTORY_SEPARATOR . 'constants.php';
-
-	/* DISPATCHER */
-	require_once SMART_GEO_GMAP_DIR_PATH . 'include' . DIRECTORY_SEPARATOR . 'dispatcher.php';
-}
-
-smartGeoGmapInit();
+// Update active plugins and never come back here.
+update_option( 'active_plugins', $active_plugins );

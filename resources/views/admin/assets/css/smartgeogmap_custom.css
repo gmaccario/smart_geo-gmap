@@ -1,0 +1,32 @@
+.wp-admin #wpcontent #wpbody-content .admin-homepage .form-table {
+    background-color: #F5EDFF;
+    border: 1px solid #007FFF;
+    border-radius: 1em;
+    border-collapse: separate;
+}
+
+.wp-admin #wpcontent #wpbody-content .admin-homepage .form-table th {
+    padding-left: 1em;
+}
+
+.wp-admin #wpcontent #wpbody-content .admin-homepage .form-table a {
+    text-decoration: none! important;
+}
+.wp-admin #wpcontent #wpbody-content .admin-homepage .form-table .smartgeogmap_dashicons span {
+    padding-top: 0.3em;
+}
+
+.wp-admin #wpcontent #wpbody-content .admin-homepage .form-table input,
+.wp-admin #wpcontent #wpbody-content .admin-homepage .form-table select,
+.wp-admin #wpcontent #wpbody-content .admin-homepage .form-table textarea {
+    width: 35%;
+}
+
+.wp-admin #wpcontent #wpbody-content .admin-homepage .form-table input[type="button"] {
+    width: auto;
+}
+
+.wp-admin #wpcontent #wpbody-content .admin-homepage .form-table input[type="radio"],
+.wp-admin #wpcontent #wpbody-content .admin-homepage .form-table input[type="checkbox"]{
+    width: auto;
+}
