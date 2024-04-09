@@ -54,6 +54,11 @@ Snazzy Maps is a community built around creating and sharing great looking style
 * Implemented dynamic legend
 * Minor fixes
 
+== Upgrade Notice ==
+
+= 1.5 =
+* This version make use a new plugin architecture and several modification. Upgrade now.
+
 == Author ==
 Giuseppe Maccario
 
