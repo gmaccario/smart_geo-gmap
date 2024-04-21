@@ -6,7 +6,7 @@ Description: Embed Google Map in your WordPress website using GeoJSON for encodi
 Text Domain: smartgeogmap
 Author: Giuseppe Maccario
 Author URI: https://www.giuseppemaccario.com
-Version: 1.5
+Version: 1.6
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html

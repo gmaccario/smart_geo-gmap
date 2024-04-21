@@ -33,14 +33,14 @@ class Actions {
 			'smartgeogmap_custom_js',
 			plugins_url( SMARTGEOGMAP_SLUG . '/resources/views/admin/assets/js/smartgeogmap_custom.js' ),
 			[],
-			'1.0.0',
+			'1.0.1',
 		);
 
 		wp_register_style(
 			'smartgeogmap_custom_css',
 			plugins_url( SMARTGEOGMAP_SLUG . '/resources/views/admin/assets/css/smartgeogmap_custom.css' ),
 			false,
-			'1.0.0',
+			'1.0.1',
 			'all'
 		);
 	}
@@ -68,7 +68,7 @@ class Actions {
 	 * @throws Exception
 	 */
 	public function show_smartgeogmap_admin_menu(): View {
-		return new View( 'show-smartgeogmap-admin-configuration', [
+		return new View( 'admin-configuration', [
 			'tab' => 'welcome',
 		] );
 	}
@@ -142,6 +142,16 @@ class Actions {
 		$this->addSettingsFieldLegendLabel2();
 		$this->addSettingsFieldLegendImg3();
 		$this->addSettingsFieldLegendLabel3();
+
+        add_settings_section(
+            Constants::SMARTGEOGMAP_DOCUMENTATION_SECTION,
+            '', //'<span class="dashicons-before dashicons-editor-customchar"></span>' . __( 'Custom Settings' ),
+            false, //[ $this, 'smartgeogmap_config_section_info' ],
+            Constants::SMARTGEOGMAP_DOCUMENTATION_PAGE,
+            []
+        );
+
+        $this->addSettingsFieldDocumentation();
 	}
 
 	/**
@@ -428,4 +438,16 @@ class Actions {
 		], Constants::SMARTGEOGMAP_LEGEND_PAGE, Constants::SMARTGEOGMAP_LEGEND_SECTION );
 		$this->field->registerSetting( Constants::SMARTGEOGMAP_LEGEND_GROUP, 'smartgeogmap_legend_label_3');
 	}
+
+    /**
+     * @return void
+     */
+    private function addSettingsFieldDocumentation(): void
+    {
+        $this->field->addSettingsField('smartgeogmap_documentation_settings_field', 'Documentation', [
+            $this->adminSettings,
+            'smartgeogmap_setting_documentation_field'
+        ], Constants::SMARTGEOGMAP_DOCUMENTATION_PAGE, Constants::SMARTGEOGMAP_DOCUMENTATION_SECTION);
+        $this->field->registerSetting(Constants::SMARTGEOGMAP_DOCUMENTATION_GROUP,'smartgeogmap_documentation');
+    }
 }

@@ -34,7 +34,22 @@ function trySubmitFile()
     });
 }
 
+function addEventListenerToShowGoogleKey()
+{
+    let el = document.querySelector('.smartgeogmap_dashicons .dashicons-welcome-view-site');
+    if (el) {
+        el.addEventListener("click", (event) => {
+            event.preventDefault()
+
+            let target = document.querySelector('#' + el.dataset.inputid);
+
+            target.type = (target.type === 'text') ? 'password' : 'text';
+        });
+    }
+}
+
 window.addEventListener("DOMContentLoaded", (event) => {
     copyToClipboard();
     trySubmitFile();
+    addEventListenerToShowGoogleKey();
 });

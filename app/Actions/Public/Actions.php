@@ -33,7 +33,7 @@ class Actions
 			'smartgeogmap_custom_css',
 			plugins_url( SMARTGEOGMAP_SLUG . '/resources/views/public/assets/css/smartgeogmap_custom.css' ),
 			false,
-			'1.0.0',
+			'1.0.1',
 			'all'
 		);
 	}

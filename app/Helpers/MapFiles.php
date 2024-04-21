@@ -29,12 +29,12 @@ class MapFiles {
 		// Deleting files
 		if ( ! empty( $_POST['smartgeogmap_delete_snazzy_file'] ) ) {
 			if ( ! $this->deleteFile( $smartgeogmapSnazzyFile ) ) {
-				return $smartgeogmapSnazzyFile;
+                $this->logger->error('Deleting Snazzy file failed!', [ 'smartgeogmapSnazzyFile' => $smartgeogmapSnazzyFile ] );
 			} else {
                 $this->logger->info('Deleting Snazzy file', [ 'smartgeogmapSnazzyFile' => $smartgeogmapSnazzyFile ] );
-
-				return '';
 			}
+
+            return '';
 		}
 
 		if ( ! empty( $_FILES['smartgeogmap_snazzy_file'] ) ) {
@@ -186,12 +186,16 @@ class MapFiles {
         $this->logger->info('Check if file path exist before deleting it', [ 'file_exists' => file_exists( $path ) ] );
 
 		if ( file_exists( $path ) ) {
+            $this->logger->info('Files exists!');
+
 			unlink( $path );
 
 			return true;
 		}
 
-		return false;
+        $this->logger->info('Files does not exists!');
+
+        return false;
 	}
 
 	/**

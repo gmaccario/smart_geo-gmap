@@ -13,6 +13,7 @@ final class Constants
 	public const SMARTGEOGMAP_COORDINATES_TAB = 'coordinates';
 	public const SMARTGEOGMAP_FILES_TAB = 'files';
 	public const SMARTGEOGMAP_LEGEND_TAB = 'legend';
+	public const SMARTGEOGMAP_DOCUMENTATION_TAB = 'documentation';
 
     public const SMARTGEOGMAP_MENU_SLUG = 'smartgeogmap-admin-page';
 
@@ -35,6 +36,10 @@ final class Constants
 	public const SMARTGEOGMAP_LEGEND_PAGE = 'smartgeogmap_legend_page';
 	public const SMARTGEOGMAP_LEGEND_GROUP = 'smartgeogmap_legend_group';
 	public const SMARTGEOGMAP_LEGEND_SECTION = 'smartgeogmap_legend_section';
+
+    public const SMARTGEOGMAP_DOCUMENTATION_PAGE = 'smartgeogmap_documentation_page';
+    public const SMARTGEOGMAP_DOCUMENTATION_GROUP = 'smartgeogmap_documentation_group';
+    public const SMARTGEOGMAP_DOCUMENTATION_SECTION = 'smartgeogmap_documentation_section';
 
 	public const SMARTGEOGMAP_MAX_GEOJSON_ALLOWED = 3;
 

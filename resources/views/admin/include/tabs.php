@@ -15,3 +15,6 @@
 <a href="?page=<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e(\SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_MENU_SLUG); ?>&tab=<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e(\SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_LEGEND_TAB); ?>" class="nav-tab <?php if ( $tab === \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_LEGEND_TAB ): ?>nav-tab-active<?php endif; ?>">
 	<?php esc_html_e(ucfirst(\SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_LEGEND_TAB)); ?>
 </a>
+<a href="?page=<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e(\SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_MENU_SLUG); ?>&tab=<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e(\SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_DOCUMENTATION_TAB); ?>" class="nav-tab <?php if ( $tab === \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_DOCUMENTATION_TAB ): ?>nav-tab-active<?php endif; ?>">
+    <?php esc_html_e(ucfirst(\SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_DOCUMENTATION_TAB)); ?>
+</a>
