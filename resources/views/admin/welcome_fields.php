@@ -30,7 +30,7 @@
 <?php elseif ( isset ( $smartgeogmapGoogleApiKey ) ): ?>
     <input type="password" id="smartgeogmap_google_api_key" name="smartgeogmap_google_api_key" value="<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e($smartgeogmapGoogleApiKey); ?>" />
     <a href="#" target="_blank" class="smartgeogmap_dashicons show-google_key"
-       title="<?php \SnapWizard\Helpers\Intl::i_esc_attr_e( 'Show Google Key' ); ?>">
+       title="<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e( 'Show Google Key' ); ?>">
         <span class="dashicons dashicons-welcome-view-site" data-inputid="smartgeogmap_google_api_key"></span>
     </a>
 <?php elseif ( $field === 'available_shortcodes'): ?>

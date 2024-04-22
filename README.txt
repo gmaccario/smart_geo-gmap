@@ -5,7 +5,7 @@ Tags: Google Maps, GeoJSON, Snazzy Maps, markers, boundaries
 Requires at least: 4.8.15
 Tested up to: 6.5
 Requires PHP: 7.2
-Stable tag: 1.6
+Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,9 @@ Snazzy Maps is a community built around creating and sharing great looking style
 * Go to Files tabs and upload your GEO JSON and Snazzy files
 
 == Change log ==
+= 1.6.1 =
+* Bug fix
+
 = 1.6 =
 * Fix files links
 * Add a touch of beauty in the admin panel
