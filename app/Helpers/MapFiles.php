@@ -9,7 +9,7 @@ class MapFiles {
 
 	private Logger $logger;
 
-	public function __construct( Logger $logger = null ) {
+	public function __construct( ?Logger $logger = null ) {
 		$this->logger = $logger;
 
 		$uploadBaseDir = isset( wp_upload_dir()['basedir'] )
@@ -133,6 +133,13 @@ class MapFiles {
 		 */
 
 		/**
+		 * No file selected in the input
+		 */
+		if ( $name === '' ) {
+			return $optionValue;
+		}
+
+		/**
 		 * Sanitize file name to avoid directory traversal
 		 */
 		$filePath = $this->getSanitizedFilePath( $name, $path );
@@ -143,6 +150,13 @@ class MapFiles {
 		$extension = pathinfo( $filePath, PATHINFO_EXTENSION );
 
 		if ( empty( $extension ) || ! in_array( $extension, $restrictions ) ) {
+			$this->addUploadError( 'invalid_extension', sprintf(
+				/* translators: 1: file name, 2: allowed extensions */
+				__( '%1$s was not uploaded: only %2$s files are allowed.', 'smartgeogmap' ),
+				$name,
+				implode( ', ', $restrictions )
+			) );
+
 			return $optionValue;
 		}
 
@@ -154,6 +168,9 @@ class MapFiles {
 		 * Move the file
 		 */
 		if ( ! move_uploaded_file( $tmpFilePath, $filePath ) ) {
+			/* translators: %s: file name */
+			$this->addUploadError( 'upload_failed', sprintf( __( '%s could not be uploaded.', 'smartgeogmap' ), $name ) );
+
 			return $optionValue;
 		}
 
@@ -169,12 +186,27 @@ class MapFiles {
 		if ( $isValid ) {
 			return $filePath;
 		} else {
+			/* translators: %s: file name */
+			$this->addUploadError( 'invalid_json', sprintf( __( '%s was not uploaded: it is not a valid JSON file.', 'smartgeogmap' ), $name ) );
+
 			if ( $this->deleteFile( $filePath ) ) {
 				return '';
 			} else {
 				return $optionValue;
 			}
 		}
+	}
+
+	/**
+	 * Shown by settings_errors() on the admin page after options.php redirects back
+	 *
+	 * @param string $code
+	 * @param string $message
+	 *
+	 * @return void
+	 */
+	private function addUploadError( string $code, string $message ): void {
+		add_settings_error( 'smartgeogmap_files', 'smartgeogmap_' . $code, esc_html( $message ) );
 	}
 
 	/**
@@ -262,18 +294,21 @@ class MapFiles {
 		foreach ( $filesData['name'] as $index => $name ) {
 			if ( ! empty ( $name ) ) {
 
-				$smartgeogmapGeoJSONFiles = $this->getSanitizedFilePath( $this->smartGeoGMapDataPath, $name );
-
 				$tmpFilePath = $filesData['tmp_name'][ $index ];
 
-                $this->logger->info('Uploading GeoJSON file', [ 'name' => $name, 'smartgeogmapGeoJSONFiles' => $smartgeogmapGeoJSONFiles ] );
+                $this->logger->info('Uploading GeoJSON file', [ 'name' => $name ] );
 
-				$files[] = $this->smartGeoGMapUploadMapFiles( $smartgeogmapGeoJSONFiles,
+				// An empty string means the upload was rejected: don't add it to the list
+				$uploadedFile = $this->smartGeoGMapUploadMapFiles( '',
 					$name,
 					$this->smartGeoGMapDataPath,
 					$filesData,
 					$tmpFilePath,
 					[ 'json', 'geojson' ] );
+
+				if ( $uploadedFile !== '' ) {
+					$files[] = $uploadedFile;
+				}
 			}
 		}
 

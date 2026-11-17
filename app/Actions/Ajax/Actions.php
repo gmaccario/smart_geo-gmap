@@ -1,6 +1,6 @@
 <?php
 
-namespace SmartGeoGMap\Actions\ajax;
+namespace SmartGeoGMap\Actions\Ajax;
 
 use SmartGeoGMap\Helpers\Constants;
 

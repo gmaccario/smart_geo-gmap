@@ -29,17 +29,18 @@
     </ul>
 <?php elseif ( isset ( $smartgeogmapGoogleApiKey ) ): ?>
     <input type="password" id="smartgeogmap_google_api_key" name="smartgeogmap_google_api_key" value="<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e($smartgeogmapGoogleApiKey); ?>" />
-    <a href="#" target="_blank" class="smartgeogmap_dashicons show-google_key"
-       title="<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e( 'Show Google Key' ); ?>">
-        <span class="dashicons dashicons-welcome-view-site" data-inputid="smartgeogmap_google_api_key"></span>
-    </a>
+    <button type="button" class="button-link smartgeogmap_dashicons show-google_key" data-inputid="smartgeogmap_google_api_key"
+            title="<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e( 'Show Google Key' ); ?>" aria-label="<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e( 'Show Google Key' ); ?>">
+        <span class="dashicons dashicons-visibility" aria-hidden="true"></span>
+    </button>
 <?php elseif ( $field === 'available_shortcodes'): ?>
     <ul>
         <li>
             <input type="text" id="smartgeogmap_shortcode" disabled value="[<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e(\SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_SHORTCODE); ?>]"/>
-            <a href="#" target="_blank" class="smartgeogmap_dashicons copy-to-clipboard" title="<?php esc_html_e( 'Copy to clipboard' ); ?>">
-                <span class="dashicons dashicons-clipboard" data-inputid="smartgeogmap_shortcode"></span>
-            </a>
+            <button type="button" class="button-link smartgeogmap_dashicons copy-to-clipboard" data-inputid="smartgeogmap_shortcode"
+                    title="<?php esc_attr_e( 'Copy to clipboard' ); ?>" aria-label="<?php esc_attr_e( 'Copy to clipboard' ); ?>">
+                <span class="dashicons dashicons-clipboard" aria-hidden="true"></span>
+            </button>
             <p>
                 <a href="https://codex.wordpress.org/shortcode" target="_blank">
                     <span><?php esc_html_e( 'What is a shortcode?' ); ?></span>

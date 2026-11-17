@@ -28,10 +28,10 @@
 <?php elseif ( isset ( $smartgeogmapJavascriptTooltip ) ): ?>
     <div>
         <input type="radio" class="javascript_event" value="mouseover" name="smartgeogmap_javascript_tooltip" id="smartgeogmap_javascript_tooltip_mouseover" <?php ($smartgeogmapJavascriptTooltip === 'mouseover') ? esc_attr_e('checked') : null; ?>>
-        <label for="javascript_event_mouseover" class="radio"><?php esc_html_e( 'Mouseover' ); ?></label>
+        <label for="smartgeogmap_javascript_tooltip_mouseover" class="radio"><?php esc_html_e( 'Mouseover' ); ?></label>
     </div>
     <div>
         <input type="radio" class="javascript_event" value="click" name="smartgeogmap_javascript_tooltip" id="smartgeogmap_javascript_tooltip_click" <?php ($smartgeogmapJavascriptTooltip === 'click') ? esc_attr_e('checked') : null; ?>>
-        <label for="javascript_event_click" class="radio"><?php esc_html_e( 'Click' ); ?></label>
+        <label for="smartgeogmap_javascript_tooltip_click" class="radio"><?php esc_html_e( 'Click' ); ?></label>
     </div>
 <?php endif; ?>

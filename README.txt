@@ -2,10 +2,10 @@
 Contributors: gmaccario
 Donate link: https://www.giuseppemaccario.com/wordpress-map-plugin-smart-geo-gmap/
 Tags: Google Maps, GeoJSON, Snazzy Maps, markers, boundaries
-Requires at least: 4.8.15
-Tested up to: 6.5
+Requires at least: 6.0
+Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 1.6.2
+Stable tag: 1.6.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,11 @@ Snazzy Maps is a community built around creating and sharing great looking style
 * Go to Files tabs and upload your GEO JSON and Snazzy files
 
 == Change log ==
+= 1.6.3 =
+* Tested up to WordPress 7.1
+* PHP 8.4 compatibility: fix implicitly nullable parameter deprecations
+* Update Parsedown to 1.8.0
+
 = 1.6.2 =
 * Small changes
 
@@ -71,6 +76,9 @@ Snazzy Maps is a community built around creating and sharing great looking style
 * Minor fixes
 
 == Upgrade Notice ==
+
+= 1.6.3 =
+* Compatibility release for WordPress 7.1 and PHP 8.4.
 
 = 1.6.2 =
 * This version is not a major upgrade but still, upgrade now!

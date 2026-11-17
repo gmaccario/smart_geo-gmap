@@ -52,7 +52,7 @@
 }
 
 /* Style the active tab */
-.toplevel_page_smartgeogmap-admin-page.wp-admin .nav-tab.active {
+.toplevel_page_smartgeogmap-admin-page.wp-admin .nav-tab.nav-tab-active {
     background-color: #fff;
     border-bottom: 1px solid #fff;
 }

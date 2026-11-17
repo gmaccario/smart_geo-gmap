@@ -9,6 +9,9 @@ if (isset($_GET['tab'])) {
 <div class="wrap admin-homepage">
     <h1><?php esc_html_e( get_admin_page_title() ); ?></h1>
 
+    <?php // WordPress only prints these automatically on Settings pages, not on top-level menu pages ?>
+    <?php settings_errors(); ?>
+
     <?php // WordPress provides the styling for tabs ?>
     <h2 class="nav-tab-wrapper">
         <?php include( 'include' . DIRECTORY_SEPARATOR . 'tabs.php' ); ?>
@@ -57,7 +60,10 @@ if (isset($_GET['tab'])) {
 				break;
 		}
 
-		submit_button();
+		// Documentation is read-only: nothing to save
+		if ( $tab !== \SmartGeoGMap\Helpers\Constants::SMARTGEOGMAP_DOCUMENTATION_TAB ) {
+			submit_button();
+		}
 		?>
     </form>
 </div>

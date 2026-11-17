@@ -33,14 +33,14 @@ class Actions {
 			'smartgeogmap_custom_js',
 			plugins_url( SMARTGEOGMAP_SLUG . '/resources/views/admin/assets/js/smartgeogmap_custom.js' ),
 			[],
-			'1.0.1',
+			'1.0.2',
 		);
 
 		wp_register_style(
 			'smartgeogmap_custom_css',
 			plugins_url( SMARTGEOGMAP_SLUG . '/resources/views/admin/assets/css/smartgeogmap_custom.css' ),
 			false,
-			'1.0.1',
+			'1.0.2',
 			'all'
 		);
 	}

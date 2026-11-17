@@ -1,20 +1,37 @@
 
 function copyToClipboard()
 {
-    let els = document.querySelectorAll('.smartgeogmap_dashicons .dashicons-clipboard');
+    let buttons = document.querySelectorAll('.smartgeogmap_dashicons.copy-to-clipboard');
 
-    if (els) {
-        els.forEach((el) => {
-            el.addEventListener("click", (event) => {
+    buttons.forEach((button) => {
+        button.addEventListener("click", (event) => {
 
-                event.preventDefault()
+            event.preventDefault()
 
-                let target = document.querySelector('#' + el.dataset.inputid);
+            let target = document.querySelector('#' + button.dataset.inputid);
 
+            // The Clipboard API is only available in secure contexts (HTTPS or localhost)
+            if (!navigator.clipboard) {
+                window.prompt("Copy to clipboard: Ctrl+C, Enter", target.value);
+                return;
+            }
+
+            navigator.clipboard.writeText(target.value).then(() => {
+                let icon = button.querySelector('.dashicons');
+                let title = button.title;
+
+                icon.classList.replace('dashicons-clipboard', 'dashicons-yes');
+                button.title = 'Copied!';
+
+                setTimeout(() => {
+                    icon.classList.replace('dashicons-yes', 'dashicons-clipboard');
+                    button.title = title;
+                }, 1500);
+            }).catch(() => {
                 window.prompt("Copy to clipboard: Ctrl+C, Enter", target.value);
             });
         });
-    }
+    });
 }
 
 function trySubmitFile()
@@ -36,14 +53,18 @@ function trySubmitFile()
 
 function addEventListenerToShowGoogleKey()
 {
-    let el = document.querySelector('.smartgeogmap_dashicons .dashicons-welcome-view-site');
-    if (el) {
-        el.addEventListener("click", (event) => {
+    let button = document.querySelector('.smartgeogmap_dashicons.show-google_key');
+    if (button) {
+        button.addEventListener("click", (event) => {
             event.preventDefault()
 
-            let target = document.querySelector('#' + el.dataset.inputid);
+            let target = document.querySelector('#' + button.dataset.inputid);
+            let icon = button.querySelector('.dashicons');
 
             target.type = (target.type === 'text') ? 'password' : 'text';
+
+            icon.classList.toggle('dashicons-visibility', target.type === 'password');
+            icon.classList.toggle('dashicons-hidden', target.type === 'text');
         });
     }
 }
