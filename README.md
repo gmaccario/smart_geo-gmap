@@ -21,6 +21,7 @@ A WordPress plugin that embeds a Google Map in any page or post with a single sh
 - Map type (roadmap, satellite, hybrid, terrain), zoom level and full or half width
 - Legend with icons and labels, positioned where you want
 - Responsive and full-screen map
+- Scripts load only on pages that show the map
 
 ## Requirements
 
@@ -63,6 +64,14 @@ The folder must be named `smart-geo-gmap`.
 
 The **Documentation** tab in the admin panel describes every setting.
 
+## Screenshots
+
+| Map with GeoJSON boundaries, markers and an info window | Welcome tab |
+|---|---|
+| ![Map](https://ps.w.org/smart-geo-gmap/assets/screenshot-3.png) | ![Welcome tab](https://ps.w.org/smart-geo-gmap/assets/screenshot-1.png) |
+
+More screenshots on the [WordPress.org page](https://wordpress.org/plugins/smart-geo-gmap/#screenshots).
+
 ## Settings
 
 | Tab | Setting | Description |
@@ -98,6 +107,19 @@ Uploaded files are stored in `wp-content/uploads/smart-geo-gmap-data/` and `wp-c
 
 GeoJSON coordinates are `[longitude, latitude]`, the opposite order of the Coordinates tab.
 
+## Troubleshooting
+
+| Symptom | Cause and fix |
+|---|---|
+| "Sorry! Something went wrong." on the map | Google rejected the key. Enable the Maps JavaScript API and billing, and add your site to the key's **Website restrictions** (e.g. `http://localhost/*` for local development). The browser console shows the exact error. |
+| "Google Key missing" | Save the API key in the Welcome tab. |
+| Markers in the wrong place | GeoJSON uses `[lng, lat]`; the Coordinates tab uses `lat, lng`. |
+| Upload rejected | Only `.json` / `.geojson` files with valid JSON are accepted. The notice at the top of the page says why. |
+
+## Privacy and external services
+
+On pages with the shortcode, the visitor's browser loads the Google Maps JavaScript API from `maps.googleapis.com`, so Google receives the visitor's IP address and map requests. See the [Google Maps Platform Terms](https://cloud.google.com/maps-platform/terms) and the [Google Privacy Policy](https://policies.google.com/privacy). Nothing is loaded on other pages, and the plugin doesn't connect to Snazzy Maps.
+
 ## Development
 
 ```
@@ -124,14 +146,21 @@ With `WP_DEBUG` enabled, the plugin writes upload and file operations to the PHP
 
 ### Releasing
 
-1. Bump `Version` in `smart-geo-gmap.php` and `Stable tag` in `README.txt`, and add a changelog entry.
+1. Bump `Version` in `smart-geo-gmap.php` and `Stable tag` in `README.txt`. Move the `[Unreleased]` entries in `CHANGELOG.md` to the new version, and add the same entries to the `== Changelog ==` and `== Upgrade Notice ==` sections of `README.txt`.
 2. Run `composer install --no-dev --optimize-autoloader`.
-3. Copy the plugin to the WordPress.org SVN `trunk` **including `vendor/`** and excluding `.git`, `.gitignore`, `.gitattributes`, `.DS_Store` and `README.md`.
-4. Tag the release in SVN and in git.
+3. Copy the plugin to the WordPress.org SVN `trunk` **including `vendor/`** and excluding `.git`, `.gitignore`, `.gitattributes`, `.DS_Store`, `README.md` and `CHANGELOG.md`.
+4. Tag the release in SVN and in git (tags without a `v`, e.g. `1.6.4`), and create the GitHub release with the changelog entry as notes.
 
 ## Changelog
 
-See the [changelog in README.txt](README.txt) (the WordPress.org readme).
+See [CHANGELOG.md](CHANGELOG.md).
+
+### 1.6.4 (2026-11-17)
+
+- Fix: the Snazzy Maps skin is applied to the map again.
+- Fix: map settings with quotes, backslashes or new lines no longer break the map.
+- Fix: uploaded files are found after the site moves to another server or folder.
+- The map scripts load only on pages that use the shortcode.
 
 ## License
 
