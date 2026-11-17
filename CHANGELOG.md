@@ -6,6 +6,24 @@ The same entries, in WordPress.org format, are in the `== Changelog ==` section 
 
 ## [Unreleased]
 
+### Security
+
+- Every setting is sanitized on save: text fields with `sanitize_text_field()`, choices (width, map type, zoom, info window event, legend position) limited to their allowed values, legend icons to icon names.
+
+### Added
+
+- Lat/Long fields are validated as `latitude, longitude`: an invalid value is not saved and an error notice explains why.
+
+### Changed
+
+- "Google Key missing" is shown to administrators only, with a hint on where to add the key. Visitors see nothing.
+- The map settings are a single `window.smartGeoGMap` object instead of 17 global variables, and the map script is scoped, so it can't clash with the theme or other plugins. The Google Maps callback is now `smartGeoGMapInit` (was `initMap`).
+- Text domain is `smart-geo-gmap` (the plugin slug), so the plugin can be translated on translate.wordpress.org. Admin labels, tab names and messages are now translatable.
+
+### Removed
+
+- The `Intl` helper, which prevented strings from being translated.
+
 ## [1.6.4] - 2026-11-17
 
 ### Fixed

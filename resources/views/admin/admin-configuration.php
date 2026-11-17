@@ -7,7 +7,7 @@ if (isset($_GET['tab'])) {
 ?>
 
 <div class="wrap admin-homepage">
-    <h1><?php esc_html_e( get_admin_page_title() ); ?></h1>
+    <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 
     <?php // WordPress only prints these automatically on Settings pages, not on top-level menu pages ?>
     <?php settings_errors(); ?>

@@ -152,7 +152,7 @@ class MapFiles {
 		if ( empty( $extension ) || ! in_array( $extension, $restrictions ) ) {
 			$this->addUploadError( 'invalid_extension', sprintf(
 				/* translators: 1: file name, 2: allowed extensions */
-				__( '%1$s was not uploaded: only %2$s files are allowed.', 'smartgeogmap' ),
+				__( '%1$s was not uploaded: only %2$s files are allowed.', 'smart-geo-gmap' ),
 				$name,
 				implode( ', ', $restrictions )
 			) );
@@ -169,7 +169,7 @@ class MapFiles {
 		 */
 		if ( ! move_uploaded_file( $tmpFilePath, $filePath ) ) {
 			/* translators: %s: file name */
-			$this->addUploadError( 'upload_failed', sprintf( __( '%s could not be uploaded.', 'smartgeogmap' ), $name ) );
+			$this->addUploadError( 'upload_failed', sprintf( __( '%s could not be uploaded.', 'smart-geo-gmap' ), $name ) );
 
 			return $optionValue;
 		}
@@ -187,7 +187,7 @@ class MapFiles {
 			return $filePath;
 		} else {
 			/* translators: %s: file name */
-			$this->addUploadError( 'invalid_json', sprintf( __( '%s was not uploaded: it is not a valid JSON file.', 'smartgeogmap' ), $name ) );
+			$this->addUploadError( 'invalid_json', sprintf( __( '%s was not uploaded: it is not a valid JSON file.', 'smart-geo-gmap' ), $name ) );
 
 			if ( $this->deleteFile( $filePath ) ) {
 				return '';

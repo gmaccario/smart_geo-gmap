@@ -27,7 +27,12 @@ class SmartGeoGMapFrontend {
 
 		$smartgeogmapLegendToggle = get_option( 'smartgeogmap_legend_toggle' );
 
-		if ( ! empty( $smartgeogmapGoogleApiKey ) ) {
+		if ( empty( $smartgeogmapGoogleApiKey ) ) {
+			// Only the site admins need to know the key is missing: visitors see nothing
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return '';
+			}
+		} else {
 			$this->enqueueAssets();
 		}
 
@@ -46,7 +51,7 @@ class SmartGeoGMapFrontend {
 
 	/**
 	 * Load the map scripts only on the pages that use the shortcode.
-	 * The Google Maps script depends on smartgeogmap_custom_js, so initMap is defined before Google calls it.
+	 * The Google Maps script depends on smartgeogmap_custom_js, so smartGeoGMapInit is defined before Google calls it.
 	 *
 	 * @return void
 	 */
@@ -63,8 +68,9 @@ class SmartGeoGMapFrontend {
 	}
 
 	/**
-	 * Build the JS variables used by smartgeogmap_custom.js.
-	 * Every value is JSON encoded, so quotes, backslashes and new lines in the settings can't break the script.
+	 * Build the window.smartGeoGMap settings object used by smartgeogmap_custom.js.
+	 * One global object, so the settings can't clash with variables of the theme or other plugins.
+	 * JSON encoded, so quotes, backslashes and new lines in the settings can't break the script.
 	 *
 	 * @return string
 	 */
@@ -79,13 +85,10 @@ class SmartGeoGMapFrontend {
 		$smartgeogmapJavascriptTooltip = get_option( 'smartgeogmap_javascript_tooltip' );
 
 		$data = [
-			'smartGeoGmapDebug' => WP_DEBUG ? 1 : 0,
-			'markers' => [],
+			'debug' => WP_DEBUG ? 1 : 0,
 			'map_type' => (string) get_option( 'smartgeogmap_map_type' ),
 			'default_zoom' => ! empty( $smartgeogmapZoom ) ? (int) $smartgeogmapZoom : 10,
 			'coord_center_1' => $coordCenter1,
-			'coord_center_2' => $coordCenter2,
-			'coord_center_3' => $coordCenter3,
 			'custom_centers' => [
 				[ 'label' => (string) get_option( 'smartgeogmap_coordinates_city_1' ), 'coord_center' => $coordCenter1 ],
 				[ 'label' => (string) get_option( 'smartgeogmap_coordinates_city_2' ), 'coord_center' => $coordCenter2 ],
@@ -93,20 +96,14 @@ class SmartGeoGMapFrontend {
 			],
 			'snazzyStyleJson' => $this->getSnazzyStyles( get_option( 'smartgeogmap_snazzy_file' ) ),
 			'js_evt_info_windows' => ! empty( $smartgeogmapJavascriptTooltip ) ? (string) $smartgeogmapJavascriptTooltip : 'mouseover',
-			'sz_recenter_control' => __( 'Click to recenter the map' ),
+			'sz_recenter_control' => __( 'Click to recenter the map', 'smart-geo-gmap' ),
 			'geojson_files' => $this->getGeoJSONFilesUrls( get_option( 'smartgeogmap_geojson_files' ) ),
 			'showLegend' => $smartgeogmapLegendToggle ? 1 : 0,
 			'legend_position' => (string) get_option( 'smartgeogmap_legend_position' ),
-			'iconBase' => 'https://maps.google.com/mapfiles/kml/shapes/',
 			'icons' => $smartgeogmapLegendToggle ? $this->getLegendIcons() : new \stdClass(),
 		];
 
-		$script = "var map;\n";
-		foreach ( $data as $name => $value ) {
-			$script .= sprintf( "var %s = %s;\n", $name, wp_json_encode( $value ) );
-		}
-
-		return $script;
+		return 'window.smartGeoGMap = ' . wp_json_encode( $data ) . ';';
 	}
 
 	/**

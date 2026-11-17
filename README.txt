@@ -73,7 +73,7 @@ Google rejected the API key. Check that the **Maps JavaScript API** is enabled f
 
 = The map shows "Google Key missing" =
 
-Paste your Google API key in the **Welcome** tab and save.
+Paste your Google API key in the **Welcome** tab and save. Only administrators see this message: visitors see nothing until the key is set.
 
 = Which files can I upload? =
 
@@ -105,6 +105,13 @@ All the plugin settings and the uploaded GeoJSON and Snazzy files.
 6. Legend tab: position, icons and labels.
 
 == Changelog ==
+
+= 1.6.5 =
+* Security: every setting is sanitized on save.
+* Lat/Long fields are validated: an invalid value is not saved and an error notice explains why.
+* "Google Key missing" is shown to administrators only.
+* The map script no longer defines global variables that could clash with the theme or other plugins.
+* The plugin can be translated: text domain is now smart-geo-gmap.
 
 = 1.6.4 - 2026-11-17 =
 * Fix: the Snazzy Maps skin is applied to the map again.
@@ -146,6 +153,9 @@ All the plugin settings and the uploaded GeoJSON and Snazzy files.
 * Minor fixes.
 
 == Upgrade Notice ==
+
+= 1.6.5 =
+Hardening release: settings are sanitized and validated, and the map script no longer clashes with other scripts.
 
 = 1.6.4 =
 Bug fix release: the Snazzy Maps skin works again, and the map scripts load only where the map is used.

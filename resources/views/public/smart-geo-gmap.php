@@ -3,7 +3,8 @@
 <?php if( empty( $smartgeogmapGoogleApiKey )): ?>
 
     <div id="smart-geo-gmap-error">
-        <p><?php esc_html_e( 'Google Key missing' ); ?>.</p>
+        <?php // Shown to administrators only, see SmartGeoGMapFrontend::showSmartGEOGoogleMap() ?>
+        <p><?php esc_html_e( 'Google Key missing. Add your Google API key in SmartGeoGMap > Welcome. Only administrators see this message.', 'smart-geo-gmap' ); ?></p>
     </div>
 
 <?php else: ?>
@@ -17,7 +18,7 @@
         <div id="smart-geo-gmap"></div>
         <?php if ($legend['smartgeogmapLegendToggle'] === 'on'): ?>
             <div id="legend">
-                <h3><?php esc_html_e( 'Legend' ); ?></h3>
+                <h3><?php esc_html_e( 'Legend', 'smart-geo-gmap' ); ?></h3>
             </div>
         <?php endif; ?>
     </div>

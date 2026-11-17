@@ -18,10 +18,8 @@ class Field implements iField
     {
 	    add_settings_field(
 		    $id,
-		    sprintf(
-			    esc_html__( '%s' ),
-			    esc_html($label)
-		    ),
+		    // The label is already translated by the caller
+		    esc_html( $label ),
 		    $callback,
 		    $page,
 		    $section,

@@ -1,109 +1,109 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 
-<select id="<?php esc_attr_e($id); ?>" name="<?php esc_attr_e($name); ?>">
-    <option value="" <?php ($target === "") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Choose an image" ); ?></option>
-	<option value="airports" <?php ($target === "airports") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Airports" ); ?></option>
-	<option value="arrow-reverse" <?php ($target === "arrow-reverse") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Arrow-reverse" ); ?></option>
-	<option value="arrow" <?php ($target === "arrow") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Arrow" ); ?></option>
-	<option value="arts" <?php ($target === "arts") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Arts" ); ?></option>
-	<option value="bars" <?php ($target === "bars") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Bars" ); ?></option>
-	<option value="broken_link" <?php ($target === "broken_link") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Broken_link" ); ?></option>
-	<option value="bus" <?php ($target === "bus") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Bus" ); ?></option>
-	<option value="cabs" <?php ($target === "cabs") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Cabs" ); ?></option>
-	<option value="camera" <?php ($target === "camera") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Camera" ); ?></option>
-	<option value="campfire" <?php ($target === "campfire") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Campfire" ); ?></option>
-	<option value="campground" <?php ($target === "campground") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Campground" ); ?></option>
-	<option value="capital_big" <?php ($target === "capital_big") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Capital_big" ); ?></option>
-	<option value="capital_big_highlight" <?php ($target === "capital_big_highlight") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Capital_big_highlight" ); ?></option>
-	<option value="capital_small" <?php ($target === "capital_small") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Capital_small" ); ?></option>
-	<option value="capital_small_highlight" <?php ($target === "capital_small_highlight") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Capital_small_highlight" ); ?></option>
-	<option value="caution" <?php ($target === "caution") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Caution" ); ?></option>
-	<option value="church" <?php ($target === "church") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Church" ); ?></option>
-	<option value="coffee" <?php ($target === "coffee") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Coffee" ); ?></option>
-	<option value="convenience" <?php ($target === "convenience") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Convenience" ); ?></option>
-	<option value="cross-hairs" <?php ($target === "cross-hairs") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Cross-hairs" ); ?></option>
-	<option value="cross-hairs_highlight" <?php ($target === "cross-hairs_highlight") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Cross-hairs_highlight" ); ?></option>
-	<option value="cycling" <?php ($target === "cycling") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Cycling" ); ?></option>
-	<option value="dining" <?php ($target === "dining") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Dining" ); ?></option>
-	<option value="dollar" <?php ($target === "dollar") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Dollar" ); ?></option>
-	<option value="donut" <?php ($target === "donut") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Donut" ); ?></option>
-	<option value="earthquake" <?php ($target === "earthquake") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Earthquake" ); ?></option>
-	<option value="electronics" <?php ($target === "electronics") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Electronics" ); ?></option>
-	<option value="euro" <?php ($target === "euro") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Euro" ); ?></option>
-	<option value="falling_rocks" <?php ($target === "falling_rocks") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Falling_rocks" ); ?></option>
-	<option value="ferry" <?php ($target === "ferry") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Ferry" ); ?></option>
-	<option value="firedept" <?php ($target === "firedept") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Firedept" ); ?></option>
-	<option value="fishing" <?php ($target === "fishing") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Fishing" ); ?></option>
-	<option value="flag" <?php ($target === "flag") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Flag" ); ?></option>
-	<option value="forbidden" <?php ($target === "forbidden") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Forbidden" ); ?></option>
-	<option value="gas_stations" <?php ($target === "gas_stations") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Gas_stations" ); ?></option>
-	<option value="golf" <?php ($target === "golf") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Golf" ); ?></option>
-	<option value="grocery" <?php ($target === "grocery") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Grocery" ); ?></option>
-	<option value="heliport" <?php ($target === "heliport") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Heliport" ); ?></option>
-	<option value="highway" <?php ($target === "highway") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Highway" ); ?></option>
-	<option value="hiker" <?php ($target === "hiker") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Hiker" ); ?></option>
-	<option value="homegardenbusiness" <?php ($target === "homegardenbusiness") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Homegardenbusiness" ); ?></option>
-	<option value="horsebackriding" <?php ($target === "horsebackriding") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Horsebackriding" ); ?></option>
-	<option value="hospitals" <?php ($target === "hospitals") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Hospitals" ); ?></option>
-	<option value="info-i" <?php ($target === "info-i") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Info-i" ); ?></option>
-	<option value="info" <?php ($target === "info") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Info" ); ?></option>
-	<option value="info_circle" <?php ($target === "info_circle") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Info_circle" ); ?></option>
-	<option value="lodging" <?php ($target === "lodging") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Lodging" ); ?></option>
-	<option value="man" <?php ($target === "man") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Man" ); ?></option>
-	<option value="marina" <?php ($target === "marina") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Marina" ); ?></option>
-	<option value="mechanic" <?php ($target === "mechanic") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Mechanic" ); ?></option>
-	<option value="motorcycling" <?php ($target === "motorcycling") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Motorcycling" ); ?></option>
-	<option value="mountains" <?php ($target === "mountains") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Mountains" ); ?></option>
-	<option value="movies" <?php ($target === "movies") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Movies" ); ?></option>
-	<option value="open-diamond" <?php ($target === "open-diamond") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Open-diamond" ); ?></option>
-	<option value="parking_lot" <?php ($target === "parking_lot") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Parking_lot" ); ?></option>
-	<option value="parks" <?php ($target === "parks") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Parks" ); ?></option>
-	<option value="pharmacy_rx" <?php ($target === "pharmacy_rx") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Pharmacy_rx" ); ?></option>
-	<option value="phone" <?php ($target === "phone") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Phone" ); ?></option>
-	<option value="picnic" <?php ($target === "picnic") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Picnic" ); ?></option>
-	<option value="placemark_circle" <?php ($target === "placemark_circle") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Placemark_circle" ); ?></option>
-	<option value="placemark_circle_highlight" <?php ($target === "placemark_circle_highlight") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Placemark_circle_highlight" ); ?></option>
-	<option value="placemark_square" <?php ($target === "placemark_square") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Placemark_square" ); ?></option>
-	<option value="placemark_square_highlight" <?php ($target === "placemark_square_highlight") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Placemark_square_highlight" ); ?></option>
-	<option value="play" <?php ($target === "play") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Play" ); ?></option>
-	<option value="poi" <?php ($target === "poi") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Poi" ); ?></option>
-	<option value="police" <?php ($target === "police") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Police" ); ?></option>
-	<option value="polygon" <?php ($target === "polygon") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Polygon" ); ?></option>
-	<option value="post_office" <?php ($target === "post_office") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Post_office" ); ?></option>
-	<option value="rail" <?php ($target === "rail") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Rail" ); ?></option>
-	<option value="ranger_station" <?php ($target === "ranger_station") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Ranger_station" ); ?></option>
-	<option value="realestate" <?php ($target === "realestate") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Realestate" ); ?></option>
-	<option value="road_shield1" <?php ($target === "road_shield1") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Road_shield1" ); ?></option>
-	<option value="road_shield2" <?php ($target === "road_shield2") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Road_shield2" ); ?></option>
-	<option value="road_shield3" <?php ($target === "road_shield3") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Road_shield3" ); ?></option>
-	<option value="ruler" <?php ($target === "ruler") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Ruler" ); ?></option>
-	<option value="sailing" <?php ($target === "sailing") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Sailing" ); ?></option>
-	<option value="salon" <?php ($target === "salon") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Salon" ); ?></option>
-	<option value="schools" <?php ($target === "schools") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Schools" ); ?></option>
-	<option value="shaded_dot" <?php ($target === "shaded_dot") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Shaded_dot" ); ?></option>
-	<option value="shopping" <?php ($target === "shopping") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Shopping" ); ?></option>
-	<option value="ski" <?php ($target === "ski") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Ski" ); ?></option>
-	<option value="snack_bar" <?php ($target === "snack_bar") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Snack_bar" ); ?></option>
-	<option value="square" <?php ($target === "square") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Square" ); ?></option>
-	<option value="star" <?php ($target === "star") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Star" ); ?></option>
-	<option value="subway" <?php ($target === "subway") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Subway" ); ?></option>
-	<option value="swimming" <?php ($target === "swimming") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Swimming" ); ?></option>
-	<option value="target" <?php ($target === "target") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Target" ); ?></option>
-	<option value="terrain" <?php ($target === "terrain") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Terrain" ); ?></option>
-	<option value="toilets" <?php ($target === "toilets") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Toilets" ); ?></option>
-	<option value="trail" <?php ($target === "trail") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Trail" ); ?></option>
-	<option value="tram" <?php ($target === "tram") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Tram" ); ?></option>
-	<option value="triangle" <?php ($target === "triangle") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Triangle" ); ?></option>
-	<option value="truck" <?php ($target === "truck") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Truck" ); ?></option>
-	<option value="volcano" <?php ($target === "volcano") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Volcano" ); ?></option>
-	<option value="water" <?php ($target === "water") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Water" ); ?></option>
-	<option value="webcam" <?php ($target === "webcam") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Webcam" ); ?></option>
-	<option value="wheel_chair_accessible" <?php ($target === "wheel_chair_accessible") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Wheel_chair_accessible" ); ?></option>
-	<option value="woman" <?php ($target === "woman") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Woman" ); ?></option>
-	<option value="yen" <?php ($target === "yen") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Yen" ); ?></option>
-	<option value="sunny" <?php ($target === "sunny") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Sunny" ); ?></option>
-	<option value="partly_cloudy" <?php ($target === "partly_cloudy") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Partly_cloudy" ); ?></option>
-	<option value="snowflake_simple" <?php ($target === "snowflake_simple") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Snowflake_simple" ); ?></option>
-	<option value="rainy" <?php ($target === "rainy") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Rainy" ); ?></option>
-	<option value="thunderstorm" <?php ($target === "thunderstorm") ? esc_attr_e("selected") : null; ?>><?php esc_html_e( "Thunderstorm" ); ?></option>
+<select id="<?php echo esc_attr( $id ); ?>" name="<?php echo esc_attr( $name ); ?>">
+    <option value="" <?php selected( $target, '' ); ?>><?php esc_html_e( 'Choose an image', 'smart-geo-gmap' ); ?></option>
+	<option value="airports" <?php selected( $target, 'airports' ); ?>><?php esc_html_e( 'Airports', 'smart-geo-gmap' ); ?></option>
+	<option value="arrow-reverse" <?php selected( $target, 'arrow-reverse' ); ?>><?php esc_html_e( 'Arrow-reverse', 'smart-geo-gmap' ); ?></option>
+	<option value="arrow" <?php selected( $target, 'arrow' ); ?>><?php esc_html_e( 'Arrow', 'smart-geo-gmap' ); ?></option>
+	<option value="arts" <?php selected( $target, 'arts' ); ?>><?php esc_html_e( 'Arts', 'smart-geo-gmap' ); ?></option>
+	<option value="bars" <?php selected( $target, 'bars' ); ?>><?php esc_html_e( 'Bars', 'smart-geo-gmap' ); ?></option>
+	<option value="broken_link" <?php selected( $target, 'broken_link' ); ?>><?php esc_html_e( 'Broken_link', 'smart-geo-gmap' ); ?></option>
+	<option value="bus" <?php selected( $target, 'bus' ); ?>><?php esc_html_e( 'Bus', 'smart-geo-gmap' ); ?></option>
+	<option value="cabs" <?php selected( $target, 'cabs' ); ?>><?php esc_html_e( 'Cabs', 'smart-geo-gmap' ); ?></option>
+	<option value="camera" <?php selected( $target, 'camera' ); ?>><?php esc_html_e( 'Camera', 'smart-geo-gmap' ); ?></option>
+	<option value="campfire" <?php selected( $target, 'campfire' ); ?>><?php esc_html_e( 'Campfire', 'smart-geo-gmap' ); ?></option>
+	<option value="campground" <?php selected( $target, 'campground' ); ?>><?php esc_html_e( 'Campground', 'smart-geo-gmap' ); ?></option>
+	<option value="capital_big" <?php selected( $target, 'capital_big' ); ?>><?php esc_html_e( 'Capital_big', 'smart-geo-gmap' ); ?></option>
+	<option value="capital_big_highlight" <?php selected( $target, 'capital_big_highlight' ); ?>><?php esc_html_e( 'Capital_big_highlight', 'smart-geo-gmap' ); ?></option>
+	<option value="capital_small" <?php selected( $target, 'capital_small' ); ?>><?php esc_html_e( 'Capital_small', 'smart-geo-gmap' ); ?></option>
+	<option value="capital_small_highlight" <?php selected( $target, 'capital_small_highlight' ); ?>><?php esc_html_e( 'Capital_small_highlight', 'smart-geo-gmap' ); ?></option>
+	<option value="caution" <?php selected( $target, 'caution' ); ?>><?php esc_html_e( 'Caution', 'smart-geo-gmap' ); ?></option>
+	<option value="church" <?php selected( $target, 'church' ); ?>><?php esc_html_e( 'Church', 'smart-geo-gmap' ); ?></option>
+	<option value="coffee" <?php selected( $target, 'coffee' ); ?>><?php esc_html_e( 'Coffee', 'smart-geo-gmap' ); ?></option>
+	<option value="convenience" <?php selected( $target, 'convenience' ); ?>><?php esc_html_e( 'Convenience', 'smart-geo-gmap' ); ?></option>
+	<option value="cross-hairs" <?php selected( $target, 'cross-hairs' ); ?>><?php esc_html_e( 'Cross-hairs', 'smart-geo-gmap' ); ?></option>
+	<option value="cross-hairs_highlight" <?php selected( $target, 'cross-hairs_highlight' ); ?>><?php esc_html_e( 'Cross-hairs_highlight', 'smart-geo-gmap' ); ?></option>
+	<option value="cycling" <?php selected( $target, 'cycling' ); ?>><?php esc_html_e( 'Cycling', 'smart-geo-gmap' ); ?></option>
+	<option value="dining" <?php selected( $target, 'dining' ); ?>><?php esc_html_e( 'Dining', 'smart-geo-gmap' ); ?></option>
+	<option value="dollar" <?php selected( $target, 'dollar' ); ?>><?php esc_html_e( 'Dollar', 'smart-geo-gmap' ); ?></option>
+	<option value="donut" <?php selected( $target, 'donut' ); ?>><?php esc_html_e( 'Donut', 'smart-geo-gmap' ); ?></option>
+	<option value="earthquake" <?php selected( $target, 'earthquake' ); ?>><?php esc_html_e( 'Earthquake', 'smart-geo-gmap' ); ?></option>
+	<option value="electronics" <?php selected( $target, 'electronics' ); ?>><?php esc_html_e( 'Electronics', 'smart-geo-gmap' ); ?></option>
+	<option value="euro" <?php selected( $target, 'euro' ); ?>><?php esc_html_e( 'Euro', 'smart-geo-gmap' ); ?></option>
+	<option value="falling_rocks" <?php selected( $target, 'falling_rocks' ); ?>><?php esc_html_e( 'Falling_rocks', 'smart-geo-gmap' ); ?></option>
+	<option value="ferry" <?php selected( $target, 'ferry' ); ?>><?php esc_html_e( 'Ferry', 'smart-geo-gmap' ); ?></option>
+	<option value="firedept" <?php selected( $target, 'firedept' ); ?>><?php esc_html_e( 'Firedept', 'smart-geo-gmap' ); ?></option>
+	<option value="fishing" <?php selected( $target, 'fishing' ); ?>><?php esc_html_e( 'Fishing', 'smart-geo-gmap' ); ?></option>
+	<option value="flag" <?php selected( $target, 'flag' ); ?>><?php esc_html_e( 'Flag', 'smart-geo-gmap' ); ?></option>
+	<option value="forbidden" <?php selected( $target, 'forbidden' ); ?>><?php esc_html_e( 'Forbidden', 'smart-geo-gmap' ); ?></option>
+	<option value="gas_stations" <?php selected( $target, 'gas_stations' ); ?>><?php esc_html_e( 'Gas_stations', 'smart-geo-gmap' ); ?></option>
+	<option value="golf" <?php selected( $target, 'golf' ); ?>><?php esc_html_e( 'Golf', 'smart-geo-gmap' ); ?></option>
+	<option value="grocery" <?php selected( $target, 'grocery' ); ?>><?php esc_html_e( 'Grocery', 'smart-geo-gmap' ); ?></option>
+	<option value="heliport" <?php selected( $target, 'heliport' ); ?>><?php esc_html_e( 'Heliport', 'smart-geo-gmap' ); ?></option>
+	<option value="highway" <?php selected( $target, 'highway' ); ?>><?php esc_html_e( 'Highway', 'smart-geo-gmap' ); ?></option>
+	<option value="hiker" <?php selected( $target, 'hiker' ); ?>><?php esc_html_e( 'Hiker', 'smart-geo-gmap' ); ?></option>
+	<option value="homegardenbusiness" <?php selected( $target, 'homegardenbusiness' ); ?>><?php esc_html_e( 'Homegardenbusiness', 'smart-geo-gmap' ); ?></option>
+	<option value="horsebackriding" <?php selected( $target, 'horsebackriding' ); ?>><?php esc_html_e( 'Horsebackriding', 'smart-geo-gmap' ); ?></option>
+	<option value="hospitals" <?php selected( $target, 'hospitals' ); ?>><?php esc_html_e( 'Hospitals', 'smart-geo-gmap' ); ?></option>
+	<option value="info-i" <?php selected( $target, 'info-i' ); ?>><?php esc_html_e( 'Info-i', 'smart-geo-gmap' ); ?></option>
+	<option value="info" <?php selected( $target, 'info' ); ?>><?php esc_html_e( 'Info', 'smart-geo-gmap' ); ?></option>
+	<option value="info_circle" <?php selected( $target, 'info_circle' ); ?>><?php esc_html_e( 'Info_circle', 'smart-geo-gmap' ); ?></option>
+	<option value="lodging" <?php selected( $target, 'lodging' ); ?>><?php esc_html_e( 'Lodging', 'smart-geo-gmap' ); ?></option>
+	<option value="man" <?php selected( $target, 'man' ); ?>><?php esc_html_e( 'Man', 'smart-geo-gmap' ); ?></option>
+	<option value="marina" <?php selected( $target, 'marina' ); ?>><?php esc_html_e( 'Marina', 'smart-geo-gmap' ); ?></option>
+	<option value="mechanic" <?php selected( $target, 'mechanic' ); ?>><?php esc_html_e( 'Mechanic', 'smart-geo-gmap' ); ?></option>
+	<option value="motorcycling" <?php selected( $target, 'motorcycling' ); ?>><?php esc_html_e( 'Motorcycling', 'smart-geo-gmap' ); ?></option>
+	<option value="mountains" <?php selected( $target, 'mountains' ); ?>><?php esc_html_e( 'Mountains', 'smart-geo-gmap' ); ?></option>
+	<option value="movies" <?php selected( $target, 'movies' ); ?>><?php esc_html_e( 'Movies', 'smart-geo-gmap' ); ?></option>
+	<option value="open-diamond" <?php selected( $target, 'open-diamond' ); ?>><?php esc_html_e( 'Open-diamond', 'smart-geo-gmap' ); ?></option>
+	<option value="parking_lot" <?php selected( $target, 'parking_lot' ); ?>><?php esc_html_e( 'Parking_lot', 'smart-geo-gmap' ); ?></option>
+	<option value="parks" <?php selected( $target, 'parks' ); ?>><?php esc_html_e( 'Parks', 'smart-geo-gmap' ); ?></option>
+	<option value="pharmacy_rx" <?php selected( $target, 'pharmacy_rx' ); ?>><?php esc_html_e( 'Pharmacy_rx', 'smart-geo-gmap' ); ?></option>
+	<option value="phone" <?php selected( $target, 'phone' ); ?>><?php esc_html_e( 'Phone', 'smart-geo-gmap' ); ?></option>
+	<option value="picnic" <?php selected( $target, 'picnic' ); ?>><?php esc_html_e( 'Picnic', 'smart-geo-gmap' ); ?></option>
+	<option value="placemark_circle" <?php selected( $target, 'placemark_circle' ); ?>><?php esc_html_e( 'Placemark_circle', 'smart-geo-gmap' ); ?></option>
+	<option value="placemark_circle_highlight" <?php selected( $target, 'placemark_circle_highlight' ); ?>><?php esc_html_e( 'Placemark_circle_highlight', 'smart-geo-gmap' ); ?></option>
+	<option value="placemark_square" <?php selected( $target, 'placemark_square' ); ?>><?php esc_html_e( 'Placemark_square', 'smart-geo-gmap' ); ?></option>
+	<option value="placemark_square_highlight" <?php selected( $target, 'placemark_square_highlight' ); ?>><?php esc_html_e( 'Placemark_square_highlight', 'smart-geo-gmap' ); ?></option>
+	<option value="play" <?php selected( $target, 'play' ); ?>><?php esc_html_e( 'Play', 'smart-geo-gmap' ); ?></option>
+	<option value="poi" <?php selected( $target, 'poi' ); ?>><?php esc_html_e( 'Poi', 'smart-geo-gmap' ); ?></option>
+	<option value="police" <?php selected( $target, 'police' ); ?>><?php esc_html_e( 'Police', 'smart-geo-gmap' ); ?></option>
+	<option value="polygon" <?php selected( $target, 'polygon' ); ?>><?php esc_html_e( 'Polygon', 'smart-geo-gmap' ); ?></option>
+	<option value="post_office" <?php selected( $target, 'post_office' ); ?>><?php esc_html_e( 'Post_office', 'smart-geo-gmap' ); ?></option>
+	<option value="rail" <?php selected( $target, 'rail' ); ?>><?php esc_html_e( 'Rail', 'smart-geo-gmap' ); ?></option>
+	<option value="ranger_station" <?php selected( $target, 'ranger_station' ); ?>><?php esc_html_e( 'Ranger_station', 'smart-geo-gmap' ); ?></option>
+	<option value="realestate" <?php selected( $target, 'realestate' ); ?>><?php esc_html_e( 'Realestate', 'smart-geo-gmap' ); ?></option>
+	<option value="road_shield1" <?php selected( $target, 'road_shield1' ); ?>><?php esc_html_e( 'Road_shield1', 'smart-geo-gmap' ); ?></option>
+	<option value="road_shield2" <?php selected( $target, 'road_shield2' ); ?>><?php esc_html_e( 'Road_shield2', 'smart-geo-gmap' ); ?></option>
+	<option value="road_shield3" <?php selected( $target, 'road_shield3' ); ?>><?php esc_html_e( 'Road_shield3', 'smart-geo-gmap' ); ?></option>
+	<option value="ruler" <?php selected( $target, 'ruler' ); ?>><?php esc_html_e( 'Ruler', 'smart-geo-gmap' ); ?></option>
+	<option value="sailing" <?php selected( $target, 'sailing' ); ?>><?php esc_html_e( 'Sailing', 'smart-geo-gmap' ); ?></option>
+	<option value="salon" <?php selected( $target, 'salon' ); ?>><?php esc_html_e( 'Salon', 'smart-geo-gmap' ); ?></option>
+	<option value="schools" <?php selected( $target, 'schools' ); ?>><?php esc_html_e( 'Schools', 'smart-geo-gmap' ); ?></option>
+	<option value="shaded_dot" <?php selected( $target, 'shaded_dot' ); ?>><?php esc_html_e( 'Shaded_dot', 'smart-geo-gmap' ); ?></option>
+	<option value="shopping" <?php selected( $target, 'shopping' ); ?>><?php esc_html_e( 'Shopping', 'smart-geo-gmap' ); ?></option>
+	<option value="ski" <?php selected( $target, 'ski' ); ?>><?php esc_html_e( 'Ski', 'smart-geo-gmap' ); ?></option>
+	<option value="snack_bar" <?php selected( $target, 'snack_bar' ); ?>><?php esc_html_e( 'Snack_bar', 'smart-geo-gmap' ); ?></option>
+	<option value="square" <?php selected( $target, 'square' ); ?>><?php esc_html_e( 'Square', 'smart-geo-gmap' ); ?></option>
+	<option value="star" <?php selected( $target, 'star' ); ?>><?php esc_html_e( 'Star', 'smart-geo-gmap' ); ?></option>
+	<option value="subway" <?php selected( $target, 'subway' ); ?>><?php esc_html_e( 'Subway', 'smart-geo-gmap' ); ?></option>
+	<option value="swimming" <?php selected( $target, 'swimming' ); ?>><?php esc_html_e( 'Swimming', 'smart-geo-gmap' ); ?></option>
+	<option value="target" <?php selected( $target, 'target' ); ?>><?php esc_html_e( 'Target', 'smart-geo-gmap' ); ?></option>
+	<option value="terrain" <?php selected( $target, 'terrain' ); ?>><?php esc_html_e( 'Terrain', 'smart-geo-gmap' ); ?></option>
+	<option value="toilets" <?php selected( $target, 'toilets' ); ?>><?php esc_html_e( 'Toilets', 'smart-geo-gmap' ); ?></option>
+	<option value="trail" <?php selected( $target, 'trail' ); ?>><?php esc_html_e( 'Trail', 'smart-geo-gmap' ); ?></option>
+	<option value="tram" <?php selected( $target, 'tram' ); ?>><?php esc_html_e( 'Tram', 'smart-geo-gmap' ); ?></option>
+	<option value="triangle" <?php selected( $target, 'triangle' ); ?>><?php esc_html_e( 'Triangle', 'smart-geo-gmap' ); ?></option>
+	<option value="truck" <?php selected( $target, 'truck' ); ?>><?php esc_html_e( 'Truck', 'smart-geo-gmap' ); ?></option>
+	<option value="volcano" <?php selected( $target, 'volcano' ); ?>><?php esc_html_e( 'Volcano', 'smart-geo-gmap' ); ?></option>
+	<option value="water" <?php selected( $target, 'water' ); ?>><?php esc_html_e( 'Water', 'smart-geo-gmap' ); ?></option>
+	<option value="webcam" <?php selected( $target, 'webcam' ); ?>><?php esc_html_e( 'Webcam', 'smart-geo-gmap' ); ?></option>
+	<option value="wheel_chair_accessible" <?php selected( $target, 'wheel_chair_accessible' ); ?>><?php esc_html_e( 'Wheel_chair_accessible', 'smart-geo-gmap' ); ?></option>
+	<option value="woman" <?php selected( $target, 'woman' ); ?>><?php esc_html_e( 'Woman', 'smart-geo-gmap' ); ?></option>
+	<option value="yen" <?php selected( $target, 'yen' ); ?>><?php esc_html_e( 'Yen', 'smart-geo-gmap' ); ?></option>
+	<option value="sunny" <?php selected( $target, 'sunny' ); ?>><?php esc_html_e( 'Sunny', 'smart-geo-gmap' ); ?></option>
+	<option value="partly_cloudy" <?php selected( $target, 'partly_cloudy' ); ?>><?php esc_html_e( 'Partly_cloudy', 'smart-geo-gmap' ); ?></option>
+	<option value="snowflake_simple" <?php selected( $target, 'snowflake_simple' ); ?>><?php esc_html_e( 'Snowflake_simple', 'smart-geo-gmap' ); ?></option>
+	<option value="rainy" <?php selected( $target, 'rainy' ); ?>><?php esc_html_e( 'Rainy', 'smart-geo-gmap' ); ?></option>
+	<option value="thunderstorm" <?php selected( $target, 'thunderstorm' ); ?>><?php esc_html_e( 'Thunderstorm', 'smart-geo-gmap' ); ?></option>
 </select>

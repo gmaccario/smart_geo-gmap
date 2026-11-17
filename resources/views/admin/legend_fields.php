@@ -1,24 +1,24 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 
 <?php if ( isset ( $smartgeogmapLegendToggle ) ): ?>
-    <input type="checkbox" id="smartgeogmap_legend_toggle" name="smartgeogmap_legend_toggle" <?php ($smartgeogmapLegendToggle) ? esc_html_e('checked') : null; ?> />
+    <input type="checkbox" id="smartgeogmap_legend_toggle" name="smartgeogmap_legend_toggle" <?php checked( (bool) $smartgeogmapLegendToggle ); ?> />
 <?php endif; ?>
 
 <?php if ( isset ( $smartgeogmapLegendPosition ) ): ?>
     <select id="smartgeogmap_legend_position" name="smartgeogmap_legend_position">
-        <option value="" <?php ($smartgeogmapLegendPosition === "") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Choose a position' ); ?></option>
-        <option value="TOP_CENTER" <?php ($smartgeogmapLegendPosition === "TOP_CENTER") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Top Center' ); ?></option>
-        <option value="TOP_LEFT" <?php ($smartgeogmapLegendPosition === "TOP_LEFT") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Top Left' ); ?></option>
-        <option value="TOP_RIGHT" <?php ($smartgeogmapLegendPosition === "TOP_RIGHT") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Top Right' ); ?></option>
-        <option value="LEFT_TOP" <?php ($smartgeogmapLegendPosition === "LEFT_TOP") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Left Top' ); ?></option>
-        <option value="RIGHT_TOP" <?php ($smartgeogmapLegendPosition === "RIGHT_TOP") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Right Top' ); ?></option>
-        <option value="LEFT_CENTER" <?php ($smartgeogmapLegendPosition === "LEFT_CENTER") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Left Center' ); ?></option>
-        <option value="RIGHT_CENTER" <?php ($smartgeogmapLegendPosition === "RIGHT_CENTER") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Right Center' ); ?></option>
-        <option value="LEFT_BOTTOM" <?php ($smartgeogmapLegendPosition === "LEFT_BOTTOM") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Left Bottom' ); ?></option>
-        <option value="RIGHT_BOTTOM" <?php ($smartgeogmapLegendPosition === "RIGHT_BOTTOM") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Right Bottom' ); ?></option>
-        <option value="BOTTOM_CENTER" <?php ($smartgeogmapLegendPosition === "BOTTOM_CENTER") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Bottom Center' ); ?></option>
-        <option value="BOTTOM_LEFT" <?php ($smartgeogmapLegendPosition === "BOTTOM_LEFT") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Bottom Left' ); ?></option>
-        <option value="BOTTOM_RIGHT" <?php ($smartgeogmapLegendPosition === "BOTTOM_RIGHT") ? esc_attr_e('selected') : esc_attr_e(''); ?>><?php esc_html_e( 'Bottom Right' ); ?></option>
+        <option value="" <?php selected( $smartgeogmapLegendPosition, '' ); ?>><?php esc_html_e( 'Choose a position', 'smart-geo-gmap' ); ?></option>
+        <option value="TOP_CENTER" <?php selected( $smartgeogmapLegendPosition, 'TOP_CENTER' ); ?>><?php esc_html_e( 'Top Center', 'smart-geo-gmap' ); ?></option>
+        <option value="TOP_LEFT" <?php selected( $smartgeogmapLegendPosition, 'TOP_LEFT' ); ?>><?php esc_html_e( 'Top Left', 'smart-geo-gmap' ); ?></option>
+        <option value="TOP_RIGHT" <?php selected( $smartgeogmapLegendPosition, 'TOP_RIGHT' ); ?>><?php esc_html_e( 'Top Right', 'smart-geo-gmap' ); ?></option>
+        <option value="LEFT_TOP" <?php selected( $smartgeogmapLegendPosition, 'LEFT_TOP' ); ?>><?php esc_html_e( 'Left Top', 'smart-geo-gmap' ); ?></option>
+        <option value="RIGHT_TOP" <?php selected( $smartgeogmapLegendPosition, 'RIGHT_TOP' ); ?>><?php esc_html_e( 'Right Top', 'smart-geo-gmap' ); ?></option>
+        <option value="LEFT_CENTER" <?php selected( $smartgeogmapLegendPosition, 'LEFT_CENTER' ); ?>><?php esc_html_e( 'Left Center', 'smart-geo-gmap' ); ?></option>
+        <option value="RIGHT_CENTER" <?php selected( $smartgeogmapLegendPosition, 'RIGHT_CENTER' ); ?>><?php esc_html_e( 'Right Center', 'smart-geo-gmap' ); ?></option>
+        <option value="LEFT_BOTTOM" <?php selected( $smartgeogmapLegendPosition, 'LEFT_BOTTOM' ); ?>><?php esc_html_e( 'Left Bottom', 'smart-geo-gmap' ); ?></option>
+        <option value="RIGHT_BOTTOM" <?php selected( $smartgeogmapLegendPosition, 'RIGHT_BOTTOM' ); ?>><?php esc_html_e( 'Right Bottom', 'smart-geo-gmap' ); ?></option>
+        <option value="BOTTOM_CENTER" <?php selected( $smartgeogmapLegendPosition, 'BOTTOM_CENTER' ); ?>><?php esc_html_e( 'Bottom Center', 'smart-geo-gmap' ); ?></option>
+        <option value="BOTTOM_LEFT" <?php selected( $smartgeogmapLegendPosition, 'BOTTOM_LEFT' ); ?>><?php esc_html_e( 'Bottom Left', 'smart-geo-gmap' ); ?></option>
+        <option value="BOTTOM_RIGHT" <?php selected( $smartgeogmapLegendPosition, 'BOTTOM_RIGHT' ); ?>><?php esc_html_e( 'Bottom Right', 'smart-geo-gmap' ); ?></option>
     </select>
 <?php endif; ?>
 
@@ -31,7 +31,7 @@
         include( 'include' . DIRECTORY_SEPARATOR . 'select-images-legend.php' );
     ?>
 <?php elseif ( isset ( $smartgeogmapLegendLabel1 ) ): ?>
-	<input type="text" id="smartgeogmap_legend_label_1" name="smartgeogmap_legend_label_1" value="<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e($smartgeogmapLegendLabel1); ?>" />
+	<input type="text" id="smartgeogmap_legend_label_1" name="smartgeogmap_legend_label_1" value="<?php echo esc_attr( $smartgeogmapLegendLabel1 ); ?>" />
 <?php endif; ?>
 
 <?php if ( isset ( $smartgeogmapLegendImage2 ) ): ?>
@@ -43,7 +43,7 @@
 	include( 'include' . DIRECTORY_SEPARATOR . 'select-images-legend.php' );
 	?>
 <?php elseif ( isset ( $smartgeogmapLegendLabel2 ) ): ?>
-    <input type="text" id="smartgeogmap_legend_label_2" name="smartgeogmap_legend_label_2" value="<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e($smartgeogmapLegendLabel2); ?>" />
+    <input type="text" id="smartgeogmap_legend_label_2" name="smartgeogmap_legend_label_2" value="<?php echo esc_attr( $smartgeogmapLegendLabel2 ); ?>" />
 <?php endif; ?>
 
 <?php if ( isset ( $smartgeogmapLegendImage3 ) ): ?>
@@ -55,5 +55,5 @@
 	include( 'include' . DIRECTORY_SEPARATOR . 'select-images-legend.php' );
 	?>
 <?php elseif ( isset ( $smartgeogmapLegendLabel3 ) ): ?>
-    <input type="text" id="smartgeogmap_legend_label_3" name="smartgeogmap_legend_label_3" value="<?php \SmartGeoGMap\Helpers\Intl::esc_attr_e($smartgeogmapLegendLabel3); ?>" />
+    <input type="text" id="smartgeogmap_legend_label_3" name="smartgeogmap_legend_label_3" value="<?php echo esc_attr( $smartgeogmapLegendLabel3 ); ?>" />
 <?php endif; ?>

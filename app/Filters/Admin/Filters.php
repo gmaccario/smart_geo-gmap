@@ -25,7 +25,7 @@ class Filters {
 		$url = get_admin_url() . "admin.php?page=" . Constants::SMARTGEOGMAP_MENU_SLUG;
 		// target="_blank"
 
-		$settings_link = sprintf( '<a href="%s">%s</a>', $url, __( 'Settings' ) );
+		$settings_link = sprintf( '<a href="%s">%s</a>', $url, __( 'Settings', 'smart-geo-gmap' ) );
 
 		$links[] = $settings_link;
 

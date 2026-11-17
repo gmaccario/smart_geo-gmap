@@ -3,10 +3,10 @@
 Plugin Name: Smart Geo GMap
 Plugin URI: https://www.giuseppemaccario.com/wordpress-map-plugin-smart-geo-gmap/
 Description: Embed Google Map in your WordPress website using GeoJSON for encoding geographic data structures.
-Text Domain: smartgeogmap
+Text Domain: smart-geo-gmap
 Author: Giuseppe Maccario
 Author URI: https://www.giuseppemaccario.com
-Version: 1.6.4
+Version: 1.6.5
 Requires at least: 6.0
 Requires PHP: 8.0
 License: GPLv2 or later

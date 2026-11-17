@@ -17,11 +17,11 @@ class Actions
 	public function smartgeogmap_register_public_script(): void {
 		$smartgeogmapGoogleApiKey = get_option( 'smartgeogmap_google_api_key' );
 
-		// Load in the footer, after the map container and smartgeogmap_custom_js (which defines initMap)
+		// Load in the footer, after the map container and smartgeogmap_custom_js (which defines smartGeoGMapInit)
 		wp_register_script(
 			'smartgeogmap_maps_googleapis_com',
 			sprintf(
-				'https://maps.googleapis.com/maps/api/js?key=%s&loading=async&callback=initMap',
+				'https://maps.googleapis.com/maps/api/js?key=%s&loading=async&callback=smartGeoGMapInit',
 				rawurlencode( (string) $smartgeogmapGoogleApiKey )
 			),
 			[ 'smartgeogmap_custom_js' ],
@@ -33,7 +33,7 @@ class Actions
 			'smartgeogmap_custom_js',
 			plugins_url( SMARTGEOGMAP_SLUG . '/resources/views/public/assets/js/smartgeogmap_custom.js' ),
 			[],
-			'1.0.2',
+			'1.0.3',
 			true
 		);
 

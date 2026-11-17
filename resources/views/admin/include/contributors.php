@@ -2,9 +2,9 @@
 
 <div class="contributors">
     <p>
-        <span><?php esc_html_e( 'Creator' ); ?></span>:
+        <span><?php esc_html_e( 'Creator', 'smart-geo-gmap' ); ?></span>:
         <a href="https://www.giuseppemaccario.com" target="_blank">
-            <span><?php esc_html_e( 'gmaccario' ); ?></span>
+            <span><?php echo 'gmaccario'; ?></span>
         </a>
     </p>
 </div>

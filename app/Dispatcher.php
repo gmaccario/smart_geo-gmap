@@ -7,6 +7,7 @@ use SmartGeoGMap\Helpers\Field;
 use SmartGeoGMap\Helpers\AdminSettings;
 use SmartGeoGMap\Helpers\Logger;
 use SmartGeoGMap\Helpers\MapFiles;
+use SmartGeoGMap\Helpers\SettingsSanitizer;
 use SmartGeoGMap\Helpers\SmartGeoGMapFrontend;
 use SmartGeoGMap\Filters\Admin\Filters as AdminFilters;
 use SmartGeoGMap\Actions\Admin\Actions as AdminActions;
@@ -43,7 +44,7 @@ class Dispatcher implements iDispatcher
             $logInstance = $logger->getInstance();
 
 			new AdminFilters();
-			new AdminActions( new Field(), new AdminSettings(), new MapFiles( $logInstance ) );
+			new AdminActions( new Field(), new AdminSettings(), new MapFiles( $logInstance ), new SettingsSanitizer() );
 		} elseif ( is_admin() && ( defined( 'DOING_AJAX' ) || DOING_AJAX ) ) {
 			new AjaxActions();
 		} else {
