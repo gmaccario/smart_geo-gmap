@@ -20,6 +20,10 @@ The same entries, in WordPress.org format, are in the `== Changelog ==` section 
 - The map settings are a single `window.smartGeoGMap` object instead of 17 global variables, and the map script is scoped, so it can't clash with the theme or other plugins. The Google Maps callback is now `smartGeoGMapInit` (was `initMap`).
 - Text domain is `smart-geo-gmap` (the plugin slug), so the plugin can be translated on translate.wordpress.org. Admin labels, tab names and messages are now translatable.
 
+### Fixed
+
+- `MapFiles` no longer throws a TypeError when it is created without a logger, as its constructor allows.
+
 ### Removed
 
 - The `Intl` helper, which prevented strings from being translated.

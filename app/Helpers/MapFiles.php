@@ -7,7 +7,8 @@ class MapFiles {
 	private string $smartGeoGMapDataPath = '';
 	private string $smartGeoGMapSnazzyPath = '';
 
-	private Logger $logger;
+	// Optional: without a logger, nothing is logged
+	private ?Logger $logger;
 
 	public function __construct( ?Logger $logger = null ) {
 		$this->logger = $logger;
@@ -29,9 +30,9 @@ class MapFiles {
 		// Deleting files
 		if ( ! empty( $_POST['smartgeogmap_delete_snazzy_file'] ) ) {
 			if ( ! $this->deleteFile( $smartgeogmapSnazzyFile ) ) {
-                $this->logger->error('Deleting Snazzy file failed!', [ 'smartgeogmapSnazzyFile' => $smartgeogmapSnazzyFile ] );
+                $this->logger?->error('Deleting Snazzy file failed!', [ 'smartgeogmapSnazzyFile' => $smartgeogmapSnazzyFile ] );
 			} else {
-                $this->logger->info('Deleting Snazzy file', [ 'smartgeogmapSnazzyFile' => $smartgeogmapSnazzyFile ] );
+                $this->logger?->info('Deleting Snazzy file', [ 'smartgeogmapSnazzyFile' => $smartgeogmapSnazzyFile ] );
 			}
 
             return '';
@@ -48,7 +49,7 @@ class MapFiles {
 			// Upload files
 			$tmpFilePath = $filesData['tmp_name'];
 
-            $this->logger->info('Uploading snazzy file',
+            $this->logger?->info('Uploading snazzy file',
                 [
                     'smartgeogmapSnazzyFile' => $smartgeogmapSnazzyFile,
                     'filesData->name' => $filesData['name'],
@@ -77,7 +78,7 @@ class MapFiles {
 
 		$smartgeogmapGeoJSONFiles = get_option( 'smartgeogmap_geojson_files' );
 
-        $this->logger->info(  'smartGeoGMapManageGeoJSONFiles starting...', [ 'smartgeogmapGeoJSONFiles' => $smartgeogmapGeoJSONFiles ] );
+        $this->logger?->info(  'smartGeoGMapManageGeoJSONFiles starting...', [ 'smartgeogmapGeoJSONFiles' => $smartgeogmapGeoJSONFiles ] );
 
 		// Deleting files
 		if ( ! empty( $_POST['smartgeogmap_delete_geojson_file'] ) ) {
@@ -215,17 +216,17 @@ class MapFiles {
 	 * @return bool
 	 */
 	private function deleteFile( string $path = '' ): bool {
-        $this->logger->info('Check if file path exist before deleting it', [ 'file_exists' => file_exists( $path ) ] );
+        $this->logger?->info('Check if file path exist before deleting it', [ 'file_exists' => file_exists( $path ) ] );
 
 		if ( file_exists( $path ) ) {
-            $this->logger->info('Files exists!');
+            $this->logger?->info('Files exists!');
 
 			unlink( $path );
 
 			return true;
 		}
 
-        $this->logger->info('Files does not exists!');
+        $this->logger?->info('Files does not exists!');
 
         return false;
 	}
@@ -255,30 +256,30 @@ class MapFiles {
 
 			$singleSmartGeoGMapGeoJSONFileToDelete = $this->getSanitizedFilePath( $geoJSONFileName, $this->smartGeoGMapDataPath );
 
-            $this->logger->info('Deleting GeoJSON file', [ 'geoJSONFileName' => $geoJSONFileName, 'singleSmartGeoGMapGeoJSONFileToDelete' => $singleSmartGeoGMapGeoJSONFileToDelete ] );
+            $this->logger?->info('Deleting GeoJSON file', [ 'geoJSONFileName' => $geoJSONFileName, 'singleSmartGeoGMapGeoJSONFileToDelete' => $singleSmartGeoGMapGeoJSONFileToDelete ] );
 
 			if ( ! $this->deleteFile( $singleSmartGeoGMapGeoJSONFileToDelete ) ) {
-                $this->logger->error('Deleting GeoJSON file failed!', [ 'singleSmartGeoGMapGeoJSONFileToDelete' => $singleSmartGeoGMapGeoJSONFileToDelete ] );
+                $this->logger?->error('Deleting GeoJSON file failed!', [ 'singleSmartGeoGMapGeoJSONFileToDelete' => $singleSmartGeoGMapGeoJSONFileToDelete ] );
 			} else {
 				if ( empty ( $files ) ) {
 					$files = json_decode( $smartgeogmapGeoJSONFiles, true );
 				}
 
-                $this->logger->info('File deleted on filesystem!', [ 'singleSmartGeoGMapGeoJSONFileToDelete' => $singleSmartGeoGMapGeoJSONFileToDelete, 'files' => $files ] );
+                $this->logger?->info('File deleted on filesystem!', [ 'singleSmartGeoGMapGeoJSONFileToDelete' => $singleSmartGeoGMapGeoJSONFileToDelete, 'files' => $files ] );
 
 				$indexToDelete = array_search( $singleSmartGeoGMapGeoJSONFileToDelete, $files );
 
-                $this->logger->info( 'Index to delete', [ 'indexToDelete' => $indexToDelete ] );
+                $this->logger?->info( 'Index to delete', [ 'indexToDelete' => $indexToDelete ] );
 
 				unset( $files[ $indexToDelete ] );
 
-				$this->logger->info( 'After index deletion', [ 'files' => $files ] );
+				$this->logger?->info( 'After index deletion', [ 'files' => $files ] );
 			}
 
-            $this->logger->info( 'End another loop - Files are: ', [ 'files' => $files ] );
+            $this->logger?->info( 'End another loop - Files are: ', [ 'files' => $files ] );
 		}
 
-        $this->logger->info( 'Final return ', [ 'files' => $files ] );
+        $this->logger?->info( 'Final return ', [ 'files' => $files ] );
 
 		return ( empty( $files ) ? '' : json_encode( array_unique( $files ) ) );
 }
@@ -296,7 +297,7 @@ class MapFiles {
 
 				$tmpFilePath = $filesData['tmp_name'][ $index ];
 
-                $this->logger->info('Uploading GeoJSON file', [ 'name' => $name ] );
+                $this->logger?->info('Uploading GeoJSON file', [ 'name' => $name ] );
 
 				// An empty string means the upload was rejected: don't add it to the list
 				$uploadedFile = $this->smartGeoGMapUploadMapFiles( '',
@@ -319,10 +320,10 @@ class MapFiles {
 		// Remove files in excess including only the first 3 files in $files (the previous ones will be replaced with the new files)
 		$totFilesExisting = count( $files );
 
-        $this->logger->info('How many files already exist?', [ 'totFilesExisting' => $totFilesExisting ] );
+        $this->logger?->info('How many files already exist?', [ 'totFilesExisting' => $totFilesExisting ] );
 
 		if ( $totFilesExisting > Constants::SMARTGEOGMAP_MAX_GEOJSON_ALLOWED ) {
-            $this->logger->info('Files  before', [ 'files' => $files ] );
+            $this->logger?->info('Files  before', [ 'files' => $files ] );
 
 			// Remove surplus files on filesystem
 			foreach( $files as $index => $file ) {
@@ -337,7 +338,7 @@ class MapFiles {
 				Constants::SMARTGEOGMAP_MAX_GEOJSON_ALLOWED
 			);
 
-            $this->logger->info('Files  after', [ 'files' => $files ] );
+            $this->logger?->info('Files  after', [ 'files' => $files ] );
 		}
 
 		return json_encode( $files );
