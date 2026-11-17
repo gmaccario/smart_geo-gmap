@@ -10,23 +10,31 @@ class Actions
 
     public function __construct()
     {
+	    // Scripts are only registered here: the shortcode enqueues them (see SmartGeoGMapFrontend)
 	    add_action( 'init', [ $this, 'smartgeogmap_register_public_script' ] );
-	    add_action( 'wp_footer', [ $this, 'smartgeogmap_public_enqueue_scripts' ] );
     }
 
 	public function smartgeogmap_register_public_script(): void {
 		$smartgeogmapGoogleApiKey = get_option( 'smartgeogmap_google_api_key' );
 
+		// Load in the footer, after the map container and smartgeogmap_custom_js (which defines initMap)
 		wp_register_script(
 			'smartgeogmap_maps_googleapis_com',
-			   sprintf('https://maps.googleapis.com/maps/api/js?key=%s&amp;callback=initMap', $smartgeogmapGoogleApiKey),
+			sprintf(
+				'https://maps.googleapis.com/maps/api/js?key=%s&loading=async&callback=initMap',
+				rawurlencode( (string) $smartgeogmapGoogleApiKey )
+			),
+			[ 'smartgeogmap_custom_js' ],
+			null,
+			true
 		);
 
 		wp_register_script(
 			'smartgeogmap_custom_js',
 			plugins_url( SMARTGEOGMAP_SLUG . '/resources/views/public/assets/js/smartgeogmap_custom.js' ),
 			[],
-			'1.0.1',
+			'1.0.2',
+			true
 		);
 
 		wp_register_style(
@@ -36,14 +44,5 @@ class Actions
 			'1.0.1',
 			'all'
 		);
-	}
-
-	public function smartgeogmap_public_enqueue_scripts(): void {
-
-		wp_enqueue_script( 'smartgeogmap_custom_js' );
-
-		wp_enqueue_script( 'smartgeogmap_maps_googleapis_com' );
-
-		wp_enqueue_style( 'smartgeogmap_custom_css' );
 	}
 }

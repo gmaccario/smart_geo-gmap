@@ -1,12 +1,12 @@
 <?php
 
-require_once( 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php' );
-
 use SmartGeoGMap\Helpers\Constants;
 
 if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
     return;
 }
+
+require_once( __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php' );
 
 // General
 delete_option('smartgeogmap_backward_compatibility');
@@ -53,8 +53,17 @@ $uploadBaseDir = isset( wp_upload_dir()['basedir'] )
 $smartGeoGMapDataPath = $uploadBaseDir . DIRECTORY_SEPARATOR . Constants::SMARTGEOGMAP_DATA_FOLDER . DIRECTORY_SEPARATOR;
 $smartGeoGMapSnazzyPath = $uploadBaseDir . DIRECTORY_SEPARATOR . Constants::SMARTGEOGMAP_SNAZZY_FOLDER . DIRECTORY_SEPARATOR;
 
-array_map('unlink', glob($smartGeoGMapDataPath . "/*.*"));
-rmdir($smartGeoGMapDataPath);
+// The folders may not exist (no file ever uploaded) or may have been removed already
+foreach ( [ $smartGeoGMapDataPath, $smartGeoGMapSnazzyPath ] as $smartGeoGMapPath ) {
+	if ( ! is_dir( $smartGeoGMapPath ) ) {
+		continue;
+	}
 
-array_map('unlink', glob($smartGeoGMapSnazzyPath . "/*.*"));
-rmdir($smartGeoGMapSnazzyPath);
+	foreach ( glob( $smartGeoGMapPath . '*' ) ?: [] as $file ) {
+		if ( is_file( $file ) ) {
+			unlink( $file );
+		}
+	}
+
+	@rmdir( $smartGeoGMapPath );
+}

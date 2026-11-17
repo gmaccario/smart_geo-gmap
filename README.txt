@@ -5,7 +5,7 @@ Tags: Google Maps, GeoJSON, Snazzy Maps, markers, boundaries
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 1.6.3
+Stable tag: 1.6.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,10 +47,21 @@ Snazzy Maps is a community built around creating and sharing great looking style
 * Go to Files tabs and upload your GEO JSON and Snazzy files
 
 == Change log ==
+= 1.6.4 =
+* Fix the Snazzy Maps skin not being applied to the map
+* Load the map scripts only on pages that use the shortcode
+* Map settings with quotes, backslashes or new lines no longer break the map
+* Find uploaded files after the site moves to another server or folder
+* Fix PHP warnings when all GeoJSON files are deleted or a coordinate is malformed
+* Safer uninstall when the upload folders don't exist
+* Remove an unused dependency
+
 = 1.6.3 =
 * Tested up to WordPress 7.1
 * PHP 8.4 compatibility: fix implicitly nullable parameter deprecations
 * Update Parsedown to 1.8.0
+* Admin: show "Settings saved" and upload error notices
+* Admin: fix Files tab markup, tooltip labels, active tab style and shortcode copy button
 
 = 1.6.2 =
 * Small changes
@@ -76,6 +87,9 @@ Snazzy Maps is a community built around creating and sharing great looking style
 * Minor fixes
 
 == Upgrade Notice ==
+
+= 1.6.4 =
+* Bug fix release: the Snazzy Maps skin now works, and the map scripts load only where the map is used.
 
 = 1.6.3 =
 * Compatibility release for WordPress 7.1 and PHP 8.4.

@@ -46,7 +46,8 @@ function printdebug(label = 'debug', par0 = '', par1 = '', par2 = '', par3 = '',
 function setSnazzyStyle() {
     printdebug("snazzyStyleJson", snazzyStyleJson);
 
-    return snazzyStyleJson;
+    // Array of map styles from the Snazzy file, or null for the default Google style
+    return Array.isArray(snazzyStyleJson) ? snazzyStyleJson : null;
 }
 
 function setSmartGeoGMap() {
@@ -114,7 +115,7 @@ function CenterControl(controlDiv, map, coord_center, message) {
      */
     let controlText = document.createElement('div');
     controlText.className = "control_interior";
-    controlText.innerHTML = message;
+    controlText.textContent = message;
     controlUI.appendChild(controlText);
 
     /**
@@ -180,7 +181,11 @@ function setLegend() {
 
         printdebug("SetLegend -> icon", type, name, icon);
 
-        div.innerHTML = '<img src="' + icon + '"> ' + name;
+        // Labels are plain text: build the nodes instead of using innerHTML
+        const img = document.createElement("img");
+        img.src = icon;
+        div.appendChild(img);
+        div.appendChild(document.createTextNode(' ' + name));
 
         if (typeof legend !== 'undefined'
             && legend !== null) {

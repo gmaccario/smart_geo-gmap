@@ -8,6 +8,11 @@ class SmartGeoGMapFrontend {
 
 	public string $side = Constants::SMARTGEOGMAP_SIDE_PUBLIC;
 
+	/**
+	 * The map settings are printed once per page, even if the shortcode is used more than once
+	 */
+	private bool $scriptDataAdded = false;
+
 	public function __construct() {
 	}
 
@@ -18,65 +23,188 @@ class SmartGeoGMapFrontend {
 
 		$smartgeogmapGoogleApiKey = get_option( 'smartgeogmap_google_api_key' );
 
-		$smartgeogmapCoordinatesCity1 = get_option( 'smartgeogmap_coordinates_city_1' );
-		$smartgeogmapCoordinatesCity2 = get_option( 'smartgeogmap_coordinates_city_2' );
-		$smartgeogmapCoordinatesCity3 = get_option( 'smartgeogmap_coordinates_city_3' );
-
-		$smartgeogmapCoordinatesLatLong1 = get_option( 'smartgeogmap_coordinates_lat_long_1' );
-		$smartgeogmapCoordinatesLatLong2 = get_option( 'smartgeogmap_coordinates_lat_long_2' );
-		$smartgeogmapCoordinatesLatLong3 = get_option( 'smartgeogmap_coordinates_lat_long_3' );
-
 		$smartgeogmapDefaultWidth = get_option( 'smartgeogmap_default_width' );
-		$smartgeogmapMapType = get_option( 'smartgeogmap_map_type' );
-		$smartgeogmapZoom = get_option( 'smartgeogmap_zoom' );
-		$smartgeogmapJavascriptTooltip = get_option( 'smartgeogmap_javascript_tooltip' );
-
-		$smartgeogmapSnazzyFile = get_option( 'smartgeogmap_snazzy_file' );
-		$smartgeogmapGeoJSONFiles = get_option( 'smartgeogmap_geojson_files' );
 
 		$smartgeogmapLegendToggle = get_option( 'smartgeogmap_legend_toggle' );
-		$smartgeogmapLegendPosition = get_option( 'smartgeogmap_legend_position' );
 
-		$smartgeogmapLegendImage1 = get_option( 'smartgeogmap_legend_image_1' );
-		$smartgeogmapLegendImage2 = get_option( 'smartgeogmap_legend_image_2' );
-		$smartgeogmapLegendImage3 = get_option( 'smartgeogmap_legend_image_3' );
-
-		$smartgeogmapLegendLabel1 = get_option( 'smartgeogmap_legend_label_1' );
-		$smartgeogmapLegendLabel2 = get_option( 'smartgeogmap_legend_label_2' );
-		$smartgeogmapLegendLabel3 = get_option( 'smartgeogmap_legend_label_3' );
+		if ( ! empty( $smartgeogmapGoogleApiKey ) ) {
+			$this->enqueueAssets();
+		}
 
 		$view = new View( 'smart-geo-gmap', [
 			'args' => $args,
 			'to-string' => true,
 			'smartgeogmapGoogleApiKey' => $smartgeogmapGoogleApiKey,
-			'coordinates' => [
-				'smartgeogmapCoordinatesCity1' => $smartgeogmapCoordinatesCity1,
-				'smartgeogmapCoordinatesCity2' => $smartgeogmapCoordinatesCity2,
-				'smartgeogmapCoordinatesCity3' => $smartgeogmapCoordinatesCity3,
-				'smartgeogmapCoordinatesLatLong1' => $smartgeogmapCoordinatesLatLong1,
-				'smartgeogmapCoordinatesLatLong2' => $smartgeogmapCoordinatesLatLong2,
-				'smartgeogmapCoordinatesLatLong3' => $smartgeogmapCoordinatesLatLong3,
-			],
 			'smartgeogmapDefaultWidth' => $smartgeogmapDefaultWidth,
-			'smartgeogmapMapType' => $smartgeogmapMapType,
-			'smartgeogmapZoom' => $smartgeogmapZoom,
-			'smartgeogmapJavascriptTooltip' => $smartgeogmapJavascriptTooltip,
-			'smartgeogmapSnazzyFile' => $smartgeogmapSnazzyFile,
-			'smartgeogmapGeoJSONFiles' => $smartgeogmapGeoJSONFiles,
 			'legend' => [
 				'smartgeogmapLegendToggle' => $smartgeogmapLegendToggle,
-				'smartgeogmapLegendPosition' => $smartgeogmapLegendPosition,
-				'smartgeogmapLegendImage1' => $smartgeogmapLegendImage1,
-				'smartgeogmapLegendImage2' => $smartgeogmapLegendImage2,
-				'smartgeogmapLegendImage3' => $smartgeogmapLegendImage3,
-				'smartgeogmapLegendLabel1' => $smartgeogmapLegendLabel1,
-				'smartgeogmapLegendLabel2' => $smartgeogmapLegendLabel2,
-				'smartgeogmapLegendLabel3' => $smartgeogmapLegendLabel3,
 			],
 		] );
 
-		//echo "<pre>";print_r();wp_die();
-
 		return $view->toString();
+	}
+
+	/**
+	 * Load the map scripts only on the pages that use the shortcode.
+	 * The Google Maps script depends on smartgeogmap_custom_js, so initMap is defined before Google calls it.
+	 *
+	 * @return void
+	 */
+	private function enqueueAssets(): void {
+		wp_enqueue_style( 'smartgeogmap_custom_css' );
+
+		wp_enqueue_script( 'smartgeogmap_maps_googleapis_com' );
+
+		if ( ! $this->scriptDataAdded ) {
+			wp_add_inline_script( 'smartgeogmap_custom_js', $this->getScriptData(), 'before' );
+
+			$this->scriptDataAdded = true;
+		}
+	}
+
+	/**
+	 * Build the JS variables used by smartgeogmap_custom.js.
+	 * Every value is JSON encoded, so quotes, backslashes and new lines in the settings can't break the script.
+	 *
+	 * @return string
+	 */
+	private function getScriptData(): string {
+		$smartgeogmapLegendToggle = get_option( 'smartgeogmap_legend_toggle' ) === 'on';
+
+		$coordCenter1 = $this->getCoordinates( get_option( 'smartgeogmap_coordinates_lat_long_1' ) );
+		$coordCenter2 = $this->getCoordinates( get_option( 'smartgeogmap_coordinates_lat_long_2' ) );
+		$coordCenter3 = $this->getCoordinates( get_option( 'smartgeogmap_coordinates_lat_long_3' ) );
+
+		$smartgeogmapZoom = get_option( 'smartgeogmap_zoom' );
+		$smartgeogmapJavascriptTooltip = get_option( 'smartgeogmap_javascript_tooltip' );
+
+		$data = [
+			'smartGeoGmapDebug' => WP_DEBUG ? 1 : 0,
+			'markers' => [],
+			'map_type' => (string) get_option( 'smartgeogmap_map_type' ),
+			'default_zoom' => ! empty( $smartgeogmapZoom ) ? (int) $smartgeogmapZoom : 10,
+			'coord_center_1' => $coordCenter1,
+			'coord_center_2' => $coordCenter2,
+			'coord_center_3' => $coordCenter3,
+			'custom_centers' => [
+				[ 'label' => (string) get_option( 'smartgeogmap_coordinates_city_1' ), 'coord_center' => $coordCenter1 ],
+				[ 'label' => (string) get_option( 'smartgeogmap_coordinates_city_2' ), 'coord_center' => $coordCenter2 ],
+				[ 'label' => (string) get_option( 'smartgeogmap_coordinates_city_3' ), 'coord_center' => $coordCenter3 ],
+			],
+			'snazzyStyleJson' => $this->getSnazzyStyles( get_option( 'smartgeogmap_snazzy_file' ) ),
+			'js_evt_info_windows' => ! empty( $smartgeogmapJavascriptTooltip ) ? (string) $smartgeogmapJavascriptTooltip : 'mouseover',
+			'sz_recenter_control' => __( 'Click to recenter the map' ),
+			'geojson_files' => $this->getGeoJSONFilesUrls( get_option( 'smartgeogmap_geojson_files' ) ),
+			'showLegend' => $smartgeogmapLegendToggle ? 1 : 0,
+			'legend_position' => (string) get_option( 'smartgeogmap_legend_position' ),
+			'iconBase' => 'https://maps.google.com/mapfiles/kml/shapes/',
+			'icons' => $smartgeogmapLegendToggle ? $this->getLegendIcons() : new \stdClass(),
+		];
+
+		$script = "var map;\n";
+		foreach ( $data as $name => $value ) {
+			$script .= sprintf( "var %s = %s;\n", $name, wp_json_encode( $value ) );
+		}
+
+		return $script;
+	}
+
+	/**
+	 * "52.370216, 4.895168" => [ 'lat' => '52.370216', 'lng' => '4.895168' ]. Empty values if the format is wrong.
+	 *
+	 * @param mixed $latLong
+	 *
+	 * @return array
+	 */
+	private function getCoordinates( mixed $latLong ): array {
+		$parts = array_map( 'trim', explode( ',', (string) $latLong ) );
+
+		if ( count( $parts ) !== 2 ) {
+			return [ 'lat' => '', 'lng' => '' ];
+		}
+
+		return [ 'lat' => $parts[0], 'lng' => $parts[1] ];
+	}
+
+	/**
+	 * The Snazzy file is a JSON array of map styles: pass the array itself to Google Maps, not the file URL
+	 *
+	 * @param mixed $smartgeogmapSnazzyFile
+	 *
+	 * @return array|null
+	 */
+	private function getSnazzyStyles( mixed $smartgeogmapSnazzyFile ): ?array {
+		$path = $this->getUploadedFilePath( Constants::SMARTGEOGMAP_SNAZZY_FOLDER, $smartgeogmapSnazzyFile );
+
+		if ( $path === '' ) {
+			return null;
+		}
+
+		$styles = json_decode( (string) file_get_contents( $path ), true );
+
+		// Must be a JSON array (list), not an object
+		return is_array( $styles ) && array_values( $styles ) === $styles ? $styles : null;
+	}
+
+	/**
+	 * @param mixed $smartgeogmapGeoJSONFiles JSON list of file paths, or '' when all files were deleted
+	 *
+	 * @return array
+	 */
+	private function getGeoJSONFilesUrls( mixed $smartgeogmapGeoJSONFiles ): array {
+		$uploadBaseUrl = isset( wp_upload_dir()['baseurl'] )
+			? wp_upload_dir()['baseurl']
+			: '/wp-content/uploads/';
+
+		$urls = [];
+		foreach ( (array) json_decode( (string) $smartgeogmapGeoJSONFiles, true ) as $smartgeogmapGeoJSONFile ) {
+			if ( $this->getUploadedFilePath( Constants::SMARTGEOGMAP_DATA_FOLDER, $smartgeogmapGeoJSONFile ) !== '' ) {
+				$urls[] = $uploadBaseUrl . '/' . Constants::SMARTGEOGMAP_DATA_FOLDER . '/' . basename( $smartgeogmapGeoJSONFile );
+			}
+		}
+
+		return $urls;
+	}
+
+	/**
+	 * The options store absolute paths, which break when the site moves to another server:
+	 * look the file up by name in the current uploads folder instead.
+	 *
+	 * @param string $folder
+	 * @param mixed $storedPath
+	 *
+	 * @return string The file path, or '' if the file doesn't exist
+	 */
+	private function getUploadedFilePath( string $folder, mixed $storedPath ): string {
+		if ( ! is_string( $storedPath ) || basename( $storedPath ) === '' ) {
+			return '';
+		}
+
+		$uploadBaseDir = isset( wp_upload_dir()['basedir'] )
+			? wp_upload_dir()['basedir']
+			: DIRECTORY_SEPARATOR . 'uploads';
+
+		$path = $uploadBaseDir . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . basename( $storedPath );
+
+		return is_file( $path ) ? $path : '';
+	}
+
+	/**
+	 * @return array Icons keyed by label, as expected by setLegend()
+	 */
+	private function getLegendIcons(): array {
+		$icons = [];
+		foreach ( [ 1, 2, 3 ] as $index ) {
+			$label = (string) get_option( 'smartgeogmap_legend_label_' . $index );
+
+			if ( $label !== '' ) {
+				$icons[ $label ] = [
+					'name' => $label,
+					'icon' => 'https://maps.google.com/mapfiles/kml/shapes/' . get_option( 'smartgeogmap_legend_image_' . $index ) . '.png',
+				];
+			}
+		}
+
+		return $icons;
 	}
 }
