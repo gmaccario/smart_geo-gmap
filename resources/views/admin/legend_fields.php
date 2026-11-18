@@ -1,4 +1,5 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
+<?php // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Included by View::make(): these variables are local to that method, not globals ?>
 
 <?php if ( isset ( $smartgeogmapLegendToggle ) ): ?>
     <input type="checkbox" id="smartgeogmap_legend_toggle" name="smartgeogmap_legend_toggle" <?php checked( (bool) $smartgeogmapLegendToggle ); ?> />

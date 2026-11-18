@@ -1,4 +1,5 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
+<?php // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Included by View::make(): these variables are local to that method, not globals ?>
 
 <?php
 $uploadBaseUrl = isset( wp_upload_dir()['baseurl'] )
