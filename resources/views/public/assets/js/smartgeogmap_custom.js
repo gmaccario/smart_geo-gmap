@@ -208,7 +208,10 @@
             }
         }
 
-        map.controls[google.maps.ControlPosition[settings.legend_position]].push(legend);
+        // No position chosen in the admin: default to the top left corner
+        const position = google.maps.ControlPosition[settings.legend_position] ?? google.maps.ControlPosition.LEFT_TOP;
+
+        map.controls[position].push(legend);
     }
 
     /**

@@ -372,7 +372,7 @@ class AdminSettings {
      */
     public function smartgeogmap_setting_documentation_field( array $args ): View
     {
-        $mdContent = file_get_contents (WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . SMARTGEOGMAP_SLUG . DIRECTORY_SEPARATOR . 'DOC.md');
+        $mdContent = file_get_contents (WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . SMARTGEOGMAP_SLUG . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'docs' . DIRECTORY_SEPARATOR . 'documentation.md');
 
         $doc = (new Parsedown())->text($mdContent);
 

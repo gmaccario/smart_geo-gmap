@@ -9,6 +9,8 @@ The same entries, in WordPress.org format, are in the `== Changelog ==` section 
 ### Security
 
 - Every setting is sanitized on save: text fields with `sanitize_text_field()`, choices (width, map type, zoom, info window event, legend position) limited to their allowed values, legend icons to icon names.
+- File uploads and deletions verify the settings nonce, and the names of the files to delete are unslashed and sanitized before use.
+- The Documentation tab output is filtered with `wp_kses_post()`.
 
 ### Added
 
@@ -19,10 +21,17 @@ The same entries, in WordPress.org format, are in the `== Changelog ==` section 
 - "Google Key missing" is shown to administrators only, with a hint on where to add the key. Visitors see nothing.
 - The map settings are a single `window.smartGeoGMap` object instead of 17 global variables, and the map script is scoped, so it can't clash with the theme or other plugins. The Google Maps callback is now `smartGeoGMapInit` (was `initMap`).
 - Text domain is `smart-geo-gmap` (the plugin slug), so the plugin can be translated on translate.wordpress.org. Admin labels, tab names and messages are now translatable.
+- WordPress file functions instead of direct PHP calls: `wp_mkdir_p()`, `wp_delete_file()` and `WP_Filesystem` (uninstall). Upload folders are no longer created with `0777` permissions.
+- The admin script loads in the footer.
+- Plugin name in the header is "Smart GEO GMap", as on WordPress.org.
+- `DOC.md` moved to `resources/docs/documentation.md`.
+- No more global variables in the main file, the old main file and `uninstall.php`.
 
 ### Fixed
 
 - `MapFiles` no longer throws a TypeError when it is created without a logger, as its constructor allows.
+- The map no longer breaks when the legend is enabled without a position: it defaults to the top left corner.
+- Uninstall also removes the `smartgeogmap_documentation` option.
 
 ### Removed
 

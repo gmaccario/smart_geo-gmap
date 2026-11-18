@@ -1,8 +1,9 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 
 <?php
-if (isset($_GET['tab'])) {
-	$tab = trim(strip_tags(htmlspecialchars($_GET['tab'])));
+// Read-only tab navigation: no nonce needed
+if ( isset( $_GET['tab'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$tab = sanitize_key( wp_unslash( $_GET['tab'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 }
 ?>
 

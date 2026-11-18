@@ -37,6 +37,7 @@ class Actions {
 			plugins_url( SMARTGEOGMAP_SLUG . '/resources/views/admin/assets/js/smartgeogmap_custom.js' ),
 			[],
 			'1.0.2',
+			true
 		);
 
 		wp_register_style(

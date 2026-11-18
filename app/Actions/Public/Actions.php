@@ -18,6 +18,8 @@ class Actions
 		$smartgeogmapGoogleApiKey = get_option( 'smartgeogmap_google_api_key' );
 
 		// Load in the footer, after the map container and smartgeogmap_custom_js (which defines smartGeoGMapInit)
+		// No version: Google versions its own script, and ?ver= would be added to Google's URL
+		// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 		wp_register_script(
 			'smartgeogmap_maps_googleapis_com',
 			sprintf(

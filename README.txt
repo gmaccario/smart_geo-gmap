@@ -112,6 +112,8 @@ All the plugin settings and the uploaded GeoJSON and Snazzy files.
 * "Google Key missing" is shown to administrators only.
 * The map script no longer defines global variables that could clash with the theme or other plugins.
 * The plugin can be translated: text domain is now smart-geo-gmap.
+* Fix: the map no longer breaks when the legend is enabled without a position.
+* File uploads and deletions verify the settings nonce, and use the WordPress file functions.
 
 = 1.6.4 - 2026-11-17 =
 * Fix: the Snazzy Maps skin is applied to the map again.

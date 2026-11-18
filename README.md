@@ -148,7 +148,7 @@ With `WP_DEBUG` enabled, the plugin writes upload and file operations to the PHP
 
 1. Bump `Version` in `smart-geo-gmap.php` and `Stable tag` in `README.txt`. Move the `[Unreleased]` entries in `CHANGELOG.md` to the new version, and add the same entries to the `== Changelog ==` and `== Upgrade Notice ==` sections of `README.txt`.
 2. Run `composer install --no-dev --optimize-autoloader`.
-3. Copy the plugin to the WordPress.org SVN `trunk` **including `vendor/`** and excluding `.git`, `.gitignore`, `.gitattributes`, `.DS_Store`, `README.md` and `CHANGELOG.md`.
+3. Copy the plugin to the WordPress.org SVN `trunk` **including `vendor/`** (`svn rm` the files deleted or moved since the last release) and excluding `.git`, `.gitignore`, `.gitattributes`, `.DS_Store`, `README.md` and `CHANGELOG.md`.
 4. Tag the release in SVN and in git (tags without a `v`, e.g. `1.6.4`), and create the GitHub release with the changelog entry as notes.
 
 ## Changelog

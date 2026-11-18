@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Smart Geo GMap
+Plugin Name: Smart GEO GMap
 Plugin URI: https://www.giuseppemaccario.com/wordpress-map-plugin-smart-geo-gmap/
 Description: Embed Google Map in your WordPress website using GeoJSON for encoding geographic data structures.
 Text Domain: smart-geo-gmap
@@ -26,8 +26,7 @@ define( "SMARTGEOGMAP_SLUG", dirname( plugin_basename( __FILE__ ) ) );
 // define( "SMARTGEOGMAP_PLUGIN_URL", plugins_url('', __FILE__) );
 
 if (!get_option( 'smartgeogmap_backward_compatibility' )) {
-	$bce = new BackwardCompatibilityEngineService();
-	$bce->upgradeSmartGeoGMap();
+	( new BackwardCompatibilityEngineService() )->upgradeSmartGeoGMap();
 }
 
 (Dispatcher::getInstance())->dispatch();

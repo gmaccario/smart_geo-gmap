@@ -34,7 +34,8 @@ class Logger
             $data['action'] = $this->_action;
             $data['message'] = $message;
 
-            error_log( print_r( $data + $context, true ) );
+            // Debug logging, only when WP_DEBUG is on
+            error_log( print_r( $data + $context, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log, WordPress.PHP.DevelopmentFunctions.error_log_print_r
         }
     }
 

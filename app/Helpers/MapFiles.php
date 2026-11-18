@@ -27,6 +27,11 @@ class MapFiles {
 	public function smartGeoGMapManageSnazzyMapFiles(): string {
 		$smartgeogmapSnazzyFile = get_option( 'smartgeogmap_snazzy_file' );
 
+		// options.php has already checked this nonce and manage_options: checked again because this callback reads $_POST and $_FILES
+		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), Constants::SMARTGEOGMAP_FILES_GROUP . '-options' ) ) {
+			return $smartgeogmapSnazzyFile;
+		}
+
 		// Deleting files
 		if ( ! empty( $_POST['smartgeogmap_delete_snazzy_file'] ) ) {
 			if ( ! $this->deleteFile( $smartgeogmapSnazzyFile ) ) {
@@ -40,7 +45,7 @@ class MapFiles {
 
 		if ( ! empty( $_FILES['smartgeogmap_snazzy_file'] ) ) {
 			// Preparing file for upload
-			$filesData = $this->getFilesData( 'smartgeogmap_snazzy_file' );
+			$filesData = $this->getFilesData( $_FILES['smartgeogmap_snazzy_file'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Upload array: the name is sanitized with sanitize_file_name(), the extension and JSON content are validated
 
 			if ( empty ( $filesData ) ) {
 				return $smartgeogmapSnazzyFile;
@@ -80,15 +85,22 @@ class MapFiles {
 
         $this->logger?->info(  'smartGeoGMapManageGeoJSONFiles starting...', [ 'smartgeogmapGeoJSONFiles' => $smartgeogmapGeoJSONFiles ] );
 
+		// options.php has already checked this nonce and manage_options: checked again because this callback reads $_POST and $_FILES
+		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), Constants::SMARTGEOGMAP_FILES_GROUP . '-options' ) ) {
+			return $smartgeogmapGeoJSONFiles;
+		}
+
 		// Deleting files
 		if ( ! empty( $_POST['smartgeogmap_delete_geojson_file'] ) ) {
-			return $this->deleteGeoJSONFiles( $smartgeogmapGeoJSONFiles );
+			$fileNamesToDelete = array_map( 'sanitize_file_name', (array) wp_unslash( $_POST['smartgeogmap_delete_geojson_file'] ) );
+
+			return $this->deleteGeoJSONFiles( $fileNamesToDelete, $smartgeogmapGeoJSONFiles );
 		}
 
 		// Uploading files
 		if ( ! empty( $_FILES['smartgeogmap_geojson_files'] ) ) {
 			// Preparing file for upload
-			$filesData = $this->getFilesData( 'smartgeogmap_geojson_files' );
+			$filesData = $this->getFilesData( $_FILES['smartgeogmap_geojson_files'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Upload array: names are sanitized with sanitize_file_name(), extensions and JSON content are validated
 
 			if ( empty ( $filesData ) ) {
 				return $smartgeogmapGeoJSONFiles;
@@ -162,7 +174,7 @@ class MapFiles {
 		}
 
 		if ( ! file_exists( $path ) ) {
-			mkdir( $path, 0777, true );
+			wp_mkdir_p( $path );
 		}
 
 		/**
@@ -221,9 +233,9 @@ class MapFiles {
 		if ( file_exists( $path ) ) {
             $this->logger?->info('Files exists!');
 
-			unlink( $path );
+			wp_delete_file( $path );
 
-			return true;
+			return ! file_exists( $path );
 		}
 
         $this->logger?->info('Files does not exists!');
@@ -232,27 +244,23 @@ class MapFiles {
 	}
 
 	/**
-	 * @param string $index
+	 * @param mixed $filesData One entry of $_FILES
 	 *
-	 * @return mixed
+	 * @return array
 	 */
-	private function getFilesData( string $index ): mixed {
-		$filesData = [];
-		if ( ! empty ( $_FILES[ $index ] ) ) {
-			$filesData = $_FILES[ $index ];
-		}
-
-		return $filesData;
+	private function getFilesData( mixed $filesData ): array {
+		return is_array( $filesData ) ? $filesData : [];
 	}
 
 	/**
+	 * @param array $fileNamesToDelete Sanitized file names
 	 * @param mixed $smartgeogmapGeoJSONFiles
 	 *
 	 * @return false|string
 	 */
-	private function deleteGeoJSONFiles( mixed $smartgeogmapGeoJSONFiles ): string|false {
+	private function deleteGeoJSONFiles( array $fileNamesToDelete, mixed $smartgeogmapGeoJSONFiles ): string|false {
 		$files = [];
-		foreach ( $_POST['smartgeogmap_delete_geojson_file'] as $geoJSONFileName ) {
+		foreach ( $fileNamesToDelete as $geoJSONFileName ) {
 
 			$singleSmartGeoGMapGeoJSONFileToDelete = $this->getSanitizedFilePath( $geoJSONFileName, $this->smartGeoGMapDataPath );
 
@@ -328,7 +336,7 @@ class MapFiles {
 			// Remove surplus files on filesystem
 			foreach( $files as $index => $file ) {
 				if ( $index > Constants::SMARTGEOGMAP_MAX_GEOJSON_ALLOWED - 1 ) {
-					unlink($file);
+					wp_delete_file( $file );
 				}
 			}
 
