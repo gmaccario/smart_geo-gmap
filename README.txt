@@ -5,7 +5,7 @@ Tags: google maps, geojson, snazzy maps, markers, map
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 1.6.4
+Stable tag: 1.6.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,7 +106,7 @@ All the plugin settings and the uploaded GeoJSON and Snazzy files.
 
 == Changelog ==
 
-= 1.6.5 =
+= 1.6.5 - 2026-11-19 =
 * Security: every setting is sanitized on save.
 * Lat/Long fields are validated: an invalid value is not saved and an error notice explains why.
 * "Google Key missing" is shown to administrators only.

@@ -6,6 +6,8 @@ The same entries, in WordPress.org format, are in the `== Changelog ==` section 
 
 ## [Unreleased]
 
+## [1.6.5] - 2026-11-19
+
 ### Security
 
 - Every setting is sanitized on save: text fields with `sanitize_text_field()`, choices (width, map type, zoom, info window event, legend position) limited to their allowed values, legend icons to icon names.
@@ -119,7 +121,8 @@ The same entries, in WordPress.org format, are in the `== Changelog ==` section 
 
 - Architecture refactoring, with automatic migration of the settings of previous versions.
 
-[Unreleased]: https://github.com/gmaccario/smart_geo-gmap/compare/1.6.4...HEAD
+[Unreleased]: https://github.com/gmaccario/smart_geo-gmap/compare/1.6.5...HEAD
+[1.6.5]: https://github.com/gmaccario/smart_geo-gmap/compare/1.6.4...1.6.5
 [1.6.4]: https://github.com/gmaccario/smart_geo-gmap/compare/1.6.3...1.6.4
 [1.6.3]: https://github.com/gmaccario/smart_geo-gmap/compare/1.6.2...1.6.3
 [1.6.2]: https://github.com/gmaccario/smart_geo-gmap/releases/tag/1.6.2
